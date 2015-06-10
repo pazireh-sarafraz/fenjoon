@@ -1,0 +1,249 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Fenjoon\n"
+"POT-Creation-Date: 2015-06-10 20:27+0330\n"
+"PO-Revision-Date: 2015-06-10 20:27+0330\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fa_IR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.7.5\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: functions.php:61
+msgid "Top Menu"
+msgstr "منوی اصلی"
+
+#: functions.php:149 functions.php:150 functions.php:151 functions.php:164
+msgid "General"
+msgstr "عمومی"
+
+#: functions.php:152
+msgid "Parent General"
+msgstr "آیتم عمومی اصلی"
+
+#: functions.php:153
+msgid "All General"
+msgstr "همه عمومی ها"
+
+#: functions.php:154
+msgid "View General"
+msgstr "مشاهده آیتم عمومی"
+
+#: functions.php:155
+msgid "Add New General"
+msgstr "افزودن آیتم عمومی"
+
+#: functions.php:156 functions.php:236
+msgid "Add New"
+msgstr "افزودن"
+
+#: functions.php:157
+msgid "Edit General"
+msgstr "ویرایش آیتم عمومی"
+
+#: functions.php:158
+msgid "Update General"
+msgstr "به روز رسانی آیتم عمومی"
+
+#: functions.php:159
+msgid "Search General"
+msgstr "جستجوی آیتم های عمومی"
+
+#: functions.php:160 functions.php:240
+msgid "Not found"
+msgstr "پیدا نشد"
+
+#: functions.php:161 functions.php:241
+msgid "Not found in Trash"
+msgstr "در زباله دان پیدا نشد"
+
+#: functions.php:165
+msgid "General information for the site"
+msgstr "آیتم های عمومی وبسایت"
+
+#: functions.php:193
+msgid "General Field"
+msgstr "دسته آیتم های عمومی"
+
+#: functions.php:194
+msgid "Add New Field"
+msgstr "افزودن فیلد جدید"
+
+#: functions.php:195
+msgid "New Field"
+msgstr "فیلد جدید"
+
+#: functions.php:208
+msgid "Field"
+msgstr "دسته"
+
+#: functions.php:219
+msgid "Field not set!"
+msgstr "دسته نامشخص"
+
+#: functions.php:229 functions.php:230 functions.php:231 functions.php:244
+#: home.php:122
+msgid "Portfolio"
+msgstr "نمونه کار"
+
+#: functions.php:232
+msgid "Parent Portfolio"
+msgstr "نمونه کار اصلی"
+
+#: functions.php:233
+msgid "All Portfolio"
+msgstr "همه نمونه کارها"
+
+#: functions.php:234
+msgid "View Portfolio"
+msgstr "مشاهده نمونه کار"
+
+#: functions.php:235
+msgid "Add New Portfolio"
+msgstr "افزودن نمونه کار"
+
+#: functions.php:237
+msgid "Edit Portfolio"
+msgstr "ویرایش نمونه کار"
+
+#: functions.php:238
+msgid "Update Portfolio"
+msgstr "به روز رسانی نمونه کار"
+
+#: functions.php:239
+msgid "Search Portfolio"
+msgstr "جستجوی نمونه کارها"
+
+#: functions.php:245
+msgid "Portfolio items"
+msgstr "نمونه کارها"
+
+#: functions.php:273
+msgid "Portfolio Cat"
+msgstr "دسته نمونه کارها"
+
+#: functions.php:274
+msgid "Add New Cat"
+msgstr "افزودن دسته جدید"
+
+#: functions.php:275
+msgid "New Cat"
+msgstr "دسته جدید"
+
+#: functions.php:292
+msgid "Portfolio Metadata"
+msgstr "اطلاعات تکمیلی نمونه کار"
+
+#: functions.php:309
+msgid "technology"
+msgstr "تکنولوژی"
+
+#: functions.php:319
+msgid "start"
+msgstr "تاریخ شروع"
+
+#: functions.php:329
+msgid "finish"
+msgstr "تاریخ اتمام"
+
+#: functions.php:339
+msgid "workforce"
+msgstr "نیروی کار"
+
+#: functions.php:349
+msgid "security"
+msgstr "امنیت"
+
+#: home.php:3
+msgid "Fenjoon Group Website"
+msgstr "یه فنجون چای خوش طعم، یه وبسایت آماده و به‌روز"
+
+#: home.php:11
+msgid "About us"
+msgstr "درباره ما"
+
+#: home.php:25
+msgid "Our difference"
+msgstr "چه نکاتی را در طراحی در نظر می‌گیریم"
+
+#: home.php:43
+msgid "Services we offer"
+msgstr "خدماتی که ارائه می‌دهیم"
+
+#: home.php:57
+msgid "Services we do not offer"
+msgstr "خدماتی که ارائه نمی‌دهیم"
+
+#: home.php:70
+msgid "Public responsibility"
+msgstr "مسئولیت اجتماعی"
+
+#: home.php:86
+msgid "Our statistics"
+msgstr "آمار گروه فنجون"
+
+#: home.php:88
+msgid "Activity duration"
+msgstr "مدت زمان فعالیت"
+
+#: home.php:88
+msgid "Year"
+msgstr "سال"
+
+#: home.php:89
+msgid "Number of customers"
+msgstr "تعداد مشتریان"
+
+#: home.php:89
+msgid "Person"
+msgstr "نفر"
+
+#: home.php:90
+msgid "Number of designed and developed websites"
+msgstr "طراحی و توسعه وبسایت"
+
+#: home.php:90
+msgid "Website"
+msgstr "وبسایت"
+
+#: home.php:91
+msgid "Number of designed and developed web applications"
+msgstr "طراحی و توسعه برنامه‌های تحت وب "
+
+#: home.php:91
+msgid "Web application"
+msgstr "برنامه"
+
+#: home.php:109
+msgid "Push this new order button right now!"
+msgstr "همین حالا برای ثبت سفارش طراحی وبسایت خود اقدام کنید!"
+
+#: index.php:8
+msgid "(more...)"
+msgstr "بیشتر"
+
+#: index.php:11
+msgid "Sorry, no posts matched your criteria."
+msgstr "متاسفانه پستی با این مشخصات پیدا نشد"
+
+#~ msgid "Technology"
+#~ msgstr "فناوری"
+
+#~ msgid "Start date"
+#~ msgstr "تاریخ شروع"
+
+#~ msgid "Finish date"
+#~ msgstr "تاریخ اتمام"
+
+#~ msgid "Workforce"
+#~ msgstr "نیروی کار"

@@ -8,11 +8,242 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: gray, white, two-columns, right-sidebar, fixed-layout, responsive-layout, custom-menu, featured-images, rtl-language-support, translation-ready
 Text Domain: fenjoon
 */
-html, home, div{
+/************************************
+************** General **************
+wrapper > main > cols > col, col{1-2-3-4}
+*************************************/
+@font-face {
+	font-family: 'BKoodakBold';
+	src: url('fonts/BKoodakBold.eot?#') format('eot'),
+	url('fonts/BKoodakBold.ttf') format('truetype'),
+	url('fonts/BKoodakBold.woff') format('woff');
+}
+@font-face {
+	font-family: 'fenjoonicon';
+	src:url('fonts/fenjoonicon.eot?-ycqj9d');
+	src:url('fonts/fenjoonicon.eot?#iefix-ycqj9d') format('embedded-opentype'),
+		url('fonts/fenjoonicon.ttf?-ycqj9d') format('truetype'),
+		url('fonts/fenjoonicon.woff?-ycqj9d') format('woff'),
+		url('fonts/fenjoonicon.svg?-ycqj9d#fenjoonicon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+*, *::after, *::before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+html, body, div, header, main, footer, ul, li, p, a, span{
 	margin: 0;
 	padding: 0;
 }
+body{
+	height: 100%;
+	font-family: 'BKoodakBold';
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+	color: #424F59;
+	background-color: #F2F2F2;
+}
+main, .main{
+	display: inline-block;
+	width: 100%;
+}
+aside{
+	display: none;
+}
+header{
+	width: 100%;
+	background-color: #FFF;
+}
+ul{
+	list-style: none;
+}
+a, img, a:hover, img:hover{
+	border: none;
+}
 .wrapper{
-	width: 960px;
+	width: 100%;
 	margin:0 auto;
+}
+.full{
+	width: 100%;
+}
+.big{
+	padding: 40px 0;
+	font-size: 200%;
+	font-weight: bold;
+}
+.large{
+	font-size: 110%;
+}
+.left{
+	float: left;
+}
+.row.hightop{
+	margin-top: 100px;
+}
+.backgreen{
+	background-color: #7FB952;
+	color: #FFFFFF;
+}
+.backblue{
+	background-color: #406E9F;
+	color: #FFFFFF;
+}
+.cols{
+	margin-bottom: 20px;
+}
+.cols .col{
+	display: inline-block;
+	vertical-align: top;
+}
+.cols .col4{
+	padding: 20px;
+}
+.cols .col a.thumb{
+	display: block;
+	width: 90%;
+	height: auto;
+	margin: -50% auto 0;
+}
+.cols .col a.thumb img{
+	width: 100%;
+	height: auto;
+	border: 10px solid #FFFFFF;
+	border-radius: 50%;
+}
+.cols .col a.thumb img:hover{
+	border: 10px solid #406E9F;
+}
+.tile{
+	padding: 20px;
+	border-radius: 2px;
+	border: 1px solid #F2F2F2;
+  background-color: #F9F9F9;
+	background: #FFF none repeat scroll 0% 0%;
+	border-radius: 5px;
+	box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.25);
+}
+.tile h1, .tile h2, .tile h3{
+	margin-top: 0;
+	margin-bottom: 0.8em;
+  padding-right: 0.7em;
+  background-color: #F2F2F2;
+}
+.tile.tilestack{
+	margin-top: 20px;
+}
+ul .right{
+	display: inline-block;
+}
+ul .left{
+	float: left;
+}
+.icon:before{
+	font-family: fenjoonicon;
+	padding-left: 10px;
+	vertical-align: middle;
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	letter-spacing: 0;
+	-webkit-font-feature-settings: "liga";
+	-moz-font-feature-settings: "liga=1";
+	-moz-font-feature-settings: "liga";
+	-ms-font-feature-settings: "liga" 1;
+	-o-font-feature-settings: "liga";
+	font-feature-settings: "liga";
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+.icon.red:before{
+	color: #9F4040;
+}
+.icon.green:before{
+	color: #7FB952;
+}
+.icon.blue:before{
+	color: #406E9F;
+}
+.icon.home3:before{content:"\e902"}.icon.newspaper:before{content:"\e904"}.icon.pencil:before{content:"\e905"}.icon.books:before{content:"\e920"}.icon.file-text2:before{content:"\e926"}.icon.stack:before{content:"\e92e"}.icon.price-tag:before{content:"\e935"}.icon.barcode:before{content:"\e937"}.icon.qrcode:before{content:"\e938"}.icon.cart:before{content:"\e93a"}.icon.coin-dollar:before{content:"\e93b"}.icon.credit-card:before{content:"\e93f"}.icon.lifebuoy:before{content:"\e941"}.icon.phone:before{content:"\e942"}.icon.envelop:before{content:"\e945"}.icon.location:before{content:"\e947"}.icon.compass:before{content:"\e949"}.icon.alarm:before{content:"\e950"}.icon.bell:before{content:"\e951"}.icon.calendar:before{content:"\e953"}.icon.printer:before{content:"\e954"}.icon.display:before{content:"\e956"}.icon.laptop:before{content:"\e957"}.icon.mobile:before{content:"\e958"}.icon.mobile2:before{content:"\e959"}.icon.tablet:before{content:"\e95a"}.icon.bubbles2:before{content:"\e96d"}.icon.user:before{content:"\e971"}.icon.user-check:before{content:"\e975"}.icon.key:before{content:"\e98d"}.icon.wrench:before{content:"\e991"}.icon.equalizer:before{content:"\e992"}.icon.cog:before{content:"\e994"}.icon.bug:before{content:"\e999"}.icon.pie-chart:before{content:"\e99a"}.icon.stats-dots:before{content:"\e99b"}.icon.stats-bars2:before{content:"\e99d"}.icon.gift:before{content:"\e99f"}.icon.leaf:before{content:"\e9a4"}.icon.meter:before{content:"\e9a6"}.icon.fire:before{content:"\e9a9"}.icon.bin:before{content:"\e9ac"}.icon.shield:before{content:"\e9b4"}.icon.power:before{content:"\e9b5"}.icon.switch:before{content:"\e9b6"}.icon.clipboard:before{content:"\e9b8"}.icon.menu:before{content:"\e9bd"}.icon.menu2:before{content:"\e9be"}.icon.menu3:before{content:"\e9bf"}.icon.menu4:before{content:"\e9c0"}.icon.download2:before{content:"\e9c5"}.icon.upload2:before{content:"\e9c6"}.icon.earth:before{content:"\e9ca"}.icon.eye:before{content:"\e9ce"}.icon.eye-blocked:before{content:"\e9d1"}.icon.bookmark:before{content:"\e9d2"}.icon.bookmarks:before{content:"\e9d3"}.icon.star-empty:before{content:"\e9d7"}.icon.star-half:before{content:"\e9d8"}.icon.star-full:before{content:"\e9d9"}.icon.heart:before{content:"\e9da"}.icon.man:before{content:"\e9dc"}.icon.woman:before{content:"\e9dd"}.icon.man-woman:before{content:"\e9de"}.icon.happy:before{content:"\e9df"}.icon.happy2:before{content:"\e9e0"}.icon.smile:before{content:"\e9e1"}.icon.tongue:before{content:"\e9e3"}.icon.sad:before{content:"\e9e5"}.icon.grin:before{content:"\e9e9"}.icon.warning:before{content:"\ea07"}.icon.notification:before{content:"\ea08"}.icon.question:before{content:"\ea09"}.icon.info:before{content:"\ea0c"}.icon.cancel-circle:before{content:"\ea0d"}.icon.blocked:before{content:"\ea0e"}.icon.cross:before{content:"\ea0f"}.icon.checkmark:before{content:"\ea10"}.icon.enter:before{content:"\ea13"}.icon.exit:before{content:"\ea14"}.icon.infinite:before{content:"\ea2f"}.icon.checkbox-checked:before{content:"\ea52"}.icon.checkbox-unchecked:before{content:"\ea53"}.icon.embed2:before{content:"\ea80"}.icon.share2:before{content:"\ea82"}.icon.google-plus:before{content:"\ea88"}.icon.google-drive:before{content:"\ea8b"}.icon.facebook:before{content:"\ea8c"}.icon.twitter:before{content:"\ea91"}.icon.feed2:before{content:"\ea94"}.icon.wordpress:before{content:"\eab6"}.icon.joomla:before{content:"\eab8"}.icon.tux:before{content:"\eabe"}.icon.apple:before{content:"\eabf"}.icon.finder:before{content:"\eac0"}.icon.android:before{content:"\eac1"}.icon.windows8:before{content:"\eac3"}.icon.file-pdf:before{content:"\eada"}.icon.file-word:before{content:"\eadc"}.icon.file-excel:before{content:"\eadd"}.icon.html5:before{content:"\eadf"}.icon.html52:before{content:"\eae0"}.icon.css3:before{content:"\eae1"}.icon.chrome:before{content:"\eae5"}.icon.firefox:before{content:"\eae6"}.icon.IE:before{content:"\eae7"}.icon.opera:before{content:"\eae8"}.icon.safari:before{content:"\eae9"}
+/* ----------- Non-Retina Screens ----------- */
+@media screen 
+and (min-width: 1100px){
+	.banner{
+		height: 72px;
+		border-bottom: 1px solid #EEEEEE;
+	}
+	.navigation{
+		height: 45px;
+		border-bottom: 1px solid #EEEEEE;
+	}
+	.top .menu{
+		padding-top: 0;
+	}
+	.top .menu li{
+		display: inline-block;
+		text-shadow: 0 -1px 0 transparent;
+		cursor: pointer;
+	}
+	.top .menu li a{
+		display: block;
+		padding: 8px 15px;
+		text-decoration: none;
+		color: #444444;
+	}
+	.top .menu li a:hover{
+		padding-bottom: 2px;
+		border-bottom: 6px solid #406E9F;
+		background-color: #EFEFEF;
+	}
+	.top .menu li.left{
+		float: left;
+		margin-left: 0;
+	}
+	.wrapper{
+		width: 90%;
+	}
+	.cols .col2{
+		width: 49%;
+		margin-left: 2%;
+	}
+	.cols .col4{
+		position: relative;
+		width: 23.5%;
+		margin-left: 2%;
+	}
+	.cols .col:last-child, .col.last-child{
+		margin-left: 0;
+	}
+	main, .main{
+		width: 70%;
+	}
+	main.full, .main.full{
+		width: 100%;
+	}
+	aside{
+		display: inline-block;
+		width: 30%;
+	}
+}
+
+@media screen 
+and (min-width: 1333px) 
+and (-webkit-min-device-pixel-ratio: 1){
+	.wrapper{
+		max-width: 1200px;
+	}
+}
+
+/* ----------- Retina Screens ----------- */
+@media screen 
+and (min-width: 1200px) 
+and (-webkit-min-device-pixel-ratio: 2)
+and (min-resolution: 192dpi){
+	
 }

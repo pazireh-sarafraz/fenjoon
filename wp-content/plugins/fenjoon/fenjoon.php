@@ -12,13 +12,13 @@ Domain Path: /lang
 defined('FENJOON_DIR') or define('FENJOON_DIR',  dirname(__FILE__).DIRECTORY_SEPARATOR);
 /* =================================================================== */
 
-require_once( FENJOON_DIR . 'fenjoon-functions.php' );
+require_once( FENJOON_DIR . 'functions.php' );
 require_once( FENJOON_DIR . 'inc/class-fjn-list-table.php' );
 require_once( FENJOON_DIR . 'inc/fjn-task-list.php' );
 //******************************************
 // Initialize
 //******************************************
-load_plugin_textdomain('fenjoon', false, basename(dirname(__FILE__)).'/lang');
+load_plugin_textdomain( 'fenjoon', false, basename(dirname(__FILE__)).'/lang');
 
 //******************************************
 // Add tasks table to database
