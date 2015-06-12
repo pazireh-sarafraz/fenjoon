@@ -35,18 +35,21 @@ function fjn_disable_wp_emojicons() {
 }
 add_action( 'init', 'fjn_disable_wp_emojicons' );
 //******************************************
-// Add Custom JS & CSS to Admin Post Edit Panel
+// Add Custom JS & CSS
 //******************************************
 function add_fenjoon_admin_js() {
 	wp_enqueue_script( 'fenjoon_admin_js', admin_url() . 'js/fenjoon_admin.js', array(), '1.0', true );
 }
 add_filter('admin_head', 'add_fenjoon_admin_js');
-
 function add_fenjoon_admin_css() {
 	wp_register_style( 'fenjoon_admin_css', admin_url() . 'css/fenjoon_admin.css', false, '1.0' );
 	wp_enqueue_style( 'fenjoon_admin_css' );
 }
 add_action( 'admin_enqueue_scripts', 'add_fenjoon_admin_css' );
+function add_fenjoon_js() {
+	wp_enqueue_script( 'fenjoon', THEME_URI . '/js/fenjoon.js', array(), '1.0', true );
+}
+add_action( 'wp_enqueue_scripts', 'add_fenjoon_js' );
 //******************************************
 // add image sizes
 //******************************************
@@ -123,18 +126,26 @@ function fjn_template_query( $cpt ){
 			'tax_query'				=> array(
 				'relation'			=> 'OR',
 				array(
-					'taxonomy' => 'field',
-					'field'    => 'slug',
-					'terms'    => array( 'about', 'difference', 'offered-services', 'unoffered-services', 'responsibility' )
+					'taxonomy'		=> 'field',
+					'field'				=> 'slug',
+					'terms'				=> array( 'about', 'difference', 'offered-services', 'unoffered-services', 'responsibility' )
 				)
 			)
 		);
 	}elseif( 'portfolio' == $cpt ){
 		$args = array(
-			'post_type' => 'portfolio',
+			'post_type'				=> 'portfolio',
 			'post_status'			=> 'publish',
 			'posts_per_page'	=> -1,
 			'orderby'					=> 'title',
+			'order'						=> 'ASC'
+		);
+	}elseif( is_array( $cpt ) && array_key_exists( 'post_type', $cpt ) ){
+		$args = array(
+			'post_type'				=> $cpt[ 'post_type' ],
+			'post_status'			=> 'publish',
+			'posts_per_page'	=> -1,
+			'orderby'					=> 'menu_order',
 			'order'						=> 'ASC'
 		);
 	}
