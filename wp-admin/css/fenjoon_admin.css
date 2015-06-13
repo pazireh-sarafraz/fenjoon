@@ -3,7 +3,7 @@ li.section{
 	margin: 0;
 }
 .section_title{
-  margin: 3px 0;
+  margin-bottom: 0;
   padding: 3px 10px 5px;
 	background-color: #0074A2;
   color: #efefef;

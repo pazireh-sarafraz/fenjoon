@@ -1,19 +1,11 @@
 <?php get_header();?>
-<div class="full backblue">
-	<div class="wrapper">
-		<div class="cols">
-			<div class="col col11">
-				<h1 class="big-padding"><?php _e( 'Fenjoon Group Website', 'fenjoon' );?></h1>
-			</div>
-		</div>
-	</div>
-</div>
 <div class="wrapper">
+	<h1><?php _e( 'Fenjoon Group Website', 'fenjoon' );?></h1>
 	<main class="main full"><?php
 	$second_query = fjn_template_query( 'general' );
 	if( $second_query->have_posts() ){?>
 		<div class="cols">
-			<div class="col col12">
+			<div class="col col2">
 				<div class="tile">
 					<section>
 						<h2><?php _e( 'About us', 'fenjoon' );?></h2>
@@ -27,7 +19,7 @@
 						</ul>
 					</section>
 				</div><?php rewind_posts();?>					
-			</div><div class="col col12 last-child">
+			</div><div class="col col2 last-child">
 				<div class="tile">
 					<section>
 						<h2><?php _e( 'Our difference', 'fenjoon' );?></h2>
@@ -45,7 +37,7 @@
 		</div>
 		
 		<div class="cols">
-			<div class="col col12">
+			<div class="col col2">
 				<div class="tile">
 					<section>
 						<h2><?php _e( 'Services we offer', 'fenjoon' );?></h2>
@@ -59,7 +51,7 @@
 						</ul>
 					</section>
 				</div><?php rewind_posts();?>
-			</div><div class="col col12 last-child">
+			</div><div class="col col2 last-child">
 				<div class="tile">
 					<section>
 						<h2><?php _e( 'Services we do not offer', 'fenjoon' );?></h2>
@@ -88,7 +80,7 @@
 		</div>
 	
 		<div class="cols">
-			<div class="col col12">
+			<div class="col col2">
 				<div class="tile">
 					<section>
 						<h2><?php _e( 'Our statistics', 'fenjoon' );?></h2>
@@ -100,7 +92,7 @@
 						</ul>
 					</section>
 				</div>
-			</div><div class="col col12 last-child">
+			</div><div class="col col2 last-child">
 				<div class="tile">
 
 				</div>
@@ -112,8 +104,8 @@
 <div class="full backgreen">
 	<div class="wrapper">
 		<div class="cols">
-			<div class="col col11">
-				<p class="big big-padding"><?php
+			<div class="col col1">
+				<p class="big"><?php
 					_e( 'Push this new order button right now!', 'fenjoon' );?>
 				</p>
 			</div>
@@ -129,7 +121,7 @@
 			<section>
 				<h2><?php _e( 'Portfolio', 'fenjoon' );?></h2>
 				<div class="row hightop">
-					<div class="col col14 tile"><?php
+					<div class="col col4 tile"><?php
 					while ($third_query->have_posts()){ $third_query->the_post();
 						$metadata = get_post_meta( $post->ID );?>
 						<a class="thumb" href="<?php the_permalink();?>" title="<?php the_title_attribute(); ?>"><?php
@@ -149,9 +141,9 @@
 						}?>
 						</ul><?php
 						if( ( $third_query->current_post + 2 ) < ( $third_query->post_count ) ){?>
-							</div><!-- --><div class="col col14 tile"><?php						
+							</div><!-- --><div class="col col4 tile"><?php						
 						}elseif( ( $third_query->current_post + 2 ) == ( $third_query->post_count ) ){?>
-							</div><!-- --><div class="col col14 tile last-child"><?php						
+							</div><!-- --><div class="col col4 tile last-child"><?php						
 						}
 					}?>
 					</div>
