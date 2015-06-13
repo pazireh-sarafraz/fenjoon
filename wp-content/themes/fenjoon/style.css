@@ -20,11 +20,11 @@ wrapper > main > cols > col, col{1-2-3-4}
 }
 @font-face {
 	font-family: 'fenjoonicon';
-	src:url('fonts/fenjoonicon.eot?-ycqj9d');
-	src:url('fonts/fenjoonicon.eot?#iefix-ycqj9d') format('embedded-opentype'),
-		url('fonts/fenjoonicon.ttf?-ycqj9d') format('truetype'),
-		url('fonts/fenjoonicon.woff?-ycqj9d') format('woff'),
-		url('fonts/fenjoonicon.svg?-ycqj9d#fenjoonicon') format('svg');
+	src:url('fonts/fenjoonicon.eot?rtgjlp');
+	src:url('fonts/fenjoonicon.eot?#iefixrtgjlp') format('embedded-opentype'),
+		url('fonts/fenjoonicon.ttf?rtgjlp') format('truetype'),
+		url('fonts/fenjoonicon.woff?rtgjlp') format('woff'),
+		url('fonts/fenjoonicon.svg?rtgjlp#fenjoonicon') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -33,7 +33,7 @@ wrapper > main > cols > col, col{1-2-3-4}
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-html, body, div, header, main, footer, ul, li, p, a, span{
+html, body, div, header, main, footer, ul, li, p, a, span, h1, h2, h3{
 	margin: 0;
 	padding: 0;
 }
@@ -71,12 +71,17 @@ a, img, a:hover, img:hover{
 	width: 100%;
 }
 .big{
-	padding: 40px 0;
 	font-size: 200%;
 	font-weight: bold;
 }
 .large{
 	font-size: 110%;
+}
+.big-padding{
+	padding: 40px 0;
+}
+.large-padding{
+	padding: 20px 0;
 }
 .left{
 	float: left;
@@ -124,7 +129,7 @@ a, img, a:hover, img:hover{
   background-color: #F9F9F9;
 	background: #FFF none repeat scroll 0% 0%;
 	border-radius: 5px;
-	box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.25);
+	box-shadow: 0 1px 3px rgba(0,0,0,.2);
 }
 .tile h1, .tile h2, .tile h3{
 	margin-top: 0;
@@ -141,9 +146,63 @@ ul .right{
 ul .left{
 	float: left;
 }
-ul.l2{
+ul.indent{
 	padding-right: 20px;
 }
+.option{
+	cursor: pointer;
+}
+.option .description.hidden{
+	display: none;
+}
+.option .description.visible{
+	display: block;
+}
+.ib{
+	display: inline-block;
+}
+/******************************* Form begin *************************/
+input[type=color], input[type=date], input[type=datetime-local], input[type=datetime], input[type=email], input[type=month], input[type=number], input[type=password], input[type=search], input[type=tel], input[type=text], input[type=time], input[type=url], input[type=week], select, textarea{
+	font-family: 'BKoodakBold';
+	vertical-align: baseline;
+  padding: 7px;
+  display: block;
+  color: #535865;
+  border: 1px solid #a0a5b1;
+  border-radius: 0;
+  background-color: #fff;
+  font-size: 1.2em;
+  width: 100%;
+  max-width: 35em;
+  line-height: 1.6;
+  height: 42px;
+}
+input[type=text]{
+  border-color: #d9d9db;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  padding-left: 8px;
+  background-repeat: no-repeat;
+  background-position: 3px 9px;
+}
+.button{
+	display: inline-block;
+  vertical-align: middle;
+  width: 100%;
+  border-radius: 5px;
+  text-align: center;
+	line-height: 2;
+  font-size: 1.3em;
+  cursor: pointer;
+  box-shadow: 0 1px 0 rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.2),inset 0 -1px 0 rgba(0,0,0,.2);
+  text-decoration: none;
+  background-image: -webkit-linear-gradient(270deg,#7fb952  0,#7fb952  20%,#26b732 100%);
+  background-image: linear-gradient(180deg,#7fb952  0,#7fb952  20%,#7fb952  100%);
+  background-color: #7fb952 ;
+  color: #FFFFFF;
+	-webkit-appearance: button;
+}
+/****************************** Form end ****************************/
 .icon:before{
 	font-family: fenjoonicon;
 	padding-left: 10px;
@@ -173,10 +232,20 @@ ul.l2{
 .icon.blue:before{
 	color: #406E9F;
 }
-.icon.home3:before{content:"\e902"}.icon.newspaper:before{content:"\e904"}.icon.pencil:before{content:"\e905"}.icon.books:before{content:"\e920"}.icon.file-text2:before{content:"\e926"}.icon.stack:before{content:"\e92e"}.icon.price-tag:before{content:"\e935"}.icon.barcode:before{content:"\e937"}.icon.qrcode:before{content:"\e938"}.icon.cart:before{content:"\e93a"}.icon.coin-dollar:before{content:"\e93b"}.icon.credit-card:before{content:"\e93f"}.icon.lifebuoy:before{content:"\e941"}.icon.phone:before{content:"\e942"}.icon.envelop:before{content:"\e945"}.icon.location:before{content:"\e947"}.icon.compass:before{content:"\e949"}.icon.alarm:before{content:"\e950"}.icon.bell:before{content:"\e951"}.icon.calendar:before{content:"\e953"}.icon.printer:before{content:"\e954"}.icon.display:before{content:"\e956"}.icon.laptop:before{content:"\e957"}.icon.mobile:before{content:"\e958"}.icon.mobile2:before{content:"\e959"}.icon.tablet:before{content:"\e95a"}.icon.bubbles2:before{content:"\e96d"}.icon.user:before{content:"\e971"}.icon.user-check:before{content:"\e975"}.icon.key:before{content:"\e98d"}.icon.wrench:before{content:"\e991"}.icon.equalizer:before{content:"\e992"}.icon.cog:before{content:"\e994"}.icon.bug:before{content:"\e999"}.icon.pie-chart:before{content:"\e99a"}.icon.stats-dots:before{content:"\e99b"}.icon.stats-bars2:before{content:"\e99d"}.icon.gift:before{content:"\e99f"}.icon.leaf:before{content:"\e9a4"}.icon.meter:before{content:"\e9a6"}.icon.fire:before{content:"\e9a9"}.icon.bin:before{content:"\e9ac"}.icon.shield:before{content:"\e9b4"}.icon.power:before{content:"\e9b5"}.icon.switch:before{content:"\e9b6"}.icon.clipboard:before{content:"\e9b8"}.icon.menu:before{content:"\e9bd"}.icon.menu2:before{content:"\e9be"}.icon.menu3:before{content:"\e9bf"}.icon.menu4:before{content:"\e9c0"}.icon.download2:before{content:"\e9c5"}.icon.upload2:before{content:"\e9c6"}.icon.earth:before{content:"\e9ca"}.icon.eye:before{content:"\e9ce"}.icon.eye-blocked:before{content:"\e9d1"}.icon.bookmark:before{content:"\e9d2"}.icon.bookmarks:before{content:"\e9d3"}.icon.star-empty:before{content:"\e9d7"}.icon.star-half:before{content:"\e9d8"}.icon.star-full:before{content:"\e9d9"}.icon.heart:before{content:"\e9da"}.icon.man:before{content:"\e9dc"}.icon.woman:before{content:"\e9dd"}.icon.man-woman:before{content:"\e9de"}.icon.happy:before{content:"\e9df"}.icon.happy2:before{content:"\e9e0"}.icon.smile:before{content:"\e9e1"}.icon.tongue:before{content:"\e9e3"}.icon.sad:before{content:"\e9e5"}.icon.grin:before{content:"\e9e9"}.icon.warning:before{content:"\ea07"}.icon.notification:before{content:"\ea08"}.icon.question:before{content:"\ea09"}.icon.info:before{content:"\ea0c"}.icon.cancel-circle:before{content:"\ea0d"}.icon.blocked:before{content:"\ea0e"}.icon.cross:before{content:"\ea0f"}.icon.checkmark:before{content:"\ea10"}.icon.enter:before{content:"\ea13"}.icon.exit:before{content:"\ea14"}.icon.infinite:before{content:"\ea2f"}.icon.checked:before{content:"\ea52"}.icon.unchecked:before{content:"\ea53"}.icon.embed2:before{content:"\ea80"}.icon.share2:before{content:"\ea82"}.icon.google-plus:before{content:"\ea88"}.icon.google-drive:before{content:"\ea8b"}.icon.facebook:before{content:"\ea8c"}.icon.twitter:before{content:"\ea91"}.icon.feed2:before{content:"\ea94"}.icon.wordpress:before{content:"\eab6"}.icon.joomla:before{content:"\eab8"}.icon.tux:before{content:"\eabe"}.icon.apple:before{content:"\eabf"}.icon.finder:before{content:"\eac0"}.icon.android:before{content:"\eac1"}.icon.windows8:before{content:"\eac3"}.icon.file-pdf:before{content:"\eada"}.icon.file-word:before{content:"\eadc"}.icon.file-excel:before{content:"\eadd"}.icon.html5:before{content:"\eadf"}.icon.html52:before{content:"\eae0"}.icon.css3:before{content:"\eae1"}.icon.chrome:before{content:"\eae5"}.icon.firefox:before{content:"\eae6"}.icon.IE:before{content:"\eae7"}.icon.opera:before{content:"\eae8"}.icon.safari:before{content:"\eae9"}
+.icon.radio.unchecked:before{content:"\e25e"}.icon.radio.checked:before{content:"\e25f"}.icon.checkbox.unchecked:before{content:"\ea53"}.icon.checkbox.checked:before{content:"\ea52"}.icon.checkmark:before{content:"\ea10"}.icon.cross:before{content:"\ea0f"}.icon.user:before{content:"\e971"}.icon.user-check:before{content:"\e975"}.icon.man:before{content:"\e9dc"}.icon.woman:before{content:"\e9dd"}.icon.man-woman:before{content:"\e9de"}.icon.star-empty:before{content:"\e9d7"}.icon.star-half:before{content:"\e9d8"}.icon.star-full:before{content:"\e9d9"}.icon.eye-blocked:before{content:"\e9d1"}.icon.eye:before{content:"\e9ce"}.icon.coffee:before{content:"\e600"}.icon.home3:before{content:"\e902"}.icon.newspaper:before{content:"\e904"}.icon.pencil:before{content:"\e905"}.icon.books:before{content:"\e920"}.icon.file-text2:before{content:"\e926"}.icon.price-tag:before{content:"\e935"}.icon.barcode:before{content:"\e937"}.icon.qrcode:before{content:"\e938"}.icon.coin-dollar:before{content:"\e93b"}.icon.credit-card:before{content:"\e93f"}.icon.lifebuoy:before{content:"\e941"}.icon.phone:before{content:"\e942"}.icon.location:before{content:"\e947"}.icon.alarm:before{content:"\e950"}.icon.bell:before{content:"\e951"}.icon.calendar:before{content:"\e953"}.icon.printer:before{content:"\e954"}.icon.display:before{content:"\e956"}.icon.laptop:before{content:"\e957"}.icon.mobile:before{content:"\e958"}.icon.mobile2:before{content:"\e959"}.icon.tablet:before{content:"\e95a"}.icon.bubbles2:before{content:"\e96d"}.icon.key:before{content:"\e98d"}.icon.wrench:before{content:"\e991"}.icon.equalizer:before{content:"\e992"}.icon.cog:before{content:"\e994"}.icon.bug:before{content:"\e999"}.icon.pie-chart:before{content:"\e99a"}.icon.stats-dots:before{content:"\e99b"}.icon.gift:before{content:"\e99f"}.icon.leaf:before{content:"\e9a4"}.icon.fire:before{content:"\e9a9"}.icon.bin:before{content:"\e9ac"}.icon.shield:before{content:"\e9b4"}.icon.power:before{content:"\e9b5"}.icon.switch:before{content:"\e9b6"}.icon.clipboard2:before{content:"\e9b8"}.icon.menu:before{content:"\e9bd"}.icon.menu2:before{content:"\e9be"}.icon.menu3:before{content:"\e9bf"}.icon.menu4:before{content:"\e9c0"}.icon.download2:before{content:"\e9c5"}.icon.upload2:before{content:"\e9c6"}.icon.earth:before{content:"\e9ca"}.icon.bookmark:before{content:"\e9d2"}.icon.bookmarks:before{content:"\e9d3"}.icon.heart:before{content:"\e9da"}.icon.happy:before{content:"\e9df"}.icon.happy2:before{content:"\e9e0"}.icon.smile:before{content:"\e9e1"}.icon.tongue:before{content:"\e9e3"}.icon.sad:before{content:"\e9e5"}.icon.grin:before{content:"\e9e9"}.icon.warning:before{content:"\ea07"}.icon.info:before{content:"\ea0c"}.icon.cancel-circle:before{content:"\ea0d"}.icon.blocked:before{content:"\ea0e"}.icon.enter:before{content:"\ea13"}.icon.exit:before{content:"\ea14"}.icon.infinite:before{content:"\ea2f"}.icon.embed2:before{content:"\ea80"}.icon.share2:before{content:"\ea82"}.icon.google-plus:before{content:"\ea88"}.icon.google-drive:before{content:"\ea8b"}.icon.facebook:before{content:"\ea8c"}.icon.twitter:before{content:"\ea91"}.icon.feed2:before{content:"\ea94"}.icon.wordpress:before{content:"\eab6"}.icon.joomla:before{content:"\eab8"}.icon.tux:before{content:"\eabe"}.icon.apple:before{content:"\eabf"}.icon.finder:before{content:"\eac0"}.icon.android:before{content:"\eac1"}.icon.windows8:before{content:"\eac3"}.icon.file-pdf:before{content:"\eada"}.icon.file-word:before{content:"\eadc"}.icon.file-excel:before{content:"\eadd"}.icon.html5:before{content:"\eadf"}.icon.html52:before{content:"\eae0"}.icon.css3:before{content:"\eae1"}.icon.chrome:before{content:"\eae5"}.icon.firefox:before{content:"\eae6"}.icon.IE:before{content:"\eae7"}.icon.opera:before{content:"\eae8"}.icon.safari:before{content:"\eae9"}.icon.cart:before{content:"\e606"}.icon.times-circle:before{content:"\f057"}.icon.check-circle2:before{content:"\f05a"}.icon.align-right:before{content:"\f038"}.icon.align-justify:before{content:"\f039"}.icon.question-circle:before{content:"\f05b"}.icon.info-circle:before{content:"\f05d"}.icon.translate:before{content:"\e2f4"}.icon.coffee2:before{content:"\e60d"}.icon.chart:before{content:"\e601"}.icon.medal:before{content:"\e602"}.icon.stats:before{content:"\e603"}.icon.stats2:before{content:"\e604"}.icon.clipboard3:before{content:"\e605"}.icon.tools:before{content:"\e609"}.icon.brush:before{content:"\e60a"}.icon.info2:before{content:"\e60b"}.icon.ruler2:before{content:"\e60c"}.icon.cogs2:before{content:"\e60f"}.icon.mouse2:before{content:"\e610"}.icon.ruler3:before{content:"\e611"}.icon.gauge:before{content:"\e61a"}.icon.search:before{content:"\e61c"}
 /* ----------- Non-Retina Screens ----------- */
 @media screen 
 and (min-width: 1100px){
+	main, .main{
+		width: 75%;
+	}
+	main.full, .main.full{
+		width: 100%;
+	}
+	aside{
+		display: inline-block;
+		width: 25%;
+	}
 	.banner{
 		height: 72px;
 		border-bottom: 1px solid #EEEEEE;
@@ -211,27 +280,28 @@ and (min-width: 1100px){
 	.wrapper{
 		width: 90%;
 	}
-	.cols .col2{
+	.cols .col11{
+		width: 100%;
+	}
+	.cols .col23{
+		width: 65%;
+		margin-left: 2%;
+	}
+	.cols .col12{
 		width: 49%;
 		margin-left: 2%;
 	}
-	.cols .col4{
+	.cols .col13{
+		width: 33%;
+		margin-left: 2%;
+	}
+	.cols .col14{
 		position: relative;
 		width: 23.5%;
 		margin-left: 2%;
 	}
 	.cols .col:last-child, .col.last-child{
 		margin-left: 0;
-	}
-	main, .main{
-		width: 70%;
-	}
-	main.full, .main.full{
-		width: 100%;
-	}
-	aside{
-		display: inline-block;
-		width: 30%;
 	}
 }
 

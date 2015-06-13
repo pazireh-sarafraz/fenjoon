@@ -29,7 +29,7 @@ function cpt_sitetypes(){
 		'label'               => __( 'Site Types', 'fenjoon' ),
 		'description'         => __( 'Different site types, our team may design and develop', 'fenjoon' ),
 		'labels'              => $labels,
-		'supports'            => array( 'title', 'editor', 'thumbnail' ),
+		'supports'            => array( 'title', 'editor', 'excerpt', 'thumbnail' ),
 		'taxonomies'          => array( 'post_tag' ),
 		'hierarchical'        => false,
 		'public'              => false,
@@ -72,7 +72,7 @@ function cpt_modules(){
 		'label'               => __( 'Modules', 'fenjoon' ),
 		'description'         => __( 'Different Modules, our team may design and develop', 'fenjoon' ),
 		'labels'              => $labels,
-		'supports'            => array( 'title', 'editor', 'thumbnail' ,'page-attributes'),
+		'supports'            => array( 'title', 'editor', 'excerpt', 'thumbnail' ,'page-attributes'),
 		'taxonomies'          => array( 'post_tag', 'category' ),
 		'hierarchical'        => true,
 		'public'              => false,
@@ -115,7 +115,7 @@ function cpt_features(){
 		'label'               => __( 'Features', 'fenjoon' ),
 		'description'         => __( 'Different Features, our team may design and develop', 'fenjoon' ),
 		'labels'              => $labels,
-		'supports'            => array( 'title', 'editor', 'thumbnail' ,'page-attributes'),
+		'supports'            => array( 'title', 'editor', 'excerpt', 'thumbnail' ,'page-attributes'),
 		'taxonomies'          => array( 'post_tag' ),
 		'hierarchical'        => true,
 		'public'              => false,
@@ -134,50 +134,6 @@ function cpt_features(){
 	register_post_type( 'features', $args );
 }
 add_action( 'init', 'cpt_features', 0 );
-
-//******************************************
-// CPT - Attributes
-//******************************************
-function cpt_attributes(){
-	$labels = array(
-		'name'                => __( 'Attributes', 'fenjoon' ),
-		'singular_name'       => __( 'Attribute', 'fenjoon' ),
-		'menu_name'           => __( 'Attributes', 'fenjoon' ),
-		'parent_item_colon'   => __( 'Parent Attribute', 'fenjoon' ),
-		'all_items'           => __( 'All Attributes', 'fenjoon' ),
-		'view_item'           => __( 'View Attribute', 'fenjoon' ),
-		'add_new_item'        => __( 'Add New Attribute', 'fenjoon' ),
-		'add_new'             => __( 'Add New', 'fenjoon' ),
-		'edit_item'           => __( 'Edit Attribute', 'fenjoon' ),
-		'update_item'         => __( 'Update Attribute', 'fenjoon' ),
-		'search_items'        => __( 'Search Attributes', 'fenjoon' ),
-		'not_found'           => __( 'Not found', 'fenjoon' ),
-		'not_found_in_trash'  => __( 'Not found in Trash', 'fenjoon' ),
-	);
-	$args = array(
-		'label'               => __( 'Attributes', 'fenjoon' ),
-		'description'         => __( 'Different Attributes, our team may design and develop', 'fenjoon' ),
-		'labels'              => $labels,
-		'supports'            => array( 'title', 'editor', 'thumbnail','page-attributes' ),
-		'taxonomies'          => array( 'post_tag' ),
-		'hierarchical'        => true,
-		'public'              => false,
-		'show_ui'             => true,
-		'show_in_menu'        => true,
-		'show_in_nav_menus'   => true,
-		'show_in_admin_bar'   => true,
-		'menu_position'       => 7,
-		'menu_icon'			 			=> 'dashicons-plus-alt',
-		'can_export'          => true,
-		'has_archive'         => true,
-		'exclude_from_search' => false,
-		'publicly_queryable'  => true,
-		'capability_type'     => 'post',
-	);
-	register_post_type( 'attributes', $args );
-}
-add_action( 'init', 'cpt_attributes', 0 );
-
 //******************************************
 // CPT - Standards
 //******************************************
@@ -201,7 +157,7 @@ function cpt_standards(){
 		'label'               => __( 'Standards', 'fenjoon' ),
 		'description'         => __( 'Different Standards, our team may design and develop', 'fenjoon' ),
 		'labels'              => $labels,
-		'supports'            => array( 'title', 'editor', 'thumbnail','page-attributes' ),
+		'supports'            => array( 'title', 'editor', 'excerpt', 'thumbnail','page-attributes' ),
 		'taxonomies'          => array( 'post_tag' ),
 		'hierarchical'        => false,
 		'public'              => false,
@@ -300,7 +256,83 @@ function cpt_projects(){
 	register_post_type( 'projects', $args );
 }
 add_action( 'init', 'cpt_projects', 0 );
+//******************************************
+// Add Preselected list to Sitetypes page
+//******************************************
+function add_preselected_list_metabox(){
+	if( is_admin() ){
+		global $pagenow;
+		if( 'post.php' == $pagenow ){
+			add_meta_box( 
+				'preselected',
+				__('Preselected choices selected by selecting this Sitetype', 'fenjoon' ),
+				'preselected',
+				'sitetypes',
+				'advanced',
+				'core'
+			); 
+		}
+	}
+}
 
+function preselected( $post ){
+	$option_types = array( 'modules', 'features', 'standards' );
+	$args = array( 'post_type' => $option_types, 'orderby' => 'menu_order', 'posts_per_page' => -1 );
+	$the_query = new WP_Query( $args );
+	if ( $the_query->have_posts() ) {
+		wp_nonce_field(basename( __FILE__ ), 'save_sitetype');
+		$sitetype_str = get_post_meta( $post->ID, 'sitetype_str', 1 );
+		$sitetype_arr = array();
+		if( !empty( $sitetype_str ) ) $sitetype_arr = explode( '+', $sitetype_str );
+		$option_sections = array();
+		foreach( $option_types as $option_type){
+			$option_sections[ $option_type ] = array();
+		}
+		$parents = array();
+		global $post;
+		while( $the_query->have_posts() ){
+			$the_query->the_post();
+			if( 0 != $post->post_parent ) $parents[] = $post->post_parent;
+			$option_sections[ $post->post_type ][ $post->ID ] = $post->post_title;
+		}
+		wp_reset_postdata();?>
+		<ul><?php
+		foreach( $option_sections as $key => $option_section ){
+			$post_type = get_post_type_object( $key );
+			if( $post_type && !empty( $option_sections[ $key ] ) ){?>
+				<li class="section">
+					<div class="section_title"><?php echo $post_type->label;?></div>
+					<ul><?php
+					foreach( $option_section as $choice_id => $choice_title ){
+						if( in_array( $choice_id, $parents ) ) continue;	?>
+						<li class="item">
+							<input class="checkbox" type="checkbox" value="<?php echo $choice_id;?>" <?php echo (in_array( $choice_id, $sitetype_arr ) ? 'checked' : '');?> /><?php echo $choice_title;?>
+						</li><?php
+					}?>
+					</ul>
+				</li><?php
+			}
+		}?>
+		</ul><?php
+	}
+	?>
+	<input type="hidden" name="string" value="<?php echo $sitetype_str;?>"/>
+	<?php
+}
+add_action( 'add_meta_boxes', 'add_preselected_list_metabox', 0 );
+
+function save_preselected_list() {
+	global $post;
+	$post_id = $post->ID;
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
+	if ( !wp_verify_nonce( $_POST['save_sitetype'], basename( __FILE__ ) ) ) return;
+	if ( !current_user_can( 'edit_post', $post_id ) ) return;
+	$sitetype_str = $_POST['string'];
+	if( $sitetype_str ) {
+		update_post_meta( $post_id, 'sitetype_str', $sitetype_str );
+	}
+}
+add_action( 'post_updated', 'save_preselected_list' );
 //******************************************
 // Add Children co-selection metabox to Modules - Modules page
 //******************************************
@@ -355,10 +387,10 @@ function save_coselected_children() {
 add_action( 'save_post', 'save_coselected_children' );
 
 //******************************************
-// Add workforce metabox to Feature & Module page
+// Add workforce metabox to Module & Feature & Standards page
 //******************************************
 function workforce_metabox( $postType ) {
-	$types = array( 'features', 'modules' );
+	$types = array( 'modules', 'features', 'standards' );
 	if( in_array( $postType, $types ) ){
 		add_meta_box(
 			'workforce_metabox',
@@ -391,62 +423,12 @@ function save_workforce_metabox(){
 		if ( !current_user_can( 'edit_post', $post_id ) ) return;
 	}
 	$workforce = $_POST['workforce_value'];
-	if( $workforce ) {
+if( $workforce || 0 == $workforce ) {
 		update_post_meta( $post_id, 'workforce', $workforce );
 	}
 
 }
 add_action( 'save_post', 'save_workforce_metabox' );
-
-//******************************************
-// Add workforce metabox to Feature & Module page
-//******************************************
-function workforce_multi_metabox( $postType ) {
-	$types = array( 'standards', 'attributes' );
-	if( in_array( $postType, $types ) ){
-		add_meta_box(
-			'workforce_multi_metabox',
-			__( 'Workforce Multi Metabox', 'fenjoon' ),
-			'create_workforce_multi_metabox',
-			$postType,
-			'side'
-		);
-	}
-}
-
-function create_workforce_multi_metabox(){
-	global $post;
-	wp_nonce_field( basename( __FILE__ ), 'workforce_multi_metabox' );
-	$workforce_multi = get_post_meta( $post->ID, 'workforce_multi', true );?>
-	<p><?php _e( 'Workforce multiplier needed (Man-Hour)', 'fenjoon' );?></p>
-	<input type="text" id="workforce_multi_value" name="workforce_multi_value" value="<?php echo esc_attr( $workforce_multi );?>" />
-	<?php
-}
-add_action( 'add_meta_boxes', 'workforce_multi_metabox', 10, 1 );
-
-function save_workforce_multi_metabox(){
-	global $post;
-	$post_id = $post->ID;
-	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
-	if ( !wp_verify_nonce( $_POST['workforce_multi_metabox'], basename( __FILE__ ) ) ) return;
-	if ( 'page' == $_POST['post_type'] ) {
-		if ( !current_user_can( 'edit_page', $post_id ) ) return;
-	}else{
-		if ( !current_user_can( 'edit_post', $post_id ) ) return;
-	}
-	$workforce_multi = $_POST['workforce_multi_value'];
-	if( $workforce_multi ) {
-		if( $workforce_multi < 1 ){
-				$workforce_multi = 1;
-		}elseif( $workforce_multi > 2 ){
-			$workforce_multi = 2;
-		}
-		update_post_meta( $post_id, 'workforce_multi', $workforce_multi );
-	}
-
-}
-add_action( 'save_post', 'save_workforce_multi_metabox' );
-
 //******************************************
 // Add order owner to Order page
 //******************************************
@@ -512,7 +494,6 @@ function save_order_owner_metabox(){
 	}
 }
 add_action( 'save_post', 'save_order_owner_metabox' );
-
 //******************************************
 // Add order list to Order page
 //******************************************
@@ -533,7 +514,7 @@ function add_order_list_metabox(){
 }
 
 function order_list( $post ){
-	$order_list = array( 'sitetypes', 'modules', 'features', 'attributes', 'standards' );
+	$order_list = array( 'modules', 'features', 'standards' );
 	$args = array( 'post_type' => $order_list, 'orderby' => 'menu_order', 'posts_per_page' => -1 );
 	$the_query = new WP_Query( $args );
 	if ( $the_query->have_posts() ) {
@@ -643,7 +624,7 @@ function save_order_list() {
 add_action( 'post_updated', 'save_order_list' );
 
 //******************************************
-// Add Order - Project switch  to Order page
+// Add Order - Project switch to Order page
 // Add last changes to Order page
 //******************************************
 function add_order_to_project_metabox(){
@@ -710,7 +691,73 @@ function last_change_by(){
 	</ul><?php
 }
 add_action( 'add_meta_boxes', 'add_order_to_project_metabox', 0 );
-
+//******************************************
+// frontend post
+//******************************************
+function fjn_frontend_post() {
+	if( !empty( $_POST ) && !is_admin() ){
+		if( !empty( $_POST['fjn_nonce'] ) ){
+			$current_user		= wp_get_current_user();
+			$msg = array();
+			$err = array();
+			if( wp_verify_nonce( $_POST['fjn_nonce'], 'fjn_new-order' ) ){
+				if ( empty( $_POST['action'] ) || 'new_order' != $_POST['action'] ) return;
+				if ( !is_user_logged_in() ) auth_redirect();
+				if ( !current_user_can( 'edit_posts' ) ) {
+					// wp_redirect( home_url( '/' ) );
+					exit;
+				}
+				$title				= $_POST['title'];
+				if( empty( $title ) ) {
+					$err[] = 1;
+				}else{
+					$post_id = wp_insert_post(
+						array(
+							'post_author'   => $current_user->ID,
+							'post_type'			=> 'orders',
+							'post_title'    => $title,
+							'post_content'  => $title,
+							'tax_input'			=> array( 'field' => $field ),
+							'post_status'   => 'pending'
+						)
+					);
+					if( isset( $post_id ) ){
+						$msg[] = 1; // order submitted successfully!
+						update_post_meta( $post_id, 'order_str', $_POST['string'] );
+					}else{
+						$err[] = 1; // order did not submit and error occurred!
+					}
+				}
+			}
+			$msg = implode( '-', $msg );
+			$err = implode( '-', $err );
+			$query_var = '';
+			if( $msg ){
+				$query_var .= '?msg=' . $msg;
+				if( $err ) $query_var .= '&err=' . $err;
+			}elseif( $err ){
+				$query_var .= '?err=' . $err;
+			}
+			$referer = wp_get_referer();
+			if( $referer ){
+				$referer = strtok( $referer, '?' );
+				wp_redirect( $referer . $query_var );
+			}else{
+				$referer = $_POST['referrer'];
+				$referer = filter_var( $referer, FILTER_SANITIZE_URL );
+				if ( !filter_var( $referer, FILTER_VALIDATE_URL ) === false ){
+					$referer_arr = parse_url( $referer );
+					$home_url = parse_url( home_url() );
+					if( $referer_arr['host'] == $home_url['host'] )
+						$referer = strtok( $referer, '?' );
+						wp_redirect( $referer . $query_var );
+				}
+			}
+			exit;
+		}
+	}
+}
+add_action( 'init', 'fjn_frontend_post' );
 //******************************************
 // Add options
 //******************************************
@@ -871,7 +918,7 @@ function display_editor( $editors, $assign, $choice_id ){
 }
 
 function project_list( $post ){
-	$project_list = array( 'sitetypes', 'modules', 'features', 'attributes', 'standards' );
+	$project_list = array( 'sitetypes', 'modules', 'features', 'standards' );
 	$project_id = $post->ID;
 	$order_id = get_post_meta( $project_id, 'order_id', 1 );
 	$order_str = get_post_meta( $order_id, 'order_str', 1 );
@@ -1022,7 +1069,7 @@ function fjn_add_project_progress_metabox(){
 }
 
 function fjn_project_progress( $post ){
-	$project_list = array( 'sitetypes', 'modules', 'features', 'attributes', 'standards' );
+	$project_list = array( 'sitetypes', 'modules', 'features', 'standards' );
 	$project_id = $post->ID;
 	$order_id = get_post_meta( $project_id, 'order_id', 1 );
 	$order_str = get_post_meta( $order_id, 'order_str', 1 );
@@ -1218,54 +1265,36 @@ function my_column_thumbnail_width(){?>
 //*******************************************
 // Get editors list by free time
 //*******************************************
-function fjn_get_meta_by_key( $key = array() ){
+function fjn_get_meta_by_key( $key ){
 	global $wpdb;
 	if( empty( $key ) ) return;
-	$query = "SELECT post_id, meta_key, meta_value FROM {$wpdb->postmeta} WHERE meta_key IN ('" . implode( "','", $key ) . "')";
+	$query = "SELECT post_id, meta_key, meta_value FROM {$wpdb->postmeta} WHERE meta_key = '" . $key ."'";
 	$r = $wpdb->get_results( $query, ARRAY_A );
 	$workforce = array();
 	foreach( $r as $row ){
 		$post_id = array_shift( $row );
-		$key = $row['meta_key'];
-		$workforce[$post_id][$key] = $row['meta_value'];
+		$workforce[$post_id] = $row['meta_value'];
 	}
 	return $workforce;
 }
 
 function fjn_editors_by_free_time(){
 	global $wpdb;
-	$workforce_meta = array( 'workforce', 'workforce_multi' );
-	$workforce_values = fjn_get_meta_by_key( $workforce_meta );
+	$workforce_values = fjn_get_meta_by_key( 'workforce' );
 	$tasks_table = $wpdb->prefix.'tasks';
 	$query_month = "SELECT editor_id, activity_id, start_date FROM {$tasks_table} 
 		WHERE EXTRACT( YEAR_MONTH FROM start_date ) = EXTRACT( YEAR_MONTH FROM NOW() )";
 	$query = "SELECT `editor_id`, `activity_id`, count(1) AS `count` FROM ({$query_month}) nested GROUP BY `editor_id`, `activity_id`";
 	$r = $wpdb->get_results( $query, ARRAY_A );
 	$workforce = array();
-	$workforce_multi = array();
 	foreach( $r as $row ){
 		$editor_id = $row['editor_id'];
 		if( !isset( $workforce[$editor_id] ) ) $workforce[$editor_id] = 0;
-		if( !isset( $workforce_multi[$editor_id] ) ) $workforce_multi[$editor_id] = 0;
 		$activity_id = $row['activity_id'];
-		if( array_key_exists( 'workforce', $workforce_values[$activity_id] ) ){
-			$workforce[$editor_id] += (int)$workforce_values[$activity_id]['workforce'];
-		}elseif( array_key_exists( 'workforce_multi', $workforce_values[$activity_id] ) ){
-			$workforce_multi[$editor_id] += (float)$workforce_values[$activity_id]['workforce_multi'];	
-		};
+		$workforce[$editor_id] += (int)$workforce_values[$activity_id];
 	}
-	$work_capacity = array();
-	foreach( $workforce as $id => $value ){
-		if( 0 == $workforce_multi[$id] ){
-			$work_capacity[$id] = $workforce[$id];
-		}elseif( 0 == $workforce[$id] ){
-			$work_capacity[$id] = $workforce_multi[$id];
-		}else{
-			$work_capacity[$id] = $workforce[$id] * $workforce_multi[$id];
-		}
-	}
-	asort( $work_capacity );
-	return $work_capacity;
+	asort( $workforce );
+	return $workforce;
 }
 
 //******************************************

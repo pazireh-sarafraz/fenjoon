@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Fenjoon\n"
-"POT-Creation-Date: 2015-05-06 06:57+0330\n"
-"PO-Revision-Date: 2015-05-06 07:37+0330\n"
+"POT-Creation-Date: 2015-06-12 20:45+0330\n"
+"PO-Revision-Date: 2015-06-12 20:45+0330\n"
 "Last-Translator: \n"
 "Language-Team: Fenjoon\n"
 "Language: fa_IR\n"
@@ -19,425 +19,378 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: fenjoon-functions.php:14 fenjoon-functions.php:16 fenjoon-functions.php:29
+#: functions.php:14 functions.php:16 functions.php:29
 msgid "Site Types"
 msgstr "نوع سایت ها"
 
-#: fenjoon-functions.php:15
+#: functions.php:15
 msgid "Site Type"
 msgstr "نوع سایت"
 
-#: fenjoon-functions.php:17
+#: functions.php:17
 msgid "Parent Site Type"
 msgstr "نوع سایت مادر"
 
-#: fenjoon-functions.php:18
+#: functions.php:18
 msgid "All Site Types"
 msgstr "همه نوع سایت ها"
 
-#: fenjoon-functions.php:19
+#: functions.php:19
 msgid "View Site Type"
 msgstr "مشاهده نوع سایت"
 
-#: fenjoon-functions.php:20
+#: functions.php:20
 msgid "Add New Site Type"
 msgstr "افزودن نوع سایت"
 
-#: fenjoon-functions.php:21 fenjoon-functions.php:64
-#: fenjoon-functions.php:107 fenjoon-functions.php:150
-#: fenjoon-functions.php:193
+#: functions.php:21 functions.php:64 functions.php:107 functions.php:149
 msgid "Add New"
 msgstr "افزودن"
 
-#: fenjoon-functions.php:22
+#: functions.php:22
 msgid "Edit Site Type"
 msgstr "ویرایش "
 
-#: fenjoon-functions.php:23
+#: functions.php:23
 msgid "Update Site Type"
 msgstr "به روز رسانی نوع سایت"
 
-#: fenjoon-functions.php:24
+#: functions.php:24
 msgid "Search Site Types"
 msgstr "جستجوی نوع سایت"
 
-#: fenjoon-functions.php:25 fenjoon-functions.php:68
-#: fenjoon-functions.php:111 fenjoon-functions.php:154
-#: fenjoon-functions.php:197 fenjoon-functions.php:239
-#: fenjoon-functions.php:279
+#: functions.php:25 functions.php:68 functions.php:111 functions.php:153
+#: functions.php:195 functions.php:235
 msgid "Not found"
 msgstr "یافت نشد"
 
-#: fenjoon-functions.php:26 fenjoon-functions.php:69
-#: fenjoon-functions.php:112 fenjoon-functions.php:155
-#: fenjoon-functions.php:198 fenjoon-functions.php:240
-#: fenjoon-functions.php:280
+#: functions.php:26 functions.php:69 functions.php:112 functions.php:154
+#: functions.php:196 functions.php:236
 msgid "Not found in Trash"
 msgstr "در زباله دان یافت نشد"
 
-#: fenjoon-functions.php:30
+#: functions.php:30
 msgid "Different site types, our team may design and develop"
 msgstr "انواع مختلف وبسایت که تیم ما قادر به طراحی آن است"
 
-#: fenjoon-functions.php:57 fenjoon-functions.php:59 fenjoon-functions.php:72
+#: functions.php:57 functions.php:59 functions.php:72
 msgid "Modules"
 msgstr "ماژول ها"
 
-#: fenjoon-functions.php:58
+#: functions.php:58
 msgid "Module"
 msgstr "ماژول"
 
-#: fenjoon-functions.php:60
+#: functions.php:60
 msgid "Parent Module"
 msgstr "ماژول مادر"
 
-#: fenjoon-functions.php:61
+#: functions.php:61
 msgid "All Modules"
 msgstr "همه ماژول ها"
 
-#: fenjoon-functions.php:62
+#: functions.php:62
 msgid "View Module"
 msgstr "مشاهده ماژول"
 
-#: fenjoon-functions.php:63
+#: functions.php:63
 msgid "Add New Module"
 msgstr "افزودن ماژول"
 
-#: fenjoon-functions.php:65
+#: functions.php:65
 msgid "Edit Module"
 msgstr "ویرایش ماژول"
 
-#: fenjoon-functions.php:66
+#: functions.php:66
 msgid "Update Module"
 msgstr "به روز رسانی ماژول"
 
-#: fenjoon-functions.php:67
+#: functions.php:67
 msgid "Search Modules"
 msgstr "جستجوی ماژول ها"
 
-#: fenjoon-functions.php:73
+#: functions.php:73
 msgid "Different Modules, our team may design and develop"
 msgstr "ماژول های مختلف که تیم ما قادر به پیاده سازی آن است"
 
-#: fenjoon-functions.php:100 fenjoon-functions.php:102
-#: fenjoon-functions.php:115
+#: functions.php:100 functions.php:102 functions.php:115
 msgid "Features"
 msgstr "قابلیت ها"
 
-#: fenjoon-functions.php:101
+#: functions.php:101
 msgid "Feature"
 msgstr "قابلیت"
 
-#: fenjoon-functions.php:103
+#: functions.php:103
 msgid "Parent Feature"
 msgstr "قابلیت مادر"
 
-#: fenjoon-functions.php:104
+#: functions.php:104
 msgid "All Features"
 msgstr "همه قابلیت ها"
 
-#: fenjoon-functions.php:105
+#: functions.php:105
 msgid "View Feature"
 msgstr "مشاهده قابلیت"
 
-#: fenjoon-functions.php:106
+#: functions.php:106
 msgid "Add New Feature"
 msgstr "افزودن قابلیت"
 
-#: fenjoon-functions.php:108
+#: functions.php:108
 msgid "Edit Feature"
 msgstr "ویرایش قابلیت"
 
-#: fenjoon-functions.php:109
+#: functions.php:109
 msgid "Update Feature"
 msgstr "به روز رسانی قابلیت"
 
-#: fenjoon-functions.php:110
+#: functions.php:110
 msgid "Search Features"
 msgstr "جستجوی قابلیت ها"
 
-#: fenjoon-functions.php:116
+#: functions.php:116
 msgid "Different Features, our team may design and develop"
 msgstr "قابلیت های محتلف که تیم ما قادر به پیاده سازی آن است"
 
-#: fenjoon-functions.php:143 fenjoon-functions.php:145
-#: fenjoon-functions.php:158
-msgid "Attributes"
-msgstr "ویژگی ها"
-
-#: fenjoon-functions.php:144
-msgid "Attribute"
-msgstr "ویژگی"
-
-#: fenjoon-functions.php:146
-msgid "Parent Attribute"
-msgstr "ویژگی مادر"
-
-#: fenjoon-functions.php:147
-msgid "All Attributes"
-msgstr "همه ویژگی ها"
-
-#: fenjoon-functions.php:148
-msgid "View Attribute"
-msgstr "مشاهده ویژگی"
-
-#: fenjoon-functions.php:149
-msgid "Add New Attribute"
-msgstr "افزودن ویژگی"
-
-#: fenjoon-functions.php:151
-msgid "Edit Attribute"
-msgstr "ویرایش ویژگی"
-
-#: fenjoon-functions.php:152
-msgid "Update Attribute"
-msgstr "به روز رسانی ویژگی"
-
-#: fenjoon-functions.php:153
-msgid "Search Attributes"
-msgstr "جستجوی ویژگی ها"
-
-#: fenjoon-functions.php:159
-msgid "Different Attributes, our team may design and develop"
-msgstr "ویژگی های محتلفی که تیم ما قادر به پیاده سازی آن است"
-
-#: fenjoon-functions.php:186 fenjoon-functions.php:188
-#: fenjoon-functions.php:201
+#: functions.php:142 functions.php:144 functions.php:157
 msgid "Standards"
 msgstr "استانداردها"
 
-#: fenjoon-functions.php:187
+#: functions.php:143
 msgid "Standard"
 msgstr "استاندارد"
 
-#: fenjoon-functions.php:189
+#: functions.php:145
 msgid "Parent Standard"
 msgstr "استاندارد مادر"
 
-#: fenjoon-functions.php:190
+#: functions.php:146
 msgid "All Standards"
 msgstr "همه استانداردها"
 
-#: fenjoon-functions.php:191
+#: functions.php:147
 msgid "View Standard"
 msgstr "مشاهده استاندارد"
 
-#: fenjoon-functions.php:192
+#: functions.php:148
 msgid "Add New Standard"
 msgstr "افزودن استاندارد"
 
-#: fenjoon-functions.php:194
+#: functions.php:150
 msgid "Edit Standard"
 msgstr "ویرایش استاندارد"
 
-#: fenjoon-functions.php:195
+#: functions.php:151
 msgid "Update Standard"
 msgstr "به روز رسانی استاندارد"
 
-#: fenjoon-functions.php:196
+#: functions.php:152
 msgid "Search Standards"
 msgstr "جستجوی استانداردها"
 
-#: fenjoon-functions.php:202
+#: functions.php:158
 msgid "Different Standards, our team may design and develop"
 msgstr "استانداردهای مختلفی که تیم ما قادر به پیاده سازی و رعایت آن است"
 
-#: fenjoon-functions.php:229 fenjoon-functions.php:231
-#: fenjoon-functions.php:243
+#: functions.php:185 functions.php:187 functions.php:199
 msgid "Orders"
 msgstr "سفارش ها"
 
-#: fenjoon-functions.php:230
+#: functions.php:186
 msgid "Order"
 msgstr "سفارش"
 
-#: fenjoon-functions.php:232
+#: functions.php:188
 msgid "All Orders"
 msgstr "همه سفارش ها"
 
-#: fenjoon-functions.php:233
+#: functions.php:189
 msgid "View Order"
 msgstr "مشاهده سفارش"
 
-#: fenjoon-functions.php:234
+#: functions.php:190
 msgid "Add a New Order"
 msgstr "افزودن سفارش"
 
-#: fenjoon-functions.php:235 fenjoon-functions.php:275
+#: functions.php:191 functions.php:231
 msgid "Add a New"
 msgstr "افزودن"
 
-#: fenjoon-functions.php:236
+#: functions.php:192
 msgid "Edit Order"
 msgstr "ویرایش سفارش"
 
-#: fenjoon-functions.php:237
+#: functions.php:193
 msgid "Update Order"
 msgstr "به روز رسانی سفارش"
 
-#: fenjoon-functions.php:238
+#: functions.php:194
 msgid "Search Orders"
 msgstr "جستجوی سفارش ها"
 
-#: fenjoon-functions.php:244
+#: functions.php:200
 msgid "The requests which are submitted known as ORDERS!"
 msgstr "سفارش هایی که به تیم ما ارائه میشود"
 
-#: fenjoon-functions.php:269 fenjoon-functions.php:271
-#: fenjoon-functions.php:283
+#: functions.php:225 functions.php:227 functions.php:239
 msgid "Projects"
 msgstr "پروژه ها"
 
-#: fenjoon-functions.php:270
+#: functions.php:226
 msgid "Project"
 msgstr "پروژه"
 
-#: fenjoon-functions.php:272
+#: functions.php:228
 msgid "All Projects"
 msgstr "همه پروژه ها"
 
-#: fenjoon-functions.php:273
+#: functions.php:229
 msgid "View Project"
 msgstr "مشاهده پروژه"
 
-#: fenjoon-functions.php:274
+#: functions.php:230
 msgid "Add a New Project"
 msgstr "افزودن پروژه"
 
-#: fenjoon-functions.php:276
+#: functions.php:232
 msgid "Edit Project"
 msgstr "ویرایش پروژه"
 
-#: fenjoon-functions.php:277
+#: functions.php:233
 msgid "Update Project"
 msgstr "به روز رسانی پروژه"
 
-#: fenjoon-functions.php:278
+#: functions.php:234
 msgid "Search Projects"
 msgstr "جستجوی پروژه ها"
 
-#: fenjoon-functions.php:284
+#: functions.php:240
 msgid "The Projects which are submitted known as Projects!"
 msgstr "پروژه هایی که از یک سفارش ایجاد میشوند"
 
-#: fenjoon-functions.php:316
+#: functions.php:268
+msgid "Preselected choices selected by selecting this Sitetype"
+msgstr "انتخاب‌های پیشفرض مرتبط با انتخاب این نوع سایت"
+
+#: functions.php:351
 msgid "Select child "
 msgstr "جستجوی فرزند"
 
-#: fenjoon-functions.php:365
+#: functions.php:400
 msgid "Workforce Metabox"
 msgstr "نیروی کار لازم"
 
-#: fenjoon-functions.php:377
+#: functions.php:412
 msgid "Workforce needed (Man-Hour)"
 msgstr "نیروی کار لازم (نفر ساعت)"
 
-#: fenjoon-functions.php:409
-msgid "Workforce Multi Metabox"
-msgstr "ضریب افزایش نیروی کار"
-
-#: fenjoon-functions.php:421
-msgid "Workforce multiplier needed (Man-Hour)"
-msgstr "ضریب افزایش نیروی کار لازم ( از 1 تا 2 )"
-
-#: fenjoon-functions.php:459
+#: functions.php:444
 msgid "Choose order owner"
 msgstr "انتخاب صاحب سفارش"
 
-#: fenjoon-functions.php:525
+#: functions.php:509
 msgid "Submitted Choices selected by Costumer"
 msgstr "گزینه های انتخاب شده توسط مشتری"
 
-#: fenjoon-functions.php:655
+#: functions.php:639
 msgid "Start its Project now!"
 msgstr "پروژه این سفارش را ایجاد کنید!"
 
-#: fenjoon-functions.php:666
+#: functions.php:650
 msgid "Last changes of this order"
 msgstr "آخرین تغییرات اعمال شده"
 
-#: fenjoon-functions.php:679
+#: functions.php:663
 msgid "Edit Project No. "
 msgstr "ویرایش پروژه شماره "
 
-#: fenjoon-functions.php:681
+#: functions.php:665
 msgid ""
 "Please note that this is a ONE TIME start and your changes are irreversible!"
 msgstr ""
 "لطفا توجه داشته باشید که این تغییر تنها یک بار اتفاق می افتد و غیر قابل "
 "بازگشت است. با اطمینان کامل تغییر دهید!"
 
-#: fenjoon-functions.php:686
+#: functions.php:670
 msgid "Project Started"
 msgstr "پروژه آغاز شد"
 
-#: fenjoon-functions.php:687
+#: functions.php:671
 msgid "Change to Project"
 msgstr "ایجاد یک پروژه"
 
-#: fenjoon-functions.php:720 fenjoon-functions.php:721
+#: functions.php:704 functions.php:705
 msgid "Fenjoon Settings"
 msgstr "تنظیمات فنجون"
 
-#: fenjoon-functions.php:751
+#: functions.php:735
 msgid "Work Force Settings"
 msgstr "تنظیمات نیروی کار"
 
-#: fenjoon-functions.php:758
+#: functions.php:742
 msgid "Developers Count"
 msgstr "تعداد نفرات توسعه دهنده"
 
-#: fenjoon-functions.php:766
+#: functions.php:750
 msgid "Man-Hour Fee"
 msgstr "هزینه هر نفر ساعت کار"
 
-#: fenjoon-functions.php:774
+#: functions.php:758
 msgid "Daily Work Hours"
 msgstr "ساعت کار روزانه"
 
-#: fenjoon-functions.php:833 fenjoon-functions.php:1014
+#: functions.php:817 functions.php:998
 msgid "Project Progress"
 msgstr "چک لیست پیشرفت پروژه"
 
-#: fenjoon-functions.php:841
+#: functions.php:825
 msgid "Last changes of this Project"
 msgstr "آخرین تغییرات اعمال شده"
 
-#: fenjoon-functions.php:854
+#: functions.php:838
 msgid "Choose editor"
 msgstr "انتخاب ویرایشگر"
 
-#: fenjoon-functions.php:867
+#: functions.php:851
 msgid "Not assigned yet"
 msgstr "تخصیص داده نشده"
 
-#: fenjoon-functions.php:928
+#: functions.php:912
 msgid "In Progress"
 msgstr "شروع به انجام"
 
-#: fenjoon-functions.php:929 inc/fjn-task-list.php:40
+#: functions.php:913 inc/fjn-task-list.php:39
 msgid "Done"
 msgstr "انجام شد"
 
-#: fenjoon-functions.php:930
+#: functions.php:914
 msgid "Still in order"
 msgstr "در لیست سفارش"
 
-#: fenjoon-functions.php:931
+#: functions.php:915
 msgid "Added to order"
 msgstr "افزوده شده به لیست سفارش"
 
-#: fenjoon-functions.php:932
+#: functions.php:916
 msgid "Removed from order"
 msgstr "حذف شده از لیست سفارش"
 
-#: fenjoon-functions.php:1097
+#: functions.php:1082
 msgid "New Tasks"
 msgstr "وظیفه جدید"
 
-#: fenjoon-functions.php:1167
+#: functions.php:1177
 msgid "My Tasks"
 msgstr "وظایف من"
+
+#: functions.php:1184
+msgid "All tasks assigned to you over time"
+msgstr "وظایفی که تا کنون به شما تخصیص داده شده است"
+
+#: functions.php:1264
+msgid "Payment History"
+msgstr "سابقه پرداخت"
 
 #: inc/class-fjn-list-table.php:36
 msgid "List View"
@@ -521,33 +474,65 @@ msgstr "رفتن به صفحه آخر"
 msgid "Select All"
 msgstr "انتخاب همه"
 
-#: inc/fjn-task-list.php:14
-msgid "All tasks assigned to you over time"
-msgstr "وظایفی که تا کنون به شما تخصیص داده شده است"
-
-#: inc/fjn-task-list.php:34
+#: inc/fjn-task-list.php:33
 msgid "Task ID"
 msgstr "شناسه"
 
-#: inc/fjn-task-list.php:35
+#: inc/fjn-task-list.php:34
 msgid "Activity title"
 msgstr "فعالیت"
 
-#: inc/fjn-task-list.php:36
+#: inc/fjn-task-list.php:35
 msgid "Project title"
 msgstr "پروژه"
 
-#: inc/fjn-task-list.php:37
+#: inc/fjn-task-list.php:36
 msgid "Assigned"
 msgstr "تخصیص"
 
-#: inc/fjn-task-list.php:38
+#: inc/fjn-task-list.php:37
 msgid "Seen"
 msgstr "رؤیت"
 
-#: inc/fjn-task-list.php:39
+#: inc/fjn-task-list.php:38
 msgid "Started"
 msgstr "شروع"
+
+#~ msgid "Attributes"
+#~ msgstr "ویژگی ها"
+
+#~ msgid "Attribute"
+#~ msgstr "ویژگی"
+
+#~ msgid "Parent Attribute"
+#~ msgstr "ویژگی مادر"
+
+#~ msgid "All Attributes"
+#~ msgstr "همه ویژگی ها"
+
+#~ msgid "View Attribute"
+#~ msgstr "مشاهده ویژگی"
+
+#~ msgid "Add New Attribute"
+#~ msgstr "افزودن ویژگی"
+
+#~ msgid "Edit Attribute"
+#~ msgstr "ویرایش ویژگی"
+
+#~ msgid "Update Attribute"
+#~ msgstr "به روز رسانی ویژگی"
+
+#~ msgid "Search Attributes"
+#~ msgstr "جستجوی ویژگی ها"
+
+#~ msgid "Different Attributes, our team may design and develop"
+#~ msgstr "ویژگی های محتلفی که تیم ما قادر به پیاده سازی آن است"
+
+#~ msgid "Workforce Multi Metabox"
+#~ msgstr "ضریب افزایش نیروی کار"
+
+#~ msgid "Workforce multiplier needed (Man-Hour)"
+#~ msgstr "ضریب افزایش نیروی کار لازم ( از 1 تا 2 )"
 
 #~ msgid "Choose worker"
 #~ msgstr "انتخاب کنید"
