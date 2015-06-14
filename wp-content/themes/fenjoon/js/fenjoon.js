@@ -35,7 +35,10 @@ function get_string( checkboxes ){
 }
 
 window.onload = function(){
+	var daily_man_power = document.getElementById( 'daily_man_power' ).value;
 	var man_hour_fee = document.getElementById( 'man_hour_fee' ).value;
+	var total_price = document.getElementById( 'total_price' );
+	var total_time = document.getElementById( 'total_time' );
 	var checkboxes = document.getElementsByClassName( 'checkbox' );
 	var post_types = document.getElementsByClassName( 'post_type' );
 	for( var i=0; i < checkboxes.length; i++ ){
@@ -62,10 +65,22 @@ window.onload = function(){
 				var visible = section.getElementsByClassName( 'description visible' )[0];
 				exchangeClass( visible, 'hidden', 'visible' );
 			}
+			var checked = document.getElementsByClassName( 'checkbox checked' );
+			var sum = 0;
+			for( var j=0; j < checked.length; j++ ){
+				if( checked[j].getAttribute( 'workforce' ) ){
+					workforce = checked[j].getAttribute( 'workforce' );
+				}else{
+					workforce = 0;
+				};
+				sum = sum + parseInt( workforce, 10 );
+			}
+			total_price.innerHTML = sum * man_hour_fee;
+			total_time.innerHTML = Math.ceil( sum / daily_man_power );
 			var post_type = closestParentByClassName( this, 'post_type' );
 			if( post_type ){
 				var pt_checked = post_type.getElementsByClassName( 'checkbox checked' );
-				var sum = 0;
+				sum = 0;
 				for( var j=0; j < pt_checked.length; j++ ){
 					if( pt_checked[j].getAttribute( 'workforce' ) ){
 						workforce = pt_checked[j].getAttribute( 'workforce' );
@@ -144,6 +159,18 @@ window.onload = function(){
 				string = get_string( checkboxes );
 				document.getElementsByName( 'string' )[0].setAttribute( 'value', string );
 			}
+			var checked = document.getElementsByClassName( 'checkbox checked' );
+			var sum = 0;
+			for( var j=0; j < checked.length; j++ ){
+				if( checked[j].getAttribute( 'workforce' ) ){
+					workforce = checked[j].getAttribute( 'workforce' );
+				}else{
+					workforce = 0;
+				};
+				sum = sum + parseInt( workforce, 10 );
+			}
+			total_price.innerHTML = sum * man_hour_fee;
+			total_time.innerHTML = Math.ceil( sum / daily_man_power );
 			var description = this.getElementsByClassName( 'description' )[0];
 			exchangeClass( description, 'hidden', 'visible' );
 		}

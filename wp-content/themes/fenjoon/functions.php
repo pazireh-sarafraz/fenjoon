@@ -47,7 +47,9 @@ function add_fenjoon_admin_css() {
 }
 add_action( 'admin_enqueue_scripts', 'add_fenjoon_admin_css' );
 function add_fenjoon_js() {
-	wp_enqueue_script( 'fenjoon', THEME_URI . '/js/fenjoon.js', array(), '1.0', true );
+	if( is_page_template( 'order.php' ) ){
+		wp_enqueue_script( 'fenjoon', THEME_URI . '/js/fenjoon.js', array(), '1.0', true );
+	}
 }
 add_action( 'wp_enqueue_scripts', 'add_fenjoon_js' );
 //******************************************

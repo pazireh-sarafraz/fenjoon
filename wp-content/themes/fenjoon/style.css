@@ -14,9 +14,10 @@ wrapper > main > cols > col, col{1-2-3-4}
 *************************************/
 @font-face {
 	font-family: 'BKoodakBold';
-	src: url('fonts/BKoodakBold.eot?#') format('eot'),
-	url('fonts/BKoodakBold.ttf') format('truetype'),
-	url('fonts/BKoodakBold.woff') format('woff');
+	src: url('fonts/BKoodakBold.eot');
+	src: url('fonts/BKoodakBold.eot?#iefix') format('embedded-opentype'),
+	url('fonts/BKoodakBold.woff') format('woff'),
+	url('fonts/BKoodakBold.ttf') format('truetype');
 }
 @font-face {
 	font-family: 'fenjoonicon';
@@ -44,14 +45,16 @@ body{
 	-webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 	color: #424F59;
-	background-color: #F2F2F2;
+	background-color: #EFEFEF;
 }
 main, .main{
 	display: inline-block;
+	vertical-align: top;
 	width: 100%;
 }
 aside{
 	display: none;
+	vertical-align: top;
 }
 header{
 	width: 100%;
@@ -70,18 +73,38 @@ a, img, a:hover, img:hover{
 .full{
 	width: 100%;
 }
-.big{
-	font-size: 200%;
-	font-weight: bold;
-}
-.large{
+.size1{
 	font-size: 110%;
 }
-.big-padding{
+.size2{
+	font-size: 120%;
+}
+.size3{
+	font-size: 130%;
+	font-weight: bold;
+}
+.size4{
+	font-size: 140%;
+	font-weight: bold;
+}
+.size5{
+	font-size:  150%;
+	font-weight: bold;
+}
+.padding1{
+	padding: 10px 0;
+}
+.padding2{
+	padding: 20px 0;
+}
+.padding3{
+	padding: 30px 0;
+}
+.padding4{
 	padding: 40px 0;
 }
-.large-padding{
-	padding: 20px 0;
+.padding5{
+	padding: 50px 0;
 }
 .left{
 	float: left;
@@ -128,8 +151,13 @@ a, img, a:hover, img:hover{
 	border: 1px solid #F2F2F2;
   background-color: #F9F9F9;
 	background: #FFF none repeat scroll 0% 0%;
-	border-radius: 5px;
 	box-shadow: 0 1px 3px rgba(0,0,0,.2);
+}
+.tile.green{
+	border: 1px solid #79B24A;
+  background-color: #7FB952;
+	background: #7FB952 none repeat scroll 0% 0%;
+	color: #FFFFFF;
 }
 .tile h1, .tile h2, .tile h3{
 	margin-top: 0;
@@ -161,19 +189,21 @@ ul.indent{
 .ib{
 	display: inline-block;
 }
+.center{
+	text-align: center;
+}
 /******************************* Form begin *************************/
 input[type=color], input[type=date], input[type=datetime-local], input[type=datetime], input[type=email], input[type=month], input[type=number], input[type=password], input[type=search], input[type=tel], input[type=text], input[type=time], input[type=url], input[type=week], select, textarea{
 	font-family: 'BKoodakBold';
 	vertical-align: baseline;
   padding: 7px;
   display: block;
-  color: #535865;
+  color: #434343;
   border: 1px solid #a0a5b1;
   border-radius: 0;
   background-color: #fff;
   font-size: 1.2em;
   width: 100%;
-  max-width: 35em;
   line-height: 1.6;
   height: 42px;
 }
@@ -244,7 +274,8 @@ and (min-width: 1100px){
 	}
 	aside{
 		display: inline-block;
-		width: 25%;
+		width: 23%;
+		margin-left: 2%; 
 	}
 	.banner{
 		height: 72px;
@@ -306,8 +337,8 @@ and (min-width: 1100px){
 }
 
 @media screen 
-and (min-width: 1333px) 
-and (-webkit-min-device-pixel-ratio: 1){
+and (min-width: 1333px) and (-webkit-min-device-pixel-ratio: 1),
+(min-width: 1333px) and (min-resolution: 96dpi){
 	.wrapper{
 		max-width: 1200px;
 	}

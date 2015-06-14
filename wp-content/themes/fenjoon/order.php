@@ -5,10 +5,15 @@ Template Name: New order
 get_header();
 
 if( $fenjoon_settings = get_option( 'fenjoon_settings' ) ){
+	$developer_count = $fenjoon_settings[ 'developer_count' ];
 	$man_hour_fee = $fenjoon_settings[ 'man_hour_fee' ];
+	$daily_work_hours = $fenjoon_settings[ 'daily_work_hours' ];
 }else{
+	$developer_count = 0;
 	$man_hour_fee = 0;
+	$daily_work_hours = 0;
 }
+$daily_man_power = ( $developer_count * $daily_work_hours != 0 ) ? $developer_count * $daily_work_hours : 1;
 $choice_sections = array( 'sitetypes', 'modules', 'features', 'standards' );
 $cpt = array( 'post_type' => $choice_sections );
 $the_query = fjn_template_query( $cpt );
@@ -43,11 +48,11 @@ if( $the_query->have_posts() ){
 	}
 }
 ?>
-<div class="full backgreen">
+<div class="full backblue">
 	<div class="wrapper">
 		<div class="cols">
 			<div class="col col11">
-				<h1 class="big-padding"><?php _e( 'Fenjoon Group Website', 'fenjoon' );?></h1>
+				<h1 class="padding4"><?php _e( 'Fenjoon Group Website', 'fenjoon' );?></h1>
 			</div>
 		</div>
 	</div>
@@ -80,10 +85,9 @@ if( $the_query->have_posts() ){
 											?>
 											<ul class="indent"><?php
 												foreach( $children[ $choice_id ] as $child_id ){?>
-													<li class="option icon checkbox unchecked children<?php echo $choice_id; echo( in_array( $child_id, explode( ',', $coselected ) ) ? ' coselection' : '' );?>" value="<?php echo $child_id;?>" id="option<?php echo $child_id;?>" parent="<?php echo $choice_id;?>"<?php if( 'sitetypes' != $key ){
-														$workforce = get_post_meta( $child_id, 'workforce', 1 );
-														echo( $workforce ? ' workforce="' . $workforce . '"' : '' );
-													}?>><?php echo $order_sections[ $key ][ $child_id ]['title'];?>
+													<li class="option icon checkbox unchecked children<?php echo $choice_id; echo( in_array( $child_id, explode( ',', $coselected ) ) ? ' coselection' : '' );?>" value="<?php echo $child_id;?>" id="option<?php echo $child_id;?>" <?php if( 'sitetypes' != $key ){
+											echo( $order_sections[ $key ][ $child_id ][ 'workforce' ] ? ' workforce="' . $order_sections[ $key ][ $child_id ][ 'workforce' ] . '"' : '' );
+										}?>><?php echo $order_sections[ $key ][ $child_id ]['title'];?>
 														<p class="description hidden"><?php echo $order_sections[ $key ][ $child_id ]['description'];?></p>
 													</li><?php
 												}?>
@@ -98,8 +102,8 @@ if( $the_query->have_posts() ){
 						<?php if( 'sitetypes' != $key ){?>
 						<div class="tile">
 							<ul>
-								<li class="icon big large-padding align-right"><span class="your_pt_price ib">0</span><span class="left"><?php _e( 'Toman', 'fenjoon' );?></span></li>
-								<li class="icon big align-justify"><span class="total_pt_price ib"><?php echo $total_pt_price[ $key ];?></span><span class="left"><?php _e( 'Toman', 'fenjoon' );?></span></li>
+								<li class="icon size5 padding1 align-right"><span class="your_pt_price ib">0</span><span class="left"><?php _e( 'Toman', 'fenjoon' );?></span></li>
+								<li class="icon size5 align-justify"><span class="total_pt_price ib"><?php echo $total_pt_price[ $key ];?></span><span class="left"><?php _e( 'Toman', 'fenjoon' );?></span></li>
 							</ul>
 						</div>
 						<?php }?>
@@ -112,15 +116,16 @@ if( $the_query->have_posts() ){
 						<div class="tile">
 							<h2><?php _e( 'Complementary information', 'fenjoon' );?></h2>
 							<form id="new_order" action="<?php echo site_url(); ?>/" method="post">
-								<input type="text" name="title" value="" /><?php
+								<input type="text" name="title" value="" placeholder="<?php _e( 'Order title', 'fenjoon' );?>"><?php
 								wp_nonce_field( 'fjn_new-order', 'fjn_nonce' );
 								$current_url = '';
 								global $wp;
 								$current_url = home_url( add_query_arg( array(), $wp->request ) );?>
-								<input type="hidden" name="referrer" value="<?php echo $current_url;?>" />
-								<input type="hidden" name="string" value=""/>
-								<input type="hidden" name="action" value="new_order"/>
-								<input type="hidden" id="man_hour_fee" value="<?php echo $man_hour_fee;?>"/>			
+								<input type="hidden" name="referrer" value="<?php echo $current_url;?>">
+								<input type="hidden" name="string" value="">
+								<input type="hidden" name="action" value="new_order">
+								<input type="hidden" id="daily_man_power" value="<?php echo $daily_man_power;?>">	
+								<input type="hidden" id="man_hour_fee" value="<?php echo $man_hour_fee;?>">	
 								<a class="button" onclick="document.getElementById('new_order').submit();"><?php _e( 'Submit order', 'fenjoon' );?></a>
 							</form>
 						</div>

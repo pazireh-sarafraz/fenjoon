@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Fenjoon\n"
-"POT-Creation-Date: 2015-06-13 07:21+0330\n"
-"PO-Revision-Date: 2015-06-13 07:21+0330\n"
+"POT-Creation-Date: 2015-06-14 07:56+0330\n"
+"PO-Revision-Date: 2015-06-14 07:56+0330\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fa_IR\n"
@@ -19,152 +19,152 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: functions.php:64
+#: functions.php:66
 msgid "Top Menu"
 msgstr "منوی اصلی"
 
-#: functions.php:160 functions.php:161 functions.php:162 functions.php:175
+#: functions.php:162 functions.php:163 functions.php:164 functions.php:177
 msgid "General"
 msgstr "عمومی"
 
-#: functions.php:163
+#: functions.php:165
 msgid "Parent General"
 msgstr "آیتم عمومی اصلی"
 
-#: functions.php:164
+#: functions.php:166
 msgid "All General"
 msgstr "همه عمومی ها"
 
-#: functions.php:165
+#: functions.php:167
 msgid "View General"
 msgstr "مشاهده آیتم عمومی"
 
-#: functions.php:166
+#: functions.php:168
 msgid "Add New General"
 msgstr "افزودن آیتم عمومی"
 
-#: functions.php:167 functions.php:247
+#: functions.php:169 functions.php:249
 msgid "Add New"
 msgstr "افزودن"
 
-#: functions.php:168
+#: functions.php:170
 msgid "Edit General"
 msgstr "ویرایش آیتم عمومی"
 
-#: functions.php:169
+#: functions.php:171
 msgid "Update General"
 msgstr "به روز رسانی آیتم عمومی"
 
-#: functions.php:170
+#: functions.php:172
 msgid "Search General"
 msgstr "جستجوی آیتم های عمومی"
 
-#: functions.php:171 functions.php:251
+#: functions.php:173 functions.php:253
 msgid "Not found"
 msgstr "پیدا نشد"
 
-#: functions.php:172 functions.php:252
+#: functions.php:174 functions.php:254
 msgid "Not found in Trash"
 msgstr "در زباله دان پیدا نشد"
 
-#: functions.php:176
+#: functions.php:178
 msgid "General information for the site"
 msgstr "آیتم های عمومی وبسایت"
 
-#: functions.php:204
+#: functions.php:206
 msgid "General Field"
 msgstr "دسته آیتم های عمومی"
 
-#: functions.php:205
+#: functions.php:207
 msgid "Add New Field"
 msgstr "افزودن فیلد جدید"
 
-#: functions.php:206
+#: functions.php:208
 msgid "New Field"
 msgstr "فیلد جدید"
 
-#: functions.php:219
+#: functions.php:221
 msgid "Field"
 msgstr "دسته"
 
-#: functions.php:230
+#: functions.php:232
 msgid "Field not set!"
 msgstr "دسته نامشخص"
 
-#: functions.php:240 functions.php:241 functions.php:242 functions.php:255
+#: functions.php:242 functions.php:243 functions.php:244 functions.php:257
 #: home.php:130
 msgid "Portfolio"
 msgstr "نمونه کار"
 
-#: functions.php:243
+#: functions.php:245
 msgid "Parent Portfolio"
 msgstr "نمونه کار اصلی"
 
-#: functions.php:244
+#: functions.php:246
 msgid "All Portfolio"
 msgstr "همه نمونه کارها"
 
-#: functions.php:245
+#: functions.php:247
 msgid "View Portfolio"
 msgstr "مشاهده نمونه کار"
 
-#: functions.php:246
+#: functions.php:248
 msgid "Add New Portfolio"
 msgstr "افزودن نمونه کار"
 
-#: functions.php:248
+#: functions.php:250
 msgid "Edit Portfolio"
 msgstr "ویرایش نمونه کار"
 
-#: functions.php:249
+#: functions.php:251
 msgid "Update Portfolio"
 msgstr "به روز رسانی نمونه کار"
 
-#: functions.php:250
+#: functions.php:252
 msgid "Search Portfolio"
 msgstr "جستجوی نمونه کارها"
 
-#: functions.php:256
+#: functions.php:258
 msgid "Portfolio items"
 msgstr "نمونه کارها"
 
-#: functions.php:284
+#: functions.php:286
 msgid "Portfolio Cat"
 msgstr "دسته نمونه کارها"
 
-#: functions.php:285
+#: functions.php:287
 msgid "Add New Cat"
 msgstr "افزودن دسته جدید"
 
-#: functions.php:286
+#: functions.php:288
 msgid "New Cat"
 msgstr "دسته جدید"
 
-#: functions.php:303
+#: functions.php:305
 msgid "Portfolio Metadata"
 msgstr "اطلاعات تکمیلی نمونه کار"
 
-#: functions.php:320
+#: functions.php:322
 msgid "technology"
 msgstr "تکنولوژی"
 
-#: functions.php:330
+#: functions.php:332
 msgid "start"
 msgstr "تاریخ شروع"
 
-#: functions.php:340
+#: functions.php:342
 msgid "finish"
 msgstr "تاریخ اتمام"
 
-#: functions.php:350
+#: functions.php:352
 msgid "workforce"
 msgstr "نیروی کار"
 
-#: functions.php:360
+#: functions.php:362
 msgid "security"
 msgstr "امنیت"
 
-#: home.php:6 order.php:50
+#: home.php:6 order.php:55
 msgid "Fenjoon Group Website"
 msgstr "یه فنجون چای خوش طعم، یه وبسایت آماده و به‌روز"
 
@@ -236,17 +236,29 @@ msgstr "بیشتر"
 msgid "Sorry, no posts matched your criteria."
 msgstr "متاسفانه پستی با این مشخصات پیدا نشد"
 
-#: order.php:101 order.php:102
+#: order.php:105 order.php:106 sidebar.php:10
 msgid "Toman"
 msgstr "تومان"
 
-#: order.php:113
+#: order.php:117
 msgid "Complementary information"
 msgstr "اطلاعات تکمیلی"
 
-#: order.php:124
+#: order.php:119
+msgid "Order title"
+msgstr "عنوان سفارش"
+
+#: order.php:129
 msgid "Submit order"
 msgstr "ثبت سفارش"
+
+#: sidebar.php:6
+msgid "Your order"
+msgstr "سفارش شما"
+
+#: sidebar.php:14
+msgid "Days"
+msgstr "روز"
 
 #~ msgid "Technology"
 #~ msgstr "فناوری"

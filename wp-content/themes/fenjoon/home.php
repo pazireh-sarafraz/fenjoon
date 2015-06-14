@@ -3,7 +3,7 @@
 	<div class="wrapper">
 		<div class="cols">
 			<div class="col col11">
-				<h1 class="big-padding"><?php _e( 'Fenjoon Group Website', 'fenjoon' );?></h1>
+				<h1 class="padding4"><?php _e( 'Fenjoon Group Website', 'fenjoon' );?></h1>
 			</div>
 		</div>
 	</div>
@@ -113,7 +113,7 @@
 	<div class="wrapper">
 		<div class="cols">
 			<div class="col col11">
-				<p class="big big-padding"><?php
+				<p class="size5 padding4"><?php
 					_e( 'Push this new order button right now!', 'fenjoon' );?>
 				</p>
 			</div>
