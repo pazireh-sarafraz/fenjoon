@@ -47,7 +47,7 @@ function add_fenjoon_admin_css() {
 }
 add_action( 'admin_enqueue_scripts', 'add_fenjoon_admin_css' );
 function add_fenjoon_js() {
-	if( is_page_template( 'order.php' ) ){
+	if( is_page_template( 'single-orders.php' ) || is_singular( 'orders' ) ){
 		wp_enqueue_script( 'fenjoon', THEME_URI . '/js/fenjoon.js', array(), '1.0', true );
 	}
 }
@@ -117,8 +117,17 @@ add_filter( 'wp_nav_menu_objects', 'fjn_filter_menu_class', 10, 2 );
 //******************************************
 // Template functions
 //******************************************
-function fjn_template_query( $cpt ){
-	if( 'general' == $cpt ){
+function fjn_template_query( $cpt, $user_id = null ){
+	if( 'orders' == $cpt ){
+		$args = array(
+			'post_type'				=> 'orders',
+			'post_status'			=> array( 'publish', 'pending' ),
+			'posts_per_page'	=> -1,
+			'orderby'					=> 'date',
+			'order'						=> 'DESC',
+			'author'					=> $user_id
+		);
+	}elseif( 'general' == $cpt ){
 		$args = array(
 			'post_type'				=> 'general',
 			'post_status'			=> 'publish',

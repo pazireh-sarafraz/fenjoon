@@ -3,7 +3,7 @@
 	<div class="wrapper">
 		<div class="cols">
 			<div class="col col11">
-				<h1 class="padding4"><?php _e( 'Fenjoon Group Website', 'fenjoon' );?></h1>
+				<h1 class="paddingtb4"><?php _e( 'Fenjoon Group Website', 'fenjoon' );?></h1>
 			</div>
 		</div>
 	</div>
@@ -14,7 +14,7 @@
 	if( $second_query->have_posts() ){?>
 		<div class="cols">
 			<div class="col col12">
-				<div class="tile">
+				<div class="tile padding2">
 					<section>
 						<h2><?php _e( 'About us', 'fenjoon' );?></h2>
 						<ul><?php
@@ -28,7 +28,7 @@
 					</section>
 				</div><?php rewind_posts();?>					
 			</div><div class="col col12 last-child">
-				<div class="tile">
+				<div class="tile padding2">
 					<section>
 						<h2><?php _e( 'Our difference', 'fenjoon' );?></h2>
 						<ul><?php
@@ -46,7 +46,7 @@
 		
 		<div class="cols">
 			<div class="col col12">
-				<div class="tile">
+				<div class="tile padding2">
 					<section>
 						<h2><?php _e( 'Services we offer', 'fenjoon' );?></h2>
 						<ul><?php
@@ -60,7 +60,7 @@
 					</section>
 				</div><?php rewind_posts();?>
 			</div><div class="col col12 last-child">
-				<div class="tile">
+				<div class="tile padding2">
 					<section>
 						<h2><?php _e( 'Services we do not offer', 'fenjoon' );?></h2>
 						<ul><?php
@@ -73,7 +73,7 @@
 						</ul>
 					</section>
 				</div><?php rewind_posts();?>
-				<div class="tile tilestack">
+				<div class="tile  padding2 tilestack">
 					<section>
 						<h2><?php _e( 'Public responsibility', 'fenjoon' );?></h2><?php
 						while ($second_query->have_posts()){
@@ -89,7 +89,7 @@
 	
 		<div class="cols">
 			<div class="col col12">
-				<div class="tile">
+				<div class="tile padding2">
 					<section>
 						<h2><?php _e( 'Our statistics', 'fenjoon' );?></h2>
 						<ul>
@@ -101,7 +101,7 @@
 					</section>
 				</div>
 			</div><div class="col col12 last-child">
-				<div class="tile">
+				<div class="tile padding2">
 
 				</div>
 			</div>
@@ -113,7 +113,7 @@
 	<div class="wrapper">
 		<div class="cols">
 			<div class="col col11">
-				<p class="size5 padding4"><?php
+				<p class="size5 paddingtb4"><?php
 					_e( 'Push this new order button right now!', 'fenjoon' );?>
 				</p>
 			</div>
@@ -129,7 +129,7 @@
 			<section>
 				<h2><?php _e( 'Portfolio', 'fenjoon' );?></h2>
 				<div class="row hightop">
-					<div class="col col14 tile"><?php
+					<div class="col col14 tile padding2"><?php
 					while ($third_query->have_posts()){ $third_query->the_post();
 						$metadata = get_post_meta( $post->ID );?>
 						<a class="thumb" href="<?php the_permalink();?>" title="<?php the_title_attribute(); ?>"><?php
@@ -149,9 +149,9 @@
 						}?>
 						</ul><?php
 						if( ( $third_query->current_post + 2 ) < ( $third_query->post_count ) ){?>
-							</div><!-- --><div class="col col14 tile"><?php						
+							</div><!-- --><div class="col col14 tile padding2"><?php						
 						}elseif( ( $third_query->current_post + 2 ) == ( $third_query->post_count ) ){?>
-							</div><!-- --><div class="col col14 tile last-child"><?php						
+							</div><!-- --><div class="col col14 tile padding2 last-child"><?php						
 						}
 					}?>
 					</div>

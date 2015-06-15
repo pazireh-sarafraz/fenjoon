@@ -12,7 +12,20 @@
 	<?php wp_head(); ?>
 </head>
 <body>
-<header>
+<header><?php
+if( is_user_logged_in() ){
+global $current_user;
+?>
+<div class="full backblue">
+	<div class="wrapper">
+		<div class="cols">
+			<div class="col col11">
+				<p class="paddingtb1"><?php printf( __( 'Welcome dear user %s.', 'fenjoon' ), $current_user->display_name );?></p>
+			</div>
+		</div>
+	</div>
+</div><?php	
+}?>
 	<div class="banner" role="banner">
 	
 	</div>

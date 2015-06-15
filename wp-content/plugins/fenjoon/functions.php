@@ -724,6 +724,9 @@ function fjn_frontend_post() {
 					if( isset( $post_id ) ){
 						$msg[] = 1; // order submitted successfully!
 						update_post_meta( $post_id, 'order_str', $_POST['string'] );
+						update_post_meta( $post_id, 'total_price', $_POST['total_price'] );
+						update_post_meta( $post_id, 'total_time', $_POST['total_time'] );
+						update_post_meta( $post_id, 'order_code', 1121000 + $post_id );
 					}else{
 						$err[] = 1; // order did not submit and error occurred!
 					}
