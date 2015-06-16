@@ -617,6 +617,7 @@ function save_order_list() {
 	$project_id = wp_insert_post( $new_project );
 	if ( 0 != $project_id ){
 		update_post_meta( $project_id, 'order_id', $post_id );
+		update_post_meta( $project_id, 'project_code', 1121000 + $project_id );
 		update_post_meta( $post_id, 'project_id', $project_id );
 		if( $order_str ) update_post_meta( $project_id, 'project_str', $order_str );
 	}
@@ -1268,10 +1269,12 @@ function my_column_thumbnail_width(){?>
 //*******************************************
 // Get editors list by free time
 //*******************************************
-function fjn_get_meta_by_key( $key ){
+function fjn_get_meta_by_key( $key, $posts = null ){
 	global $wpdb;
 	if( empty( $key ) ) return;
 	$query = "SELECT post_id, meta_key, meta_value FROM {$wpdb->postmeta} WHERE meta_key = '" . $key ."'";
+	if( !empty( $posts ) )
+		$query .= " AND post_id IN ( " . str_replace( '+', ',', $posts ) . " )";
 	$r = $wpdb->get_results( $query, ARRAY_A );
 	$workforce = array();
 	foreach( $r as $row ){

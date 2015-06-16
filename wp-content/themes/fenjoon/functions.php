@@ -50,6 +50,9 @@ function add_fenjoon_js() {
 	if( is_page_template( 'single-orders.php' ) || is_singular( 'orders' ) ){
 		wp_enqueue_script( 'fenjoon', THEME_URI . '/js/fenjoon.js', array(), '1.0', true );
 	}
+	if( is_page_template( 'single-projects.php' ) || is_singular( 'projects' ) ){
+		wp_enqueue_script( 'fenjoon', THEME_URI . '/js/gauge.js', array(), '1.0', true );
+	}
 }
 add_action( 'wp_enqueue_scripts', 'add_fenjoon_js' );
 //******************************************

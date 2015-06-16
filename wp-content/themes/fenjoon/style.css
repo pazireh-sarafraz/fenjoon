@@ -106,6 +106,15 @@ a, img, a:hover, img:hover{
 .paddingtb4{
 	padding: 40px 0;
 }
+.pr1{
+	padding-right: 10px;
+}
+.pr2{
+	padding-right: 20px;
+}
+.pr3{
+	padding-right: 30px;
+}
 .mt1{
 	margin-top: 10px;
 }
@@ -136,6 +145,14 @@ a, img, a:hover, img:hover{
 }
 .backblue{
 	background-color: #406E9F;
+	color: #FFFFFF;
+}
+.backorange{
+	background-color: #FFB800;
+	color: #FFFFFF;
+}
+.backred{
+	background-color: #FF3A00;
 	color: #FFFFFF;
 }
 ul .right{
@@ -238,7 +255,6 @@ ul.indent{
 .tile h1, .tile h2, .tile h3{
 	margin-top: 0;
 	margin-bottom: 0.7em;
-  background-color: #F2F2F2;
 }
 .tile.tilestack{
 	margin-top: 20px;

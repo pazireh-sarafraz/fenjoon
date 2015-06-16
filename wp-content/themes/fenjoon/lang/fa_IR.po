@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Fenjoon\n"
-"POT-Creation-Date: 2015-06-16 04:43+0330\n"
-"PO-Revision-Date: 2015-06-16 04:43+0330\n"
+"POT-Creation-Date: 2015-06-16 23:59+0330\n"
+"PO-Revision-Date: 2015-06-17 00:12+0330\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fa_IR\n"
@@ -19,148 +19,152 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: functions.php:66
+#: footer-projects.php:30
+msgid "Project progress"
+msgstr "درصد پیشرفت پروژه"
+
+#: functions.php:69
 msgid "Top Menu"
 msgstr "منوی اصلی"
 
-#: functions.php:171 functions.php:172 functions.php:173 functions.php:186
+#: functions.php:174 functions.php:175 functions.php:176 functions.php:189
 msgid "General"
 msgstr "عمومی"
 
-#: functions.php:174
+#: functions.php:177
 msgid "Parent General"
 msgstr "آیتم عمومی اصلی"
 
-#: functions.php:175
+#: functions.php:178
 msgid "All General"
 msgstr "همه عمومی ها"
 
-#: functions.php:176
+#: functions.php:179
 msgid "View General"
 msgstr "مشاهده آیتم عمومی"
 
-#: functions.php:177
+#: functions.php:180
 msgid "Add New General"
 msgstr "افزودن آیتم عمومی"
 
-#: functions.php:178 functions.php:258
+#: functions.php:181 functions.php:261
 msgid "Add New"
 msgstr "افزودن"
 
-#: functions.php:179
+#: functions.php:182
 msgid "Edit General"
 msgstr "ویرایش آیتم عمومی"
 
-#: functions.php:180
+#: functions.php:183
 msgid "Update General"
 msgstr "به روز رسانی آیتم عمومی"
 
-#: functions.php:181
+#: functions.php:184
 msgid "Search General"
 msgstr "جستجوی آیتم های عمومی"
 
-#: functions.php:182 functions.php:262
+#: functions.php:185 functions.php:265
 msgid "Not found"
 msgstr "پیدا نشد"
 
-#: functions.php:183 functions.php:263
+#: functions.php:186 functions.php:266
 msgid "Not found in Trash"
 msgstr "در زباله دان پیدا نشد"
 
-#: functions.php:187
+#: functions.php:190
 msgid "General information for the site"
 msgstr "آیتم های عمومی وبسایت"
 
-#: functions.php:215
+#: functions.php:218
 msgid "General Field"
 msgstr "دسته آیتم های عمومی"
 
-#: functions.php:216
+#: functions.php:219
 msgid "Add New Field"
 msgstr "افزودن فیلد جدید"
 
-#: functions.php:217
+#: functions.php:220
 msgid "New Field"
 msgstr "فیلد جدید"
 
-#: functions.php:230
+#: functions.php:233
 msgid "Field"
 msgstr "دسته"
 
-#: functions.php:241
+#: functions.php:244
 msgid "Field not set!"
 msgstr "دسته نامشخص"
 
-#: functions.php:251 functions.php:252 functions.php:253 functions.php:266
+#: functions.php:254 functions.php:255 functions.php:256 functions.php:269
 #: home.php:130
 msgid "Portfolio"
 msgstr "نمونه کار"
 
-#: functions.php:254
+#: functions.php:257
 msgid "Parent Portfolio"
 msgstr "نمونه کار اصلی"
 
-#: functions.php:255
+#: functions.php:258
 msgid "All Portfolio"
 msgstr "همه نمونه کارها"
 
-#: functions.php:256
+#: functions.php:259
 msgid "View Portfolio"
 msgstr "مشاهده نمونه کار"
 
-#: functions.php:257
+#: functions.php:260
 msgid "Add New Portfolio"
 msgstr "افزودن نمونه کار"
 
-#: functions.php:259
+#: functions.php:262
 msgid "Edit Portfolio"
 msgstr "ویرایش نمونه کار"
 
-#: functions.php:260
+#: functions.php:263
 msgid "Update Portfolio"
 msgstr "به روز رسانی نمونه کار"
 
-#: functions.php:261
+#: functions.php:264
 msgid "Search Portfolio"
 msgstr "جستجوی نمونه کارها"
 
-#: functions.php:267
+#: functions.php:270
 msgid "Portfolio items"
 msgstr "نمونه کارها"
 
-#: functions.php:295
+#: functions.php:298
 msgid "Portfolio Cat"
 msgstr "دسته نمونه کارها"
 
-#: functions.php:296
+#: functions.php:299
 msgid "Add New Cat"
 msgstr "افزودن دسته جدید"
 
-#: functions.php:297
+#: functions.php:300
 msgid "New Cat"
 msgstr "دسته جدید"
 
-#: functions.php:314
+#: functions.php:317
 msgid "Portfolio Metadata"
 msgstr "اطلاعات تکمیلی نمونه کار"
 
-#: functions.php:331
+#: functions.php:334
 msgid "technology"
 msgstr "تکنولوژی"
 
-#: functions.php:341
+#: functions.php:344
 msgid "start"
 msgstr "تاریخ شروع"
 
-#: functions.php:351
+#: functions.php:354
 msgid "finish"
 msgstr "تاریخ اتمام"
 
-#: functions.php:361
+#: functions.php:364
 msgid "workforce"
 msgstr "نیروی کار"
 
-#: functions.php:371
+#: functions.php:374
 msgid "security"
 msgstr "امنیت"
 
@@ -169,7 +173,7 @@ msgstr "امنیت"
 msgid "Welcome dear user %s."
 msgstr "کاربر محترم %s خوش آمدید"
 
-#: home.php:6 orderlist.php:11 single-orders.php:80
+#: home.php:6 orderlist.php:11 single-orders.php:80 single-projects.php:74
 msgid "Fenjoon Group Website"
 msgstr "یه فنجون چای خوش طعم، یه وبسایت آماده و به‌روز"
 
@@ -253,7 +257,8 @@ msgstr "شناسه"
 msgid "Title"
 msgstr "عنوان"
 
-#: orderlist.php:29 sidebar-orders.php:32
+#: orderlist.php:29 sidebar-orders.php:32 sidebar-orders.php:37
+#: sidebar-projects.php:32 sidebar-projects.php:37
 msgid "Date created"
 msgstr "ثبت"
 
@@ -273,7 +278,7 @@ msgstr "زمان"
 msgid "Status"
 msgstr "وضعیت"
 
-#: orderlist.php:50 sidebar-orders.php:59
+#: orderlist.php:50 sidebar-orders.php:64
 msgid "Project"
 msgstr "پروژه"
 
@@ -289,45 +294,66 @@ msgstr "بررسی"
 msgid "Search"
 msgstr "جستجو"
 
-#: sidebar-orders.php:19
+#: sidebar-orders.php:19 sidebar-projects.php:19
 msgid "Your order"
 msgstr "سفارش شما"
 
-#: sidebar-orders.php:26
+#: sidebar-orders.php:26 sidebar-projects.php:26
 msgid "Identifier"
 msgstr "شناسه"
 
-#: sidebar-orders.php:38
+#: sidebar-orders.php:43 sidebar-projects.php:43
 msgid "Correction"
 msgstr "تغییر"
 
-#: sidebar-orders.php:43 single-orders.php:131 single-orders.php:132
+#: sidebar-orders.php:48 sidebar-projects.php:48 single-orders.php:131
+#: single-orders.php:132
 msgid "Toman"
 msgstr "تومان"
 
-#: sidebar-orders.php:47
+#: sidebar-orders.php:52 sidebar-projects.php:52
 msgid "Days"
 msgstr "روز"
 
-#: sidebar-orders.php:58
+#: sidebar-orders.php:63
 msgid "Related project"
 msgstr "پروژه متصل به این سفارش"
 
-#: sidebar-orders.php:63
+#: sidebar-orders.php:68 sidebar-projects.php:68
 msgid "Help"
 msgstr "راهنما"
 
-#: sidebar-orders.php:66
+#: sidebar-orders.php:71
 msgid "Selected"
 msgstr "انتخاب شده"
 
-#: sidebar-orders.php:69
+#: sidebar-orders.php:74 single-projects.php:34
 msgid "In progress"
 msgstr "در دست اجرا"
 
-#: sidebar-orders.php:72
+#: sidebar-orders.php:77
 msgid "Not selected"
 msgstr "انتخاب نشده"
+
+#: sidebar-projects.php:63
+msgid "Related order"
+msgstr "سفارش متصل به این پروژه"
+
+#: sidebar-projects.php:64
+msgid "Order"
+msgstr "سفارش"
+
+#: sidebar-projects.php:71
+msgid "Modules"
+msgstr "ماژول‌ها"
+
+#: sidebar-projects.php:74
+msgid "Features"
+msgstr "قابلیت‌ها"
+
+#: sidebar-projects.php:77
+msgid "Standards"
+msgstr "استانداردها"
 
 #: sidebar.php:9
 msgid "Submit a new order!"
@@ -356,6 +382,34 @@ msgstr "ثبت سفارش"
 #: single-orders.php:157
 msgid "Update order"
 msgstr "به روز رسانی سفارش"
+
+#: single-projects.php:34
+msgid "Done"
+msgstr "انجام شده"
+
+#: single-projects.php:34
+msgid "In queue"
+msgstr "در صف شروع"
+
+#: single-projects.php:85
+msgid "Project status"
+msgstr "وضعیت پروژه"
+
+#: single-projects.php:106
+msgid "Project summary"
+msgstr "خلاصه پروژه"
+
+#: single-projects.php:111
+msgid "Elapsed time"
+msgstr "سپرسی شده"
+
+#: single-projects.php:117
+msgid "Remaining time"
+msgstr "باقی مانده"
+
+#: single-projects.php:128
+msgid "Payment history"
+msgstr "سابقه پرداخت‌های این پروژه"
 
 #~ msgid "New order"
 #~ msgstr "ثبت سفارش"
