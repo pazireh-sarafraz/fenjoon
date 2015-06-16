@@ -119,17 +119,18 @@ function switch_radio( radio ){
 window.onload = function(){
 	var daily_man_power = document.getElementById( 'daily_man_power' ).value;
 	var man_hour_fee = document.getElementById( 'man_hour_fee' ).value;
-	var checkboxes = document.getElementsByClassName( 'checkbox' );
+	var checkboxes = document.getElementsByClassName( 'option checkbox' );
 	var post_types = document.getElementsByClassName( 'post_type' );
 	update( man_hour_fee, daily_man_power );
 	for( var i=0; i < checkboxes.length; i++ ){
+		if( hasClass( checkboxes[i], 'started' ) ) continue;
 		checkboxes[i].onclick = function(){
 			exchangeClass( this, 'checked', 'unchecked' );
 			update( man_hour_fee, daily_man_power, this );
 		}
 	}
 
-	var radios = document.getElementsByClassName( 'radio' );
+	var radios = document.getElementsByClassName( 'option radio' );
 	for( var i=0; i < radios.length; i++ ){
 		radios[i].onclick = function(){
 			switch_radio( this );

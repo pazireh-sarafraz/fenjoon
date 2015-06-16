@@ -4,20 +4,28 @@ Template Name: New order
 */
 get_header();
 $order_arr = array();
+$progress_arr = array();
 if( have_posts() ){
 	while( have_posts() ){
 		the_post();
+		$order_id = $post->ID;
 		$permalink = get_the_permalink();
 		$title = get_the_title();
 		$created_date = get_the_date( 'Y/m/d' );
 		$modified_date = get_the_modified_date( 'Y/m/d' );
-		$metadata = get_post_meta( $post->ID );
+		$metadata = get_post_meta( $order_id );
 		$order_code = ( $metadata[ 'order_code' ] ? $metadata[ 'order_code' ][0] : '' );
 		$project_id = ( $metadata[ 'project_id' ] ? $metadata[ 'project_id' ][0] : '' );
 		$total_price = ( $metadata[ 'total_price' ] ? $metadata[ 'total_price' ][0] : 20 );
 		$total_time = ( $metadata[ 'total_time' ] ? $metadata[ 'total_time' ][0] : 10 );
 		$order_str = ( $metadata[ 'order_str' ] ? $metadata[ 'order_str' ][0] : '' );
 		if( !empty( $order_str ) ) $order_arr = explode( '+', $order_str );
+		if( !empty( $order_arr ) ){
+			if( !empty( $project_id ) ){
+				$progress_str = get_post_meta( $project_id, 'progress_str', 1 );
+				if( !empty( $progress_str ) ) $progress_arr = explode( '+', $progress_str );
+			}
+		}
 	}
 }
 
@@ -88,7 +96,7 @@ if( $the_query->have_posts() ){
 								<ul><?php
 								foreach( $order_section as $choice_id => $choice_info ){
 									if( in_array( $choice_id, $parents ) ){?>
-										<li class="icon green option size2 <?php echo( 'sitetypes' == $key ? 'radio' : 'checkbox');?> <?php echo (in_array( $choice_id, $order_arr ) ? 'checked' : 'unchecked');?>" value="<?php echo $choice_id;?>" id="option<?php echo $choice_id;?>"<?php
+										<li class="icon green option size2 <?php echo( 'sitetypes' == $key ? 'radio' : 'checkbox');?> <?php echo (in_array( $choice_id, $order_arr ) ? 'checked' : 'unchecked');?> <?php echo (in_array( $choice_id, $progress_arr ) ? 'started' : '');?>" value="<?php echo $choice_id;?>" id="option<?php echo $choice_id;?>"<?php
 										if( 'sitetypes' == $key ){
 											echo( $order_sections[ $key ][ $choice_id ][ 'sitetype_str' ] ? ' preselection="' . $order_sections[ $key ][ $choice_id ][ 'sitetype_str' ] . '"' : '' );
 										}elseif( 'sitetypes' != $key ){
@@ -102,7 +110,7 @@ if( $the_query->have_posts() ){
 											?>
 											<ul class="indent"><?php
 												foreach( $children[ $choice_id ] as $child_id ){?>
-													<li class="icon green option size1 checkbox <?php echo (in_array( $choice_id, $order_arr ) ? 'checked' : 'unchecked');?> children<?php echo $choice_id; echo( in_array( $child_id, explode( ',', $coselected ) ) ? ' coselection' : '' );?>" value="<?php echo $child_id;?>" id="option<?php echo $child_id;?>" <?php if( 'sitetypes' != $key ){
+													<li class="icon green option size1 checkbox <?php echo (in_array( $choice_id, $order_arr ) ? 'checked' : 'unchecked');?> <?php echo (in_array( $choice_id, $progress_arr ) ? 'started' : '');?> children<?php echo $choice_id; echo( in_array( $child_id, explode( ',', $coselected ) ) ? ' coselection' : '' );?>" value="<?php echo $child_id;?>" id="option<?php echo $child_id;?>" <?php if( 'sitetypes' != $key ){
 											echo( $order_sections[ $key ][ $child_id ][ 'workforce' ] ? ' workforce="' . $order_sections[ $key ][ $child_id ][ 'workforce' ] . '"' : '' );
 										}?>><?php echo $order_sections[ $key ][ $child_id ]['title'];?>
 														<p class="description hidden"><?php echo $order_sections[ $key ][ $child_id ]['description'];?></p>
@@ -134,7 +142,7 @@ if( $the_query->have_posts() ){
 						<div class="tile padding2">
 							<h2><?php _e( 'Complementary information', 'fenjoon' );?></h2>
 							<form id="new_order" action="<?php echo site_url(); ?>/" method="post">
-								<input type="text" name="title" value="<?php if( !empty( $title ) ) echo $title;?>" placeholder="<?php _e( 'Order title', 'fenjoon' );?>"><?php
+								<input type="text" name="title" value="<?php if( !empty( $order_code ) && !empty( $title ) ) echo $title;?>" placeholder="<?php _e( 'Order title', 'fenjoon' );?>"><?php
 								wp_nonce_field( 'fjn_new-order', 'fjn_nonce' );
 								$current_url = '';
 								global $wp;
@@ -146,7 +154,7 @@ if( $the_query->have_posts() ){
 								<input type="hidden" name="action" value="new_order">
 								<input type="hidden" id="daily_man_power" value="<?php echo $daily_man_power;?>">	
 								<input type="hidden" id="man_hour_fee" value="<?php echo $man_hour_fee;?>">	
-								<a class="button green" onclick="document.getElementById('new_order').submit();"><?php _e( 'Submit order', 'fenjoon' );?></a>
+								<a class="button green" onclick="document.getElementById('new_order').submit();"><?php if( empty( $order_code ) ){ _e( 'Submit order', 'fenjoon' );}else{ _e( 'Update order', 'fenjoon' );}?></a>
 							</form>
 						</div>
 					</div>

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Fenjoon\n"
-"POT-Creation-Date: 2015-06-15 02:11+0330\n"
-"PO-Revision-Date: 2015-06-15 04:32+0330\n"
+"POT-Creation-Date: 2015-06-16 04:43+0330\n"
+"PO-Revision-Date: 2015-06-16 04:43+0330\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fa_IR\n"
@@ -169,7 +169,7 @@ msgstr "امنیت"
 msgid "Welcome dear user %s."
 msgstr "کاربر محترم %s خوش آمدید"
 
-#: home.php:6 orderlist.php:11 single-orders.php:69
+#: home.php:6 orderlist.php:11 single-orders.php:80
 msgid "Fenjoon Group Website"
 msgstr "یه فنجون چای خوش طعم، یه وبسایت آماده و به‌روز"
 
@@ -253,7 +253,7 @@ msgstr "شناسه"
 msgid "Title"
 msgstr "عنوان"
 
-#: orderlist.php:29
+#: orderlist.php:29 sidebar-orders.php:32
 msgid "Date created"
 msgstr "ثبت"
 
@@ -273,7 +273,7 @@ msgstr "زمان"
 msgid "Status"
 msgstr "وضعیت"
 
-#: orderlist.php:50
+#: orderlist.php:50 sidebar-orders.php:59
 msgid "Project"
 msgstr "پروژه"
 
@@ -289,50 +289,76 @@ msgstr "بررسی"
 msgid "Search"
 msgstr "جستجو"
 
-#: sidebar-orders.php:8 sidebar.php:6
+#: sidebar-orders.php:19
 msgid "Your order"
 msgstr "سفارش شما"
 
-#: sidebar-orders.php:13
+#: sidebar-orders.php:26
 msgid "Identifier"
 msgstr "شناسه"
 
-#: sidebar-orders.php:19
+#: sidebar-orders.php:38
 msgid "Correction"
 msgstr "تغییر"
 
-#: sidebar-orders.php:24 sidebar.php:10 single-orders.php:120
-#: single-orders.php:121
+#: sidebar-orders.php:43 single-orders.php:131 single-orders.php:132
 msgid "Toman"
 msgstr "تومان"
 
-#: sidebar-orders.php:28 sidebar.php:14
+#: sidebar-orders.php:47
 msgid "Days"
 msgstr "روز"
 
-#: sidebar.php:19
+#: sidebar-orders.php:58
+msgid "Related project"
+msgstr "پروژه متصل به این سفارش"
+
+#: sidebar-orders.php:63
+msgid "Help"
+msgstr "راهنما"
+
+#: sidebar-orders.php:66
+msgid "Selected"
+msgstr "انتخاب شده"
+
+#: sidebar-orders.php:69
+msgid "In progress"
+msgstr "در دست اجرا"
+
+#: sidebar-orders.php:72
+msgid "Not selected"
+msgstr "انتخاب نشده"
+
+#: sidebar.php:9
 msgid "Submit a new order!"
 msgstr "یک سفارش جدید ثبت کنید!"
 
-#: sidebar.php:20
-msgid "New order"
-msgstr "ثبت سفارش"
+#: sidebar.php:10
+msgid "Register new order"
+msgstr "ثبت سفارش جدید"
 
-#: single-orders.php:118
+#: single-orders.php:129
 msgid "Sum"
 msgstr "جمع"
 
-#: single-orders.php:132
+#: single-orders.php:143
 msgid "Complementary information"
 msgstr "اطلاعات تکمیلی"
 
-#: single-orders.php:134
+#: single-orders.php:145
 msgid "Order title"
 msgstr "عنوان سفارش"
 
-#: single-orders.php:146
+#: single-orders.php:157
 msgid "Submit order"
 msgstr "ثبت سفارش"
+
+#: single-orders.php:157
+msgid "Update order"
+msgstr "به روز رسانی سفارش"
+
+#~ msgid "New order"
+#~ msgstr "ثبت سفارش"
 
 #~ msgid "Technology"
 #~ msgstr "فناوری"

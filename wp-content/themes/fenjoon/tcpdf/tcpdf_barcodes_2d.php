@@ -147,7 +147,7 @@ class TCPDF2DBarcode {
 		$w = 100 / $cols;
 		$h = $w;
 		$html = '';
-		$html .= '<div class="barcode">'.'\n';
+		$html .= '<div class="qr">'.'\n';
 		$y = 0;
 
 		for( $r = 0; $r < $rows; ++$r ){
