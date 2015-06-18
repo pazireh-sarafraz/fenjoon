@@ -72,13 +72,12 @@ function update( man_hour_fee, daily_man_power, checkbox ){
 	update_post_type( man_hour_fee );
 	var total_price = document.getElementById( 'total_price' );
 	var total_time = document.getElementById( 'total_time' );
-	var total_price_form = document.getElementsByName( 'total_price' )[0];
-	var total_time_form = document.getElementsByName( 'total_time' )[0];
 	var checked = document.getElementsByClassName( 'checkbox checked' );
 	var string = '';
 	var array = new Array();
 	var sum = 0;
 	for( var j=0; j < checked.length; j++ ){
+		if( !hasClass( checked[j], 'option' ) ) continue;
 		if( checked[j].getAttribute( 'workforce' ) ){
 			workforce = checked[j].getAttribute( 'workforce' );
 		}else{
@@ -93,8 +92,6 @@ function update( man_hour_fee, daily_man_power, checkbox ){
 	time = Math.ceil( sum / daily_man_power );
 	total_price.innerHTML = price;
 	total_time.innerHTML = time;
-	total_price_form.value = price;
-	total_time_form.value = time;
 }
 
 function switch_radio( radio ){

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Fenjoon\n"
-"POT-Creation-Date: 2015-06-16 23:59+0330\n"
-"PO-Revision-Date: 2015-06-17 00:12+0330\n"
+"POT-Creation-Date: 2015-06-17 10:03+0330\n"
+"PO-Revision-Date: 2015-06-17 10:03+0330\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fa_IR\n"
@@ -19,7 +19,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: footer-projects.php:30
+#: footer-projects.php:29
 msgid "Project progress"
 msgstr "درصد پیشرفت پروژه"
 
@@ -173,9 +173,9 @@ msgstr "امنیت"
 msgid "Welcome dear user %s."
 msgstr "کاربر محترم %s خوش آمدید"
 
-#: home.php:6 orderlist.php:11 single-orders.php:80 single-projects.php:74
+#: home.php:6 orderlist.php:11 single-orders.php:82 single-projects.php:74
 msgid "Fenjoon Group Website"
-msgstr "یه فنجون چای خوش طعم، یه وبسایت آماده و به‌روز"
+msgstr "طعم خوش وب با فنجون"
 
 #: home.php:19
 msgid "About us"
@@ -306,8 +306,8 @@ msgstr "شناسه"
 msgid "Correction"
 msgstr "تغییر"
 
-#: sidebar-orders.php:48 sidebar-projects.php:48 single-orders.php:131
-#: single-orders.php:132
+#: sidebar-orders.php:48 sidebar-projects.php:48 single-orders.php:133
+#: single-orders.php:134
 msgid "Toman"
 msgstr "تومان"
 
@@ -363,23 +363,27 @@ msgstr "یک سفارش جدید ثبت کنید!"
 msgid "Register new order"
 msgstr "ثبت سفارش جدید"
 
-#: single-orders.php:129
+#: single-orders.php:131
 msgid "Sum"
 msgstr "جمع"
 
-#: single-orders.php:143
+#: single-orders.php:145
 msgid "Complementary information"
 msgstr "اطلاعات تکمیلی"
 
-#: single-orders.php:145
+#: single-orders.php:147
 msgid "Order title"
 msgstr "عنوان سفارش"
 
-#: single-orders.php:157
+#: single-orders.php:152
+msgid "Order detail"
+msgstr "جزئیات سفارش"
+
+#: single-orders.php:161
 msgid "Submit order"
 msgstr "ثبت سفارش"
 
-#: single-orders.php:157
+#: single-orders.php:161
 msgid "Update order"
 msgstr "به روز رسانی سفارش"
 

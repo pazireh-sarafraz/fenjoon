@@ -383,10 +383,10 @@ function create_portfolio_metadata(){
 add_action( 'add_meta_boxes', 'fjn_portfolio_metaboxes', 10, 1 );
 
 function save_portfolio_metadata(){
+	if( empty( $_POST['portfolio_metadata'] ) || !wp_verify_nonce( $_POST['portfolio_metadata'], basename( __FILE__ ) ) ) return;
 	global $post;
 	$post_id = $post->ID;
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
-	if ( !wp_verify_nonce( $_POST['portfolio_metadata'], basename( __FILE__ ) ) ) return;
 	if ( !current_user_can( 'edit_post', $post_id ) ) return;
 	$metadata_arr = array( 'technology', 'start', 'finish', 'workforce', 'security' );
 	foreach( $metadata_arr as $metadata ){

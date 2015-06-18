@@ -11,14 +11,15 @@ if( have_posts() ){
 		$order_id = $post->ID;
 		$permalink = get_the_permalink();
 		$title = get_the_title();
+		$content = get_the_content();
 		$created_date = get_the_date( 'Y/m/d' );
 		$modified_date = get_the_modified_date( 'Y/m/d' );
 		$metadata = get_post_meta( $order_id );
-		$order_code = ( $metadata[ 'order_code' ] ? $metadata[ 'order_code' ][0] : '' );
-		$project_id = ( $metadata[ 'project_id' ] ? $metadata[ 'project_id' ][0] : '' );
-		$total_price = ( $metadata[ 'total_price' ] ? $metadata[ 'total_price' ][0] : 20 );
-		$total_time = ( $metadata[ 'total_time' ] ? $metadata[ 'total_time' ][0] : 10 );
-		$order_str = ( $metadata[ 'order_str' ] ? $metadata[ 'order_str' ][0] : '' );
+		$order_code = ( !empty( $metadata[ 'order_code' ] ) ? $metadata[ 'order_code' ][0] : '' );
+		$project_id = ( !empty( $metadata[ 'project_id' ] ) ? $metadata[ 'project_id' ][0] : '' );
+		$total_price = ( !empty( $metadata[ 'total_price' ] ) ? $metadata[ 'total_price' ][0] : 20 );
+		$total_time = ( !empty( $metadata[ 'total_time' ] ) ? $metadata[ 'total_time' ][0] : 10 );
+		$order_str = ( !empty( $metadata[ 'order_str' ] ) ? $metadata[ 'order_str' ][0] : '' );
 		if( !empty( $order_str ) ) $order_arr = explode( '+', $order_str );
 		if( !empty( $order_arr ) ){
 			if( !empty( $project_id ) ){
@@ -38,7 +39,7 @@ if( $fenjoon_settings = get_option( 'fenjoon_settings' ) ){
 	$man_hour_fee = 0;
 	$daily_work_hours = 0;
 }
-$daily_man_power = ( $developer_count * $daily_work_hours != 0 ) ? $developer_count * $daily_work_hours : 1;
+$daily_man_power = ( 0 != ( $developer_count * $daily_work_hours ) ) ? ( $developer_count * $daily_work_hours ) : 1;
 $choice_sections = array( 'sitetypes', 'modules', 'features', 'standards' );
 $cpt = array( 'post_type' => $choice_sections );
 $the_query = fjn_template_query( $cpt );
@@ -62,6 +63,7 @@ if( $the_query->have_posts() ){
 	}
 	$total_pt_price = array();
 	foreach( $order_sections as $key => $order_section ){
+		$total_pt_price[ $key ] = 0;
 		foreach( $order_section as $choice_id => $choice_info ){
 			if( 'sitetypes' == $key ){
 				$order_sections[ $key ][ $choice_id ][ 'sitetype_str' ] = get_post_meta( $choice_id, 'sitetype_str', 1 );
@@ -105,7 +107,7 @@ if( $the_query->have_posts() ){
 										><?php echo $choice_info['title'];?>
 											<p class="description hidden"><?php echo $choice_info['description'];?></p>
 										</li><?php
-										if( $children[ $choice_id ] ){
+										if( !empty( $children[ $choice_id ] ) ){
 											$coselected = get_post_meta( $choice_id, 'coselected_children', 1 );
 											?>
 											<ul class="indent"><?php
@@ -143,15 +145,18 @@ if( $the_query->have_posts() ){
 							<h2><?php _e( 'Complementary information', 'fenjoon' );?></h2>
 							<form id="new_order" action="<?php echo site_url(); ?>/" method="post">
 								<input type="text" name="title" value="<?php if( !empty( $order_code ) && !empty( $title ) ) echo $title;?>" placeholder="<?php _e( 'Order title', 'fenjoon' );?>"><?php
-								wp_nonce_field( 'fjn_new-order', 'fjn_nonce' );
+								wp_nonce_field( 'fjn_submit-order', 'fjn_nonce' );
 								$current_url = '';
 								global $wp;
 								$current_url = home_url( add_query_arg( array(), $wp->request ) );?>
+								<textarea rows="5" name="content" placeholder="<?php _e( 'Order detail', 'fenjoon' );?>"><?php if( !empty( $order_code ) && !empty( $content ) ) echo $content;?></textarea>
+								<input type="text" name="email" class="hidden">
 								<input type="hidden" name="referrer" value="<?php echo $current_url;?>">
-								<input type="hidden" name="string" value="<?php if( !empty( $order_str ) ) echo $order_str;?>">
-								<input type="hidden" name="total_price" value="">
-								<input type="hidden" name="total_time" value="">
-								<input type="hidden" name="action" value="new_order">
+								<input type="hidden" name="string" value="<?php if( !empty( $order_str ) ) echo $order_str;?>"><?php
+								if( !empty( $order_code ) && !empty( $order_id ) ){?>
+									<input type="hidden" name="order_id" value="<?php echo $order_id;?>"><?php
+								}?>
+								<input type="hidden" name="action" value="<?php echo( !empty( $order_code ) && !empty( $order_id ) ? 'update_order' : 'new_order' );?>">
 								<input type="hidden" id="daily_man_power" value="<?php echo $daily_man_power;?>">	
 								<input type="hidden" id="man_hour_fee" value="<?php echo $man_hour_fee;?>">	
 								<a class="button green" onclick="document.getElementById('new_order').submit();"><?php if( empty( $order_code ) ){ _e( 'Submit order', 'fenjoon' );}else{ _e( 'Update order', 'fenjoon' );}?></a>

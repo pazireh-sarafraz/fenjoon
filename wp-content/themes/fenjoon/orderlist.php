@@ -36,10 +36,10 @@ $the_query = fjn_template_query( 'orders', $current_user->ID );?>
 							<tbody><?php
 							while( $the_query->have_posts() ){ $the_query->the_post();
 								$metadata = get_post_meta( $post->ID );
-								$order_code = ( $metadata[ 'order_code' ] ? $metadata[ 'order_code' ][0] : '' );
-								$project_id = ( $metadata[ 'project_id' ] ? $metadata[ 'project_id' ][0] : '' );
-								$total_price = ( $metadata[ 'total_price' ] ? $metadata[ 'total_price' ][0] : 0 );
-								$total_time = ( $metadata[ 'total_time' ] ? $metadata[ 'total_time' ][0] : 0 );?>
+								$order_code = ( !empty( $metadata[ 'order_code' ] ) ? $metadata[ 'order_code' ][0] : '' );
+								$project_id = ( !empty( $metadata[ 'project_id' ] ) ? $metadata[ 'project_id' ][0] : '' );
+								$total_price = ( !empty( $metadata[ 'total_price' ] ) ? $metadata[ 'total_price' ][0] : 0 );
+								$total_time = ( !empty( $metadata[ 'total_time' ] ) ? $metadata[ 'total_time' ][0] : 0 );?>
 								<tr>
 									<td><?php echo $order_code;?></td>
 									<td><a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></td>

@@ -3,9 +3,13 @@
 // Sort object array elements by order key ( editors workforce )
 //******************************************
 function fjn_order_cmp( $a, $b ){
+	if( !property_exists( $a, 'order' ) ){
+		return -1;
+	}elseif( !property_exists( $b, 'order' ) ){
+		return 1;
+	}
 	return ($a->order < $b->order) ? -1 : (($a->order > $b->order) ? 1 : 0);
 }
- 
 //******************************************
 // CPT - Site Types
 //******************************************
@@ -81,7 +85,7 @@ function cpt_modules(){
 		'show_in_nav_menus'   => true,
 		'show_in_admin_bar'   => true,
 		'menu_position'       => 5,
-		'menu_icon'						=> 'dashicons-align-left',
+		'menu_icon'						=> 'dashicons-admin-generic',
 		'can_export'          => true,
 		'has_archive'         => false,
 		'exclude_from_search' => false,
@@ -124,7 +128,7 @@ function cpt_features(){
 		'show_in_nav_menus'   => true,
 		'show_in_admin_bar'   => true,
 		'menu_position'       => 6,
-		'menu_icon'						=> 'dashicons-star-filled',
+		'menu_icon'						=> 'dashicons-performance',
 		'can_export'          => true,
 		'has_archive'         => true,
 		'exclude_from_search' => false,
@@ -322,10 +326,11 @@ function preselected( $post ){
 add_action( 'add_meta_boxes', 'add_preselected_list_metabox', 0 );
 
 function save_preselected_list() {
+	if ( empty( $_POST['save_sitetype'] ) || !wp_verify_nonce( $_POST['save_sitetype'], basename( __FILE__ ) ) ) return;
 	global $post;
+	if( 'sytetypes' != $post->post_type ) return;
 	$post_id = $post->ID;
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
-	if ( !wp_verify_nonce( $_POST['save_sitetype'], basename( __FILE__ ) ) ) return;
 	if ( !current_user_can( 'edit_post', $post_id ) ) return;
 	$sitetype_str = $_POST['string'];
 	if( $sitetype_str ) {
@@ -371,10 +376,10 @@ function children_list( $post ) {
 add_action( 'add_meta_boxes','add_children_metabox',0 );
 
 function save_coselected_children() {
+	if ( empty( $_POST['coselected_children'] ) || !wp_verify_nonce( $_POST['coselected_children'], basename( __FILE__ ) ) ) return;
 	global $post;
 	$post_id = $post->ID;
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
-	if ( !wp_verify_nonce( $_POST['coselected_children'], basename( __FILE__ ) ) ) return;
 	if ( 'page' == $_POST['post_type'] ) {
 		if ( !current_user_can( 'edit_page', $post_id ) ) return;
 	}else{
@@ -413,24 +418,19 @@ function create_workforce_metabox(){
 add_action( 'add_meta_boxes', 'workforce_metabox', 10, 1 );
 
 function save_workforce_metabox(){
+	if( empty( $_POST['workforce_metabox'] ) || !wp_verify_nonce( $_POST['workforce_metabox'], basename( __FILE__ ) ) ) return;
 	global $post;
 	$post_id = $post->ID;
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
-	if ( !wp_verify_nonce( $_POST['workforce_metabox'], basename( __FILE__ ) ) ) return;
-	if ( 'page' == $_POST['post_type'] ) {
-		if ( !current_user_can( 'edit_page', $post_id ) ) return;
-	}else{
-		if ( !current_user_can( 'edit_post', $post_id ) ) return;
-	}
+	if ( !current_user_can( 'edit_post', $post_id ) ) return;
 	$workforce = $_POST['workforce_value'];
-if( $workforce || 0 == $workforce ) {
+	if( $workforce || 0 == $workforce ) {
 		update_post_meta( $post_id, 'workforce', $workforce );
 	}
-
 }
 add_action( 'save_post', 'save_workforce_metabox' );
 //******************************************
-// Add order owner to Order page
+// Order owner metabox
 //******************************************
 function add_order_owner_metabox(){
 	if( is_admin() ){
@@ -449,53 +449,17 @@ function add_order_owner_metabox(){
 }
 function order_owner(){
 	global $post;
-	$post_id = $post->ID;
-	$order_owner_id = get_post_field( 'post_author', $post_id );
+	$order_id = $post->ID;
+	$order_owner_id = get_post_field( 'post_author', $order_id );
 	$args = array(
 		'selected'										=> $order_owner_id,
 		'name'												=> 'order_owner_id',
 	);
-	wp_dropdown_users($args);	
-	wp_nonce_field(basename( __FILE__ ), 'order_owner');
+	wp_dropdown_users( $args );	
 }
-   
 add_action( 'add_meta_boxes', 'add_order_owner_metabox', 0 );
-
-function save_order_owner_metabox(){
-	global $post;
-	$post_id = $post->ID;
-	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
-	if ( !wp_verify_nonce( $_POST['order_owner'], basename( __FILE__ ) ) ) return;
-	if ( 'page' == $_POST['post_type'] ) {
-		if ( !current_user_can( 'edit_page', $post_id ) ) return;
-	}else{
-		if ( !current_user_can( 'edit_post', $post_id ) ) return;
-	}
-	$order_owner_id = $_POST['order_owner_id'];
-	if( $order_owner_id ){
-		$args = array(
-			'ID' 						=> $post_id,
-			'post_author' 	=> $order_owner_id,
-			'post_type' 		=> 'orders',
-			'post_status'		=> 'publish'
-		);
-		remove_action( 'save_post', 'save_order_owner_metabox' );
-		wp_update_post( $args );
-		$project_id = get_post_meta( $post_id, 'project_id', 1 );
-		if( !empty( $project_id ) ){
-			$args = array(
-				'ID' 						=> $project_id,
-				'post_author' 	=> $order_owner_id,
-				'post_type' 		=> 'projects',
-				'post_status'		=> 'publish'
-			);
-			wp_update_post( $args );
-		}
-	}
-}
-add_action( 'save_post', 'save_order_owner_metabox' );
 //******************************************
-// Add order list to Order page
+//Order list metabox
 //******************************************
 function add_order_list_metabox(){
 	if( is_admin() ){
@@ -507,18 +471,17 @@ function add_order_list_metabox(){
 				'order_list',
 				'orders',
 				'advanced',
-				'core'
+				'low'
 			); 
 		}
 	}
 }
-
 function order_list( $post ){
+	wp_nonce_field( basename( __FILE__ ), 'order_nonce' );
 	$order_list = array( 'modules', 'features', 'standards' );
 	$args = array( 'post_type' => $order_list, 'orderby' => 'menu_order', 'posts_per_page' => -1 );
 	$the_query = new WP_Query( $args );
-	if ( $the_query->have_posts() ) {
-		wp_nonce_field(basename( __FILE__ ), 'save_order');
+	if( $the_query->have_posts() ){
 		$order_str = get_post_meta( $post->ID, 'order_str', 1 );
 		$order_arr = array();
 		$progress_arr = array();
@@ -566,64 +529,6 @@ function order_list( $post ){
 	<?php
 }
 add_action( 'add_meta_boxes', 'add_order_list_metabox', 0 );
-
-function save_order_list() {
-	global $post;
-	$post_id = $post->ID;
-	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
-	if ( !wp_verify_nonce( $_POST['save_order'], basename( __FILE__ ) ) ) return;
-	if ( 'page' == $_POST['post_type'] ) {
-		if ( !current_user_can( 'edit_page', $post_id ) ) return;
-	}else{
-		if ( !current_user_can( 'edit_post', $post_id ) ) return;
-	}
-// Order list metabox
-	$order_str = $_POST['string'];
-	if( $order_str ) {
-		update_post_meta( $post_id, 'order_str', $order_str );
-	}
-
-// Order last changes metabox
-	$changes_str = get_post_meta( $post_id, 'changes_str', 1 );
-	$changes_str = !empty( $changes_str ) ? $changes_str : '';
-	$changes_arr = array();
-	if ( !empty( $changes_str ) ) $changes_arr = explode( "+", $changes_str );
-	if( count( $changes_arr ) == 5 ) {array_shift( $changes_arr );};
-	global $current_user;
-	$change_str = $current_user->ID;
-	if( ! is_plugin_active( 'wp-jalali/wp-jalali.php' ) ){ //this function use to specify that jdata plugin is active or not
-		$date_info = date('h:i - j F Y '); //if jdate is not active we show the data in gregorian calender
-	}else{
-		$date_info = jdate( 'h:i - j F Y', strtotime( get_the_modified_date() ) );
-	};
-	$change_str = $change_str.'*'.$date_info;
-	array_push( $changes_arr, $change_str );
-	$changes_str = implode( "+", $changes_arr );
-	update_post_meta( $post_id, 'changes_str', $changes_str );
-	
-// Order to Project metabox
-	$project_id = get_post_meta( $post_id, 'project_id', 1 );
-	if ( '' != $project_id ) return;
-	if ( !current_user_can( 'publish_post' ) ) return;
-	if ( !isset( $_POST['chkswchipt'] ) ) return;
-	$new_project = array(
-		'post_title'    => $post->post_title,
-		'post_content'  => $post->post_content,
-		'post_type'   	=> 'projects',
-		'post_status'		=> 'publish',
-		'post_author'		=> $post->post_author
-	);
-	remove_action( 'post_updated', 'save_order_list' );
-	$project_id = wp_insert_post( $new_project );
-	if ( 0 != $project_id ){
-		update_post_meta( $project_id, 'order_id', $post_id );
-		update_post_meta( $project_id, 'project_code', 1121000 + $project_id );
-		update_post_meta( $post_id, 'project_id', $project_id );
-		if( $order_str ) update_post_meta( $project_id, 'project_str', $order_str );
-	}
-}
-add_action( 'post_updated', 'save_order_list' );
-
 //******************************************
 // Add Order - Project switch to Order page
 // Add last changes to Order page
@@ -657,9 +562,9 @@ function add_order_to_project_metabox(){
 
 function order_to_project( $post ){
 	$project_id = get_post_meta( $post->ID, 'project_id', 1 );
-	if ( '' != $project_id ){ 
+	if( !empty( $project_id ) ){ 
 		edit_post_link(__('Edit Project No. ', 'fenjoon' ).$project_id , '<p>', '</p>', $project_id );
-	}else{ ?>
+	}else{?>
 	<p><?php _e('Please note that this is a ONE TIME start and your changes are irreversible!','fenjoon');?></p>
 	<?php } ?>	<div id="order-to-project-switch">
 		<div class="checkbox-switch">
@@ -693,43 +598,228 @@ function last_change_by(){
 }
 add_action( 'add_meta_boxes', 'add_order_to_project_metabox', 0 );
 //******************************************
-// frontend post
+// Save order
 //******************************************
-function fjn_frontend_post() {
+function fjn_save_order() {
+	if ( empty( $_POST['order_nonce'] ) || !wp_verify_nonce( $_POST['order_nonce'], basename( __FILE__ ) ) ) return;
+	global $post;
+	$order_id = $post->ID;
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
+	if ( !current_user_can( 'edit_post', $order_id ) ) return;
+
+	// Order list
+	$order_str = $_POST['string'];
+	if( $order_str ) {
+		update_post_meta( $order_id, 'order_str', $order_str );
+	}
+
+	// Order last changes
+	$changes_str = get_post_meta( $order_id, 'changes_str', 1 );
+	$changes_str = !empty( $changes_str ) ? $changes_str : '';
+	$changes_arr = array();
+	if( !empty( $changes_str ) ) $changes_arr = explode( "+", $changes_str );
+	if( count( $changes_arr ) == 5 ) {array_shift( $changes_arr );};
+	global $current_user;
+	$change_str = $current_user->ID;
+	if( !is_plugin_active( 'wp-jalali/wp-jalali.php' ) ){
+		$date_info = date( 'Y/m/d,h:i' );
+	}else{
+		$date_info = jdate( 'Y/m/d,h:i', strtotime( get_the_modified_date() ) );
+	};
+	$change_str = $change_str.'*'.$date_info;
+	array_push( $changes_arr, $change_str );
+	$changes_str = implode( '+', $changes_arr );
+	update_post_meta( $order_id, 'changes_str', $changes_str );
+	
+	// Order owner
+	$order_owner_id = $_POST['order_owner_id'];
+	$project_id = get_post_meta( $order_id, 'project_id', 1 );
+	if( $order_owner_id ){
+		$args = array(
+			'ID' 						=> $order_id,
+			'post_author' 	=> $order_owner_id,
+			'post_type' 		=> 'orders',
+			'post_status'		=> 'publish'
+		);
+		remove_action( 'post_updated', 'fjn_save_order' );
+		wp_update_post( $args );
+		if( !empty( $project_id ) ){
+			$args = array(
+				'ID' 						=> $project_id,
+				'post_author' 	=> $order_owner_id,
+				'post_type' 		=> 'projects',
+				'post_status'		=> 'publish'
+			);
+			wp_update_post( $args );
+		}
+	}
+	
+	// Order to Project metabox
+	if( empty( $project_id ) || false == $project_id ){
+		if( !current_user_can( 'publish_post' ) ) return;
+		if( empty( $_POST['chkswchipt'] ) ) return;
+		$new_project = array(
+			'post_title'    => $post->post_title,
+			'post_content'  => $post->post_content,
+			'post_type'   	=> 'projects',
+			'post_status'		=> 'publish',
+			'post_author'		=> $post->post_author
+		);
+		remove_action( 'post_updated', 'fjn_save_order' );
+		$project_id = wp_insert_post( $new_project );
+		if( 0 != $project_id ){
+			update_post_meta( $project_id, 'order_id', $order_id );
+			update_post_meta( $project_id, 'project_code', 1121000 + $project_id );
+			update_post_meta( $order_id, 'project_id', $project_id );
+			if( $order_str ) update_post_meta( $project_id, 'project_str', $order_str );
+		}
+	}
+}
+add_action( 'post_updated', 'fjn_save_order' );
+//******************************************
+// Front end post
+//******************************************
+function fjn_valid_string( $string ){
+	if( preg_match( '/^[+\d]+$/', $string ) ){
+		return $string;
+	}else{
+		return false;
+	}
+}
+function fjn_remove_querystring_var( $url, $key ){ 
+	$url = preg_replace('/(.*)(?|&)' . $key . '=[^&]+?(&)(.*)/i', '$1$2$4', $url . '&'); 
+	$url = substr($url, 0, -1); 
+	return $url; 
+}
+function is_blank( $value ){
+	return empty( $value ) && !is_numeric( $value );
+}
+function fjn_frontend_post(){
 	if( !empty( $_POST ) && !is_admin() ){
-		if( !empty( $_POST['fjn_nonce'] ) ){
+		if( !empty( $_POST['fjn_nonce'] ) && !empty( $_POST['action'] ) && empty( $_POST['email'] ) ){ // email field is a bot trap
+			if( !is_user_logged_in() ) auth_redirect();
 			$current_user		= wp_get_current_user();
 			$msg = array();
 			$err = array();
-			if( wp_verify_nonce( $_POST['fjn_nonce'], 'fjn_new-order' ) ){
-				if ( empty( $_POST['action'] ) || 'new_order' != $_POST['action'] ) return;
-				if ( !is_user_logged_in() ) auth_redirect();
-				if ( !current_user_can( 'edit_posts' ) ) {
-					// wp_redirect( home_url( '/' ) );
-					exit;
-				}
-				$title				= $_POST['title'];
-				if( empty( $title ) ) {
-					$err[] = 1;
-				}else{
-					$post_id = wp_insert_post(
-						array(
-							'post_author'   => $current_user->ID,
-							'post_type'			=> 'orders',
-							'post_title'    => $title,
-							'post_content'  => $title,
-							'tax_input'			=> array( 'field' => $field ),
-							'post_status'   => 'pending'
-						)
-					);
-					if( isset( $post_id ) ){
-						$msg[] = 1; // order submitted successfully!
-						update_post_meta( $post_id, 'order_str', $_POST['string'] );
-						update_post_meta( $post_id, 'total_price', $_POST['total_price'] );
-						update_post_meta( $post_id, 'total_time', $_POST['total_time'] );
-						update_post_meta( $post_id, 'order_code', 1121000 + $post_id );
+			if( wp_verify_nonce( $_POST['fjn_nonce'], 'fjn_submit-order' ) ){
+				if( 'new_order' == $_POST['action'] && !empty( $_POST['string'] ) ){
+					if( !current_user_can( 'edit_posts' ) ) return;
+					$title = sanitize_text_field( $_POST['title'] );
+					$content = sanitize_text_field( $_POST['content'] );
+					$order_str = fjn_valid_string( $_POST['string'] );
+					if( empty( $title ) || empty( $content ) ) {
+						$err[] = 1; // Title and Content incorrect
+					}
+					if( empty( $order_str ) ) {
+						$err[] = 2; // Access denied!
+					}
+					if( empty( $err ) ){
+						$order_id = wp_insert_post(
+							array(
+								'post_author'   => $current_user->ID,
+								'post_type'			=> 'orders',
+								'post_title'    => $title,
+								'post_content'  => $content,
+								'post_status'   => 'pending'
+							)
+						);
+						if( isset( $order_id ) ){
+							$msg[] = 1; // order submitted successfully!
+							if( $fenjoon_settings = get_option( 'fenjoon_settings' ) ){
+								$developer_count = $fenjoon_settings[ 'developer_count' ];
+								$man_hour_fee = $fenjoon_settings[ 'man_hour_fee' ];
+								$daily_work_hours = $fenjoon_settings[ 'daily_work_hours' ];
+							}else{
+								$developer_count = 0;
+								$man_hour_fee = 0;
+								$daily_work_hours = 0;
+							}
+							$daily_man_power = ( 0 != ( $developer_count * $daily_work_hours ) ) ? ( $developer_count * $daily_work_hours ) : 1;
+							$workforce_values = fjn_get_meta_by_key( 'workforce', $order_str );
+							$order_arr = explode( '+', $order_str );
+							$total_work = 0;
+							foreach( $workforce_values as $key => $workforce_value ){
+								if( in_array( (string)$key, $order_arr ) ) $total_work += (int)$workforce_value;
+							}
+							update_post_meta( $order_id, 'order_str', $order_str );
+							update_post_meta( $order_id, 'man_hour_fee', $man_hour_fee );
+							update_post_meta( $order_id, 'daily_man_power', $daily_man_power );
+							update_post_meta( $order_id, 'total_price', $total_work * $man_hour_fee );
+							update_post_meta( $order_id, 'total_time', $total_work / $daily_man_power );
+							update_post_meta( $order_id, 'order_code', 1121000 + $order_id );
+						}else{
+							$err[] = 3; // order did not submit and error occurred!
+						}
+					}
+				}elseif( 'update_order' == $_POST['action'] && !empty( $_POST['order_id'] ) && is_numeric( $_POST['order_id'] ) && !empty( $_POST['string'] ) ){
+					$order_id = $_POST['order_id'];
+					if( !current_user_can( 'edit_post', $order_id ) ) return;
+					$title = sanitize_text_field( $_POST['title'] );
+					$content = sanitize_text_field( $_POST['content'] );
+					$string = fjn_valid_string( $_POST['string'] );
+					if( empty( $title ) || empty( $content ) ) {
+						$err[] = 1; // Title and Content incorrect
+					}
+					if( empty( $string ) ) {
+						$err[] = 2; // Access denied!
 					}else{
-						$err[] = 1; // order did not submit and error occurred!
+						$order_arr = array();
+						$order_str = get_post_meta( $order_id, 'order_str', 1 );
+						if( !empty( $order_str ) ){
+							$order_arr = explode( '+', $order_str );
+							$array = explode( '+', $string );
+							$merge = implode( '+', array_unique( array_merge( $array, $order_arr ) ) );
+							$total_price = get_post_meta( $order_id, 'total_price', 1 );
+							if( empty( $total_price ) ) $total_price = 0;
+							$total_time = get_post_meta( $order_id, 'total_time', 1 );
+							if( empty( $total_time ) ) $total_time = 0;
+							$workforce_values = fjn_get_meta_by_key( 'workforce', $merge );
+							$delta_work = 0;
+							foreach( $workforce_values as $key => $workforce_value ){
+								if( in_array( (string)$key, array_diff( $order_arr, $array ) ) ){
+									$delta_work = $delta_work - (int)$workforce_value;
+								}elseif( in_array( (string)$key, array_diff( $array, $order_arr ) ) ){
+									$delta_work = $delta_work + (int)$workforce_value;
+								}
+							}
+							$man_hour_fee = get_post_meta( $order_id, 'man_hour_fee', 1 );
+							$daily_man_power = get_post_meta( $order_id, 'daily_man_power', 1 );
+							$daily_man_power = ( !empty( $daily_man_power ) ? $daily_man_power : 1 );
+							update_post_meta( $order_id, 'test', $man_hour_fee );
+							$t_p = ceil( $total_price + ( $delta_work * $man_hour_fee ) );
+							$t_t = ceil( $total_time + ( $delta_work / $daily_man_power  ) );
+							if( is_blank( $t_p ) || is_blank( $t_t ) ) $err[] = 6; // Unknown error
+						}
+						$project_id = get_post_meta( $order_id, 'project_id', 1 );
+						if( !empty( $project_id ) ){
+							$progress_arr = array();
+							$progress_str = get_post_meta( $project_id, 'progress_str', 1 );
+							if( !empty( $progress_str ) ) $progress_arr = explode( '+', $progress_str );
+							foreach( $progress_arr as $item ){
+								if( !in_array( $item, $array ) ){
+									$err[] = 4; // Item in progress and cant be removed from order any more
+									break;
+								}
+							}
+						}
+					}
+					if( empty( $err ) ){
+						$result = wp_update_post(
+							array(
+								'ID' 						=> $order_id,
+								'post_title'    => $title,
+								'post_content'  => $content
+							)
+						);
+						if( !empty( $result ) ){
+							$msg[] = 2; // order updated successfully!
+							update_post_meta( $order_id, 'order_str', $string );
+							if( !empty( $project_id ) ) update_post_meta( $project_id, 'project_str', $string );
+							if( !is_blank( $t_p ) ) update_post_meta( $order_id, 'total_price', $t_p );
+							if( !is_blank( $t_t ) ) update_post_meta( $order_id, 'total_time', $t_t );
+						}else{
+							$err[] = 5; // order did not update and error occurred!
+						}
 					}
 				}
 			}
@@ -737,14 +827,20 @@ function fjn_frontend_post() {
 			$err = implode( '-', $err );
 			$query_var = '';
 			if( $msg ){
-				$query_var .= '?msg=' . $msg;
+				$query_var .= 'msg=' . $msg;
 				if( $err ) $query_var .= '&err=' . $err;
 			}elseif( $err ){
-				$query_var .= '?err=' . $err;
+				$query_var .= 'err=' . $err;
 			}
 			$referer = wp_get_referer();
 			if( $referer ){
-				$referer = strtok( $referer, '?' );
+				$referer = fjn_remove_querystring_var( $referer, 'msg' );
+				$referer = fjn_remove_querystring_var( $referer, 'err' );
+				if( strpos( $referer, '?' ) === false ){
+					$query_var = '?' . $query_var;
+				}else{
+					$query_var = '&' . $query_var;
+				}
 				wp_redirect( $referer . $query_var );
 			}else{
 				$referer = $_POST['referrer'];
@@ -869,16 +965,22 @@ if( is_admin() ){
 		'<input type="text" id="daily_work_hours" name="fenjoon_settings[daily_work_hours]" value="'.esc_attr( $options['daily_work_hours'] ).'" />'
 		);
 	}
-	
 }
-
 //******************************************
-// Add project list metabox to Projects - Project edit page
+// Project list metabox
 //******************************************
-function add_project_list_metabox(){
+function fjn_project_metaboxes(){
 	if( is_admin() ){
 		global $pagenow;
 		if( 'post.php' == $pagenow ){
+			add_meta_box( 
+				'payment_history',
+				__( 'Payment History', 'fenjoon' ),
+				'fjn_payment_history',
+				'projects',
+				'advanced',
+				'high'
+			);
 			add_meta_box( 
 				'project_list',
 				__('Project Progress', 'fenjoon' ),
@@ -921,7 +1023,8 @@ function display_editor( $editors, $assign, $choice_id ){
 	}
 }
 
-function project_list( $post ){
+function project_list(){
+	global $post;
 	$project_list = array( 'sitetypes', 'modules', 'features', 'standards' );
 	$project_id = $post->ID;
 	$order_id = get_post_meta( $project_id, 'order_id', 1 );
@@ -935,7 +1038,7 @@ function project_list( $post ){
 	$added_arr = array_diff( $order_arr, $project_arr );	
 	$args = array( 'post__in' => array_merge( $project_arr, $added_arr, $removed_arr ), 'post_type' => $project_list, 'orderby' => 'menu_order', 'posts_per_page' => -1 );
 	$the_query = new WP_Query( $args );
-	if ( $the_query->have_posts() ) {
+	if( $the_query->have_posts() ){
 		wp_nonce_field(basename( __FILE__ ), 'save_project');
 		$progress_str = get_post_meta( $project_id, 'progress_str', 1 );
 		$progress_arr = array();
@@ -954,7 +1057,7 @@ function project_list( $post ){
 			$assign[ $activity_id ] = $editor_id;
 		}
 		$editors = get_users( array( 'role' => 'editor', 'fields' => array( 'ID', 'display_name') ) );
-		//if( empty( $editors ) ) return; Activate if the site has at least one editor
+		//if( empty( $editors ) ) return; uncomment if the site has at least one editor
 		$sorted_by_free_time = fjn_editors_by_free_time();
 		foreach( $sorted_by_free_time as $key => $value ){
 			foreach( $editors as $editor ){
@@ -967,13 +1070,12 @@ function project_list( $post ){
 			$project_sections[ $project_type ] = array();
 		}
 		$parents = array();
-		global $post;
 		while( $the_query->have_posts() ){
 			$the_query->the_post();
 			if( 0 != $post->post_parent ) $parents[] = $post->post_parent;
 			$project_sections[ $post->post_type ][ $post->ID ] = $post->post_title;
 		}
-		wp_reset_query();?>
+		wp_reset_postdata();?>
 		<div class="legend">
 			<ul>
 				<li class="item"><span class="progress"><input type="checkbox"><?php _e('In Progress', 'fenjoon');?></span></li>
@@ -1008,51 +1110,72 @@ function project_list( $post ){
 <?php
 	
 }
-add_action( 'add_meta_boxes', 'add_project_list_metabox', 0 );
+add_action( 'add_meta_boxes', 'fjn_project_metaboxes', 0 );
 
-function save_project_list(){
+function fjn_save_project(){
+	if( empty( $_POST['save_project'] ) || !wp_verify_nonce( $_POST['save_project'], basename( __FILE__ ) ) ) return;
 	global $post;
-	$post_id = $post->ID;
+	$project_id = $post->ID;
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
-	if ( !wp_verify_nonce( $_POST['save_project'], basename( __FILE__ ) ) ) return;
-	if ( 'page' == $_POST['post_type'] ) {
-		if ( !current_user_can( 'edit_page', $post_id ) ) return;
-	}else{
-		if ( !current_user_can( 'edit_post', $post_id ) ) return;
-	}
-// Project list metabox
-	$progress_str = $_POST['string'];
-	if( $progress_str ) update_post_meta( $post_id, 'progress_str', $progress_str );
-	$done_str = $_POST['string_done'];
-	if( $done_str ) update_post_meta( $post_id, 'done_str', $done_str );
-	$editor_str = $_POST['string_dropdown'];
-	if( $editor_str ) update_post_meta( $post_id, 'editor_str', $editor_str );
-	
-	//Insert the tasks assigned to specific Editor in wp_tasks table
-	fjn_assign_tasks_to_editors( $post_id );		
+	if ( !current_user_can( 'edit_post', $project_id ) ) return;
 
+	// Project list metabox
+	$progress_str = $_POST['string'];
+	if( $progress_str ) update_post_meta( $project_id, 'progress_str', $progress_str );
+	$done_str = $_POST['string_done'];
+	if( $done_str ) update_post_meta( $project_id, 'done_str', $done_str );
+	$editor_str = $_POST['string_dropdown'];
+	if( $editor_str ) update_post_meta( $project_id, 'editor_str', $editor_str );
 	
-// Project last changes metabox
-	$changes_str = get_post_meta( $post_id, 'changes_str', 1 );
+	// Delete instalments
+	if( !empty( $_POST['delete_instalments'] ) ) fjn_delete_instalments( $project_id, $_POST['delete_instalments'] );
+	
+	// Insert & Update instalment
+	if( !empty( $_POST['instalment']['year'] ) && !empty( $_POST['instalment']['month'] ) && !empty( $_POST['instalment']['day'] ) && !empty( $_POST['instalment']['concern'] ) && !empty( $_POST['instalment']['amount'] ) ){
+		if( !empty( $_POST['edit_instalment'] ) ){
+			fjn_edit_instalment( $project_id, $_POST['instalment'], $_POST['edit_instalment'] );
+		}elseif( empty( $_POST['edit_instalment'] ) ){
+			fjn_add_instalment( $project_id, $_POST['instalment'] );
+		}
+	}
+
+	// Delete payments
+	if( !empty( $_POST['delete_payments'] ) ) fjn_delete_payments( $project_id, $_POST['delete_payments'] );
+	
+	
+	update_post_meta( 66, 'test', empty( $_POST['payment']['approved'] ) );
+	
+	// Insert & Update payments
+	if( !empty( $_POST['payment']['year'] ) && !empty( $_POST['payment']['month'] ) && !empty( $_POST['payment']['day'] ) && !empty( $_POST['payment']['pursuit'] ) && !empty( $_POST['payment']['pay'] ) ){
+		if( !empty( $_POST['edit_payment'] ) ){
+			fjn_edit_payment( $project_id, $_POST['payment'], $_POST['edit_payment'] );
+		}elseif( empty( $_POST['edit_payment'] ) ){
+			fjn_add_payment( $project_id, $_POST['payment'] );
+		}
+	}
+	
+	// Insert the tasks assigned to specific Editor in wp_tasks table
+	fjn_assign_tasks_to_editors( $project_id );		
+
+	// Project last changes metabox
+	$changes_str = get_post_meta( $project_id, 'changes_str', 1 );
 	$changes_str = !empty( $changes_str ) ? $changes_str : '';
 	$changes_arr = array();
 	if ( !empty( $changes_str ) ) $changes_arr = explode( "+", $changes_str );
 	if( count( $changes_arr ) == 5 ) {array_shift( $changes_arr );};
 	global $current_user;
 	$change_str = $current_user->ID;
-	if ( ! is_plugin_active( 'wp-jalali/wp-jalali.php' ) ){ //this function use to specify that jdata plugin is active or not
-		$date_info = date('h:i - j F Y'); //if jdate is not active we show the data in gregorian calender
+	if ( !is_plugin_active( 'wp-jalali/wp-jalali.php' ) ){
+		$date_info = date( 'h:i - Y/m/d' );
 	}else{
-		$date_info = jdate( 'h:i - j F Y', strtotime( get_the_modified_date() ) );
+		$date_info = jdate( 'h:i - Y/m/d', strtotime( get_the_modified_date() ) );
 	};
 	$change_str = $change_str.'*'.$date_info;
 	array_push( $changes_arr, $change_str );
 	$changes_str = implode( "+", $changes_arr );
-	update_post_meta( $post_id, 'changes_str', $changes_str );	
+	update_post_meta( $project_id, 'changes_str', $changes_str );	
 }
-add_action( 'post_updated', 'save_project_list' );
-
-
+add_action( 'post_updated', 'fjn_save_project' );
 //******************************************
 // Add project progress metabox - Project edit page
 //******************************************
@@ -1101,16 +1224,13 @@ function fjn_project_progress( $post ){
 		echo '%'.$project_done_count / $project_count * 100;
 	}
 }
-
-add_action( 'add_meta_boxes', 'fjn_add_project_progress_metabox', 10, 1 );
-
+//add_action( 'add_meta_boxes', 'fjn_add_project_progress_metabox', 10, 1 );
 //******************************************
 // Last Seen User Update
 //******************************************
-
 function fjn_user_last_login(){
 	$current_user = wp_get_current_user();
-	$current_user_id = $current_user->id;
+	$current_user_id = $current_user->ID;
 	$date_info = date('Y-m-d H:i:s'); 
 	update_user_meta( $current_user_id, 'last_login', $date_info );
 	update_user_meta( $current_user_id, 'last_login_time', time() );
@@ -1121,19 +1241,15 @@ get_user_meta( $current_user_id, 'last_login_time', 1 );
 */
 };
 add_action( 'wp_loaded', 'fjn_user_last_login', 10 , 2 );
-
-
 //******************************************
 // Add Notification User Tasks
 //******************************************
-
-
 function fjn_create_tasks_menu() {
 	global $wpdb;
 	global $wp_admin_bar;
 	$table_tasks = $wpdb->prefix.'tasks';
 	$current_user = wp_get_current_user();
-	$current_user_id = $current_user->id;
+	$current_user_id = $current_user->ID;
 	$seen_user = $wpdb -> get_col( "SELECT seen_date FROM {$table_tasks} WHERE editor_id = {$current_user_id}" );
 	$seen_user_count = count($seen_user);
 	$count_tasks = 0;
@@ -1152,35 +1268,29 @@ function fjn_create_tasks_menu() {
 	); 
 }
 add_action('admin_bar_menu', 'fjn_create_tasks_menu', 1000);
-
-
 //******************************************
 // Check All Users Last Seen
 //******************************************
-
 function fjn_check_users_seen(){
 	global $wpdb;
 	$tasks_table = $wpdb->prefix . 'tasks';
-	$query_user_seen = $wpdb->get_results( "SELECT task_id, editor_id, seen_date FROM {$tasks_table} WHERE seen_date = null OR seen_date = 0 " );
-	$for_countr = count( $query_user_seen );
-	for( $y = 0; $y <= $for_countr; $y++ ){
-		$last_user_seen_time = get_user_meta( $query_user_seen[$y]->editor_id, 'last_login_time', 1 );
-		$last_user_seen = get_user_meta( $query_user_seen[$y] -> editor_id, 'last_login', 1 );
+	$new_tasks = $wpdb->get_results( "SELECT task_id, editor_id, seen_date FROM {$tasks_table} WHERE seen_date = null OR seen_date = 0 " );
+	foreach( $new_tasks as $new_task ){
+		$last_user_seen_time = get_user_meta( $new_task->editor_id, 'last_login_time', 1 );
+		$last_user_seen = get_user_meta( $new_task->editor_id, 'last_login', 1 );
 		if( time() - $last_user_seen_time > 3600 ){
 			$wpdb->update(
 				$tasks_table ,
 				array( 'seen_date' => $last_user_seen ),
-				array( 'editor_id' => $query_user_seen[$y]->editor_id,'task_id' => $query_user_seen[$y]->task_id )
+				array( 'editor_id' => $new_task->editor_id,'task_id' => $new_task->task_id )
 		  );
 		}
 	}
 }
 add_action( 'wp_loaded', 'fjn_check_users_seen', 9 , 2 );
-
 //******************************************************
 // Insert the assigned tasks of Editors to the database
 //******************************************************
-
 function fjn_assign_tasks_to_editors($project_id){	//assign tasks to editors in wp_tasks table in database to inform editors what they do!!
 	$editor_str = get_post_meta( $project_id, 'editor_str', 1 );
 	$editors_arr = array();
@@ -1193,11 +1303,9 @@ function fjn_assign_tasks_to_editors($project_id){	//assign tasks to editors in 
 		fjn_insert_record_to_db( $editor_id, $activity_id, $project_id );		
 	}
 }
-
 //******************************************
 // Insertion of records function
 //******************************************
-
 function fjn_insert_record_to_db( $editor_id, $activity_id, $project_id ){
 	global $wpdb;
 	$tasks_table = $wpdb->prefix.'tasks';
@@ -1265,7 +1373,6 @@ function my_column_thumbnail_width(){?>
 </style>
 <?php
 }
-
 //*******************************************
 // Get editors list by free time
 //*******************************************
@@ -1302,59 +1409,224 @@ function fjn_editors_by_free_time(){
 	asort( $workforce );
 	return $workforce;
 }
-
 //******************************************
 // Insertion of records to payments table
 //******************************************
-
 function fjn_insert_record_to_payment_db( $project_id, $payment_date, $amount_paid ){
 	global $wpdb;
 	$payments_table = $wpdb->prefix.'payments';
 	$data=array(
 		'pay_id' 		=> "",
-     	'project_id'	=> 	$project_id, 
+    'project_id'	=> 	$project_id, 
 		'payment_date' 	=>  $payment_date,     
 		'amount_paid' 	=>  $amount_paid
 		);
 	$format= array( '%d', '%d', '%s', '%d' );
 	$wpdb->insert( $payments_table, $data, $format );	
 }
-
 //******************************************
-// Add Payment History metabox - Project edit page
+// Payment History metabox
 //******************************************
-
-function fjn_add_payment_history_metabox(){
-	if( is_admin() ){
-		global $pagenow;
-		if( 'post.php' == $pagenow ){
-			add_meta_box( 
-				'payment_history',
-				__( 'Payment History', 'fenjoon' ),
-				'fjn_payment_history',
-				'projects',
-				'side',
-				'low'
-			);
-		}
-	}
-}
-function fjn_payment_history(){	
+function fjn_payment_history( $post ){
 	global $wpdb;
-	global $post;
-	$post_id = $post->ID;
-	$payments_table = $wpdb->prefix.'payments';
-	$query_payment = $wpdb->get_results( "SELECT payment_date, amount_paid FROM {$payments_table} WHERE project_id = {$post_id}" );?>		
-	<ul class="listofrows"><?php
-	foreach( ( array ) $query_payment as $pay ){?>
-		<li class="row">
-			<div class="right"><?php echo $pay->amount_paid;?></div>
-			<div class="left"><?php echo  $pay->payment_date;?></div>
-		</li><?php
-	}?>
-	</ul><?php
-}
-add_action( 'add_meta_boxes', 'fjn_add_payment_history_metabox', 0 );
-add_action( 'add_meta_boxes', 'fjn_add_payment_history_metabox', 0 );
+	$project_id = $post->ID;
+	$concern = array(
+		1 => __( 'Web design', 'fenjoon' ),
+		2 => __( 'Support', 'fenjoon' ),
+		3 => __( 'Host registration', 'fenjoon' ),
+		4 => __( 'Domain registration', 'fenjoon' ),
+		5 => __( 'Content development', 'fenjoon' ),
+		6 => __( 'Penalty', 'fenjoon' )
+	);
+	
+	$passed = array(
+		0 => __( 'No', 'fenjoon' ),
+		1 => __( 'Yes', 'fenjoon' )
+	);
+	
+	$instalments_table = $wpdb->prefix . 'instalments';
+	$query = "SELECT id, concern, amount, due, passed FROM {$instalments_table} WHERE project_id = %d";
+	$query = $wpdb->prepare( $query, $project_id );
+	$results = $wpdb->get_results( $query, OBJECT );?>
+	<h3><?php _e( 'Project instalments', 'fenjoon' );?></h3>
+	<table id="instalments">
+		<thead>
+			<tr>
+				<th class="w15"><?php _e( 'Instalment id', 'fenjoon' );?></th>
+				<th class="w15"><?php _e( 'Amount', 'fenjoon' );?></th>
+				<th class="w20"><?php _e( 'Due', 'fenjoon' );?></th>
+				<th class="w10"><?php _e( 'Passed', 'fenjoon' );?></th>
+				<th class="w35"><?php _e( 'Concern', 'fenjoon' );?></th>
+				<th class="w5"><?php _e( 'Delete', 'fenjoon' );?></th>
+			</tr>
+		</thead>
+		<tbody><?php
+	if( !empty( $results ) ){
+		foreach( $results as $instalment ){?>
+				<tr class="instalment">
+					<td class="w15 id"><?php echo $instalment->id;?></td>
+					<td class="w15 amount"><?php echo number_format( $instalment->amount );?></td>
+					<td class="w20 due"><?php echo ( is_plugin_active( 'wp-jalali/wp-jalali.php' ) ? jdate( 'Y/m/d', $instalment->due ) : date( 'Y/m/d', $instalment->due ) );?></td>
+					<td class="w10 passed" value="<?php echo( $instalment->passed ? $instalment->passed : 0 );?>"><?php echo $passed[ $instalment->passed ];?></td>
+					<td class="w35 concern" value="<?php echo( $instalment->concern ? $instalment->concern : 0 );?>"><?php echo( $instalment->concern ? $concern[ $instalment->concern ] : '' );?></td>
+					<td class="w5"><input type="checkbox" class="delete_instalments" value="<?php echo $instalment->id;?>"></td>
+				</tr><?php
+			}
+		}?>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td class="w15"></td>
+				<td class="w15"><input type="text" id="amount" name="instalment[amount]"></td>
+				<td class="w20">
+					<table>
+						<tr>
+							<td class="w20"><input type="text" id="day" name="instalment[day]"></td>
+							<td>/</td>
+							<td class="w20"><input type="text" id="month" name="instalment[month]"></td>
+							<td>/</td>
+							<td class="w40"><input type="text" id="year" name="instalment[year]"></td>
+						</tr>
+					</table>
+				</td>
+				<td class="w10">
+					<select id="passed" name="instalment[passed]">
+						<option><?php _e( 'Select', 'fenjoon' );?></option><?php
+						foreach( $passed as $k => $c ){?>
+							<option value="<?php echo $k;?>"><?php echo $c;?></option><?php
+						}?>
+					</select>
+				</td>
+				<td class="w35">
+					<select id="concern" name="instalment[concern]">
+						<option><?php _e( 'Select', 'fenjoon' );?></option><?php
+						foreach( $concern as $k => $c ){?>
+							<option value="<?php echo $k;?>"><?php echo $c;?></option><?php
+						}?>
+					</select>
+				</td>
+				<td class="w5"></td>
+			</tr>
+		</tfoot>
+	</table>
+	<input type="hidden" name="edit_instalment" value="">
+	<input type="hidden" name="delete_instalments"><?php
 
-?>	
+	$approved = array(
+		0 => __( 'No', 'fenjoon' ),
+		1 => __( 'Yes', 'fenjoon' )
+	);
+	
+	$payments_table = $wpdb->prefix . 'payments';
+	$query = "SELECT id, pay, date, pursuit, approved, note FROM {$payments_table} WHERE project_id = %d";
+	$query = $wpdb->prepare( $query, $project_id );
+	$results = $wpdb->get_results( $query, OBJECT );?>
+	<h3><?php _e( 'Payment history', 'fenjoon' );?></h3>
+	<table id="payments">
+		<thead>
+			<tr>
+				<th class="w15"><?php _e( 'Payment id', 'fenjoon' );?></th>
+				<th class="w15"><?php _e( 'Payment', 'fenjoon' );?></th>
+				<th class="w20"><?php _e( 'Date', 'fenjoon' );?></th>
+				<th class="w10"><?php _e( 'Approved', 'fenjoon' );?></th>
+				<th class="w15"><?php _e( 'Pursuit', 'fenjoon' );?></th>
+				<th class="w20"><?php _e( 'Note', 'fenjoon' );?></th>
+				<th class="w5"><?php _e( 'Delete', 'fenjoon' );?></th>
+			</tr>
+		</thead>
+		<tbody><?php
+		if( !empty( $results ) ){
+			foreach( $results as $payment ){?>
+				<tr class="payment">
+					<td class="w15 id"><?php echo $payment->id;?></td>
+					<td class="w15 pay"><?php echo number_format( $payment->pay );?></td>
+					<td class="w20 date"><?php echo ( is_plugin_active( 'wp-jalali/wp-jalali.php' ) ? jdate( 'Y/m/d', $payment->date ) : date( 'Y/m/d', $payment->date ) );?></td>
+					<td class="w10 approved" value="<?php echo( $payment->approved ? $payment->approved : 0 );?>"><?php echo $approved[ $payment->approved ];?></td>
+					<td class="w15 pursuit"><?php echo $payment->pursuit;?></td>
+					<td class="w20 note"><?php echo $payment->note;?></td>
+					<td class="w5"><input type="checkbox" class="delete_payments" value="<?php echo $payment->id;?>"></td>
+				</tr><?php
+			}
+		}?>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td class="w15"></td>
+				<td class="w15"><input type="text" id="pay" name="payment[pay]"></td>
+				<td class="w20">
+					<table>
+						<tr>
+							<td class="w20"><input type="text" id="pday" name="payment[day]"></td>
+							<td>/</td>
+							<td class="w20"><input type="text" id="pmonth" name="payment[month]"></td>
+							<td>/</td>
+							<td class="w40"><input type="text" id="pyear" name="payment[year]"></td>
+						</tr>
+					</table>
+				</td>
+				<td class="w10">
+					<select id="approved" name="instalment[approved]">
+						<option><?php _e( 'Select', 'fenjoon' );?></option><?php
+						foreach( $approved as $k => $c ){?>
+							<option value="<?php echo $k;?>"><?php echo $c;?></option><?php
+						}?>
+					</select>
+				</td>
+				<td class="w15"><input type="text" id="pursuit" name="payment[pursuit]"></td>
+				<td class="w20"><input type="text" id="note" name="payment[note]"></td>
+				<td class="w5"></td>
+			</tr>
+		</tfoot>
+	</table>
+	<input type="hidden" name="edit_payment" value="">
+	<input type="hidden" name="delete_payments"><?php
+}
+
+//Instalment
+function fjn_add_instalment( $project_id, $instalment ){
+	global $wpdb;
+	$due = jalali_to_gregorian( $instalment['year'], $instalment['month'], $instalment['day']);
+	$due = implode( '-', $due );
+	$instalments_table = $wpdb->prefix . 'instalments';
+	$wpdb->insert( $instalments_table, array( 'project_id' => $project_id, 'concern' => $instalment['concern'], 'amount' => $instalment['amount'], 'due' => $due ), array( '%d', '%d', '%d', '%s' ) );
+}
+
+function fjn_edit_instalment( $project_id, $instalment, $id ){
+	global $wpdb;
+	$due = jalali_to_gregorian( $instalment['year'], $instalment['month'], $instalment['day']);
+	$due = implode( '-', $due );
+	$instalments_table = $wpdb->prefix . 'instalments';
+	$wpdb->update( $instalments_table, array( 'concern' => $instalment['concern'], 'passed' => $instalment['passed'], 'amount' => $instalment['amount'], 'due' => $due ), array( 'id' => $id ),  array( '%d', '%d', '%d', '%s' ), array( '%d' ) );
+}
+
+function fjn_delete_instalments( $project_id, $instalments ){
+	global $wpdb;
+	$instalments_table = $wpdb->prefix . 'instalments';
+	$query = "DELETE from {$instalments_table} WHERE id IN (" . str_replace( '+', ',', $instalments ) . ")";
+	$wpdb->query( $query );
+}
+
+//Payment
+function fjn_add_payment( $project_id, $payment ){
+	global $wpdb;
+	$date = jalali_to_gregorian( $payment['year'], $payment['month'], $payment['day']);
+	$date = implode( '-', $date );
+	$payments_table = $wpdb->prefix . 'payments';
+	$wpdb->insert( $payments_table, array( 'project_id' => $project_id, 'pursuit' => $payment['pursuit'], 'pay' => $payment['pay'], 'date' => $date, 'note' => $payment['note'] ), array( '%d', '%d', '%d', '%s', '%s' ) );
+}
+
+function fjn_edit_payment( $project_id, $payment, $id ){
+	global $wpdb;
+	$date = jalali_to_gregorian( $payment['year'], $payment['month'], $payment['day']);
+	$date = implode( '-', $date );
+	$payments_table = $wpdb->prefix . 'payments';
+	$wpdb->update( $payments_table, array( 'pursuit' => $payment['pursuit'], 'approved' => $payment['approved'], 'pay' => $payment['pay'], 'date' => $date, 'note' => $payment['note'] ), array( 'id' => $id ),  array( '%d', '%d', '%d', '%s', '%s' ), array( '%d' ) );
+}
+
+function fjn_delete_payments( $project_id, $payments ){
+	global $wpdb;
+	$payments_table = $wpdb->prefix . 'payments';
+	$query = "DELETE from {$payments_table} WHERE id IN (" . str_replace( '+', ',', $payments ) . ")";
+	$wpdb->query( $query );
+}
+?>
