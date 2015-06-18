@@ -124,8 +124,13 @@ $backcolor[ 'inqueue' ] = 'backred';
 		<div class="cols">
 			<div class="col col23">
 				<div class="tile padding2">
+					<section class="section mb2">
+						<h2 class="icon"><?php _e( 'Project instalments', 'fenjoon' );?></h2>
+						<?php get_template_part( 'parts/single-projects', 'instalments' );?>
+					</section>
 					<section class="section">
 						<h2 class="icon"><?php _e( 'Payment history', 'fenjoon' );?></h2>
+						<?php get_template_part( 'parts/single-projects', 'payments' );?>
 					</section>
 				</div>
 			</div>

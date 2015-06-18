@@ -621,7 +621,7 @@ function fjn_save_order() {
 	if( count( $changes_arr ) == 5 ) {array_shift( $changes_arr );};
 	global $current_user;
 	$change_str = $current_user->ID;
-	if( !is_plugin_active( 'wp-jalali/wp-jalali.php' ) ){
+	if( !function_exists( 'jdate' ) ){
 		$date_info = date( 'Y/m/d,h:i' );
 	}else{
 		$date_info = jdate( 'Y/m/d,h:i', strtotime( get_the_modified_date() ) );
@@ -1165,7 +1165,7 @@ function fjn_save_project(){
 	if( count( $changes_arr ) == 5 ) {array_shift( $changes_arr );};
 	global $current_user;
 	$change_str = $current_user->ID;
-	if ( !is_plugin_active( 'wp-jalali/wp-jalali.php' ) ){
+	if ( !function_exists( 'jdate' ) ){
 		$date_info = date( 'h:i - Y/m/d' );
 	}else{
 		$date_info = jdate( 'h:i - Y/m/d', strtotime( get_the_modified_date() ) );
@@ -1466,7 +1466,7 @@ function fjn_payment_history( $post ){
 				<tr class="instalment">
 					<td class="w15 id"><?php echo $instalment->id;?></td>
 					<td class="w15 amount"><?php echo number_format( $instalment->amount );?></td>
-					<td class="w20 due"><?php echo ( is_plugin_active( 'wp-jalali/wp-jalali.php' ) ? jdate( 'Y/m/d', $instalment->due ) : date( 'Y/m/d', $instalment->due ) );?></td>
+					<td class="w20 due"><?php echo ( function_exists( 'jdate' ) ? jdate( 'Y/m/d', $instalment->due ) : date( 'Y/m/d', $instalment->due ) );?></td>
 					<td class="w10 passed" value="<?php echo( $instalment->passed ? $instalment->passed : 0 );?>"><?php echo $passed[ $instalment->passed ];?></td>
 					<td class="w35 concern" value="<?php echo( $instalment->concern ? $instalment->concern : 0 );?>"><?php echo( $instalment->concern ? $concern[ $instalment->concern ] : '' );?></td>
 					<td class="w5"><input type="checkbox" class="delete_instalments" value="<?php echo $instalment->id;?>"></td>
@@ -1540,7 +1540,7 @@ function fjn_payment_history( $post ){
 				<tr class="payment">
 					<td class="w15 id"><?php echo $payment->id;?></td>
 					<td class="w15 pay"><?php echo number_format( $payment->pay );?></td>
-					<td class="w20 date"><?php echo ( is_plugin_active( 'wp-jalali/wp-jalali.php' ) ? jdate( 'Y/m/d', $payment->date ) : date( 'Y/m/d', $payment->date ) );?></td>
+					<td class="w20 date"><?php echo ( function_exists( 'jdate' ) ? jdate( 'Y/m/d', $payment->date ) : date( 'Y/m/d', $payment->date ) );?></td>
 					<td class="w10 approved" value="<?php echo( $payment->approved ? $payment->approved : 0 );?>"><?php echo $approved[ $payment->approved ];?></td>
 					<td class="w15 pursuit"><?php echo $payment->pursuit;?></td>
 					<td class="w20 note"><?php echo $payment->note;?></td>

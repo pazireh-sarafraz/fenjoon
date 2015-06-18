@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Fenjoon\n"
-"POT-Creation-Date: 2015-06-18 13:35+0330\n"
-"PO-Revision-Date: 2015-06-18 13:35+0330\n"
+"POT-Creation-Date: 2015-06-19 00:28+0330\n"
+"PO-Revision-Date: 2015-06-19 00:30+0330\n"
 "Last-Translator: \n"
 "Language-Team: Fenjoon\n"
 "Language: fa_IR\n"
@@ -344,7 +344,7 @@ msgstr "ساعت کار روزانه"
 msgid "Payment History"
 msgstr "سابقه پرداخت"
 
-#: functions.php:986 functions.php:1172
+#: functions.php:986 functions.php:1188
 msgid "Project Progress"
 msgstr "چک لیست پیشرفت پروژه"
 
@@ -380,107 +380,107 @@ msgstr "افزوده شده به لیست سفارش"
 msgid "Removed from order"
 msgstr "حذف شده از لیست سفارش"
 
-#: functions.php:1249
+#: functions.php:1265
 msgid "New Tasks"
 msgstr "وظیفه جدید"
 
-#: functions.php:1336
+#: functions.php:1352
 msgid "My Tasks"
 msgstr "وظایف من"
 
-#: functions.php:1343
+#: functions.php:1359
 msgid "All tasks assigned to you over time"
 msgstr "وظایفی که تا کنون به شما تخصیص داده شده است"
 
-#: functions.php:1418
+#: functions.php:1434
 msgid "Web design"
 msgstr "طراحی وب"
 
-#: functions.php:1419
+#: functions.php:1435
 msgid "Support"
 msgstr "پشتیبانی"
 
-#: functions.php:1420
+#: functions.php:1436
 msgid "Host registration"
 msgstr "سرویس میزبانی وب"
 
-#: functions.php:1421
+#: functions.php:1437
 msgid "Domain registration"
 msgstr "دامنه اینترنتی"
 
-#: functions.php:1422
+#: functions.php:1438
 msgid "Content development"
 msgstr "توسعه محتوا"
 
-#: functions.php:1423
+#: functions.php:1439
 msgid "Penalty"
 msgstr "جریمه تأخیر پرداخت"
 
-#: functions.php:1431
-msgid "Project instalments"
-msgstr "اقساط پروژه"
-
-#: functions.php:1435
-msgid "Instalment id"
-msgstr "شناسه قسط"
-
-#: functions.php:1436
-msgid "Amount"
-msgstr "مبلغ"
-
-#: functions.php:1437
-msgid "Due"
-msgstr "سررسید"
-
-#: functions.php:1438
-msgid "Passed"
-msgstr "پاس شده"
-
-#: functions.php:1439
-msgid "Concern"
-msgstr "بابت"
-
-#: functions.php:1440
-msgid "Delete"
-msgstr "حذف"
-
-#: functions.php:1449 functions.php:1511
-msgid "Yes"
-msgstr "بله"
-
-#: functions.php:1449 functions.php:1511
+#: functions.php:1443 functions.php:1516
 msgid "No"
 msgstr "خیر"
 
-#: functions.php:1473
+#: functions.php:1444 functions.php:1517
+msgid "Yes"
+msgstr "بله"
+
+#: functions.php:1451
+msgid "Project instalments"
+msgstr "هزینه‌های پروژه"
+
+#: functions.php:1455
+msgid "Instalment id"
+msgstr "شناسه قسط"
+
+#: functions.php:1456
+msgid "Amount"
+msgstr "مبلغ"
+
+#: functions.php:1457
+msgid "Due"
+msgstr "سررسید"
+
+#: functions.php:1458
+msgid "Passed"
+msgstr "پاس شده"
+
+#: functions.php:1459
+msgid "Concern"
+msgstr "بابت"
+
+#: functions.php:1460 functions.php:1534
+msgid "Delete"
+msgstr "حذف"
+
+#: functions.php:1494 functions.php:1502 functions.php:1569
 msgid "Select"
 msgstr "انتخاب کنید"
 
-#: functions.php:1492
+#: functions.php:1524
 msgid "Payment history"
-msgstr "سابقه پرداخت‌های این پروژه"
+msgstr "پرداخت‌های پروژه"
 
-#: functions.php:1496
+#: functions.php:1528
 msgid "Payment id"
 msgstr "شناسه پرداخت"
 
-#: functions.php:1497
+#: functions.php:1529
 msgid "Payment"
 msgstr "مبلغ"
 
-#: functions.php:1498
+#: functions.php:1530
 msgid "Date"
 msgstr "تاریخ"
 
-#: functions.php:1499
-msgid "Pursuit"
-msgstr "شماره پیگیری"
-
-#: functions.php:1500
+#: functions.php:1531
 msgid "Approved"
 msgstr "تأیید شده"
 
-#: functions.php:1501
+#: functions.php:1532
+msgid "Pursuit"
+msgstr "شماره پیگیری"
+
+#: functions.php:1533
 msgid "Note"
 msgstr "توضیح"
 

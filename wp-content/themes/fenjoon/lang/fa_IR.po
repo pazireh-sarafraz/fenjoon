@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Fenjoon\n"
-"POT-Creation-Date: 2015-06-17 10:03+0330\n"
-"PO-Revision-Date: 2015-06-17 10:03+0330\n"
+"POT-Creation-Date: 2015-06-19 00:27+0330\n"
+"PO-Revision-Date: 2015-06-19 00:28+0330\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fa_IR\n"
@@ -290,6 +290,66 @@ msgstr "ثبت شده"
 msgid "Checking"
 msgstr "بررسی"
 
+#: parts/single-projects-instalments.php:4
+msgid "Web design"
+msgstr "طراحی وب"
+
+#: parts/single-projects-instalments.php:5
+msgid "Support"
+msgstr "پشتیبانی"
+
+#: parts/single-projects-instalments.php:6
+msgid "Host registration"
+msgstr "سرویس میزبانی وب"
+
+#: parts/single-projects-instalments.php:7
+msgid "Domain registration"
+msgstr "دامنه اینترنتی"
+
+#: parts/single-projects-instalments.php:8
+msgid "Content development"
+msgstr "توسعه محتوا"
+
+#: parts/single-projects-instalments.php:9
+msgid "Penalty"
+msgstr "جریمه تأخیر پرداخت"
+
+#: parts/single-projects-instalments.php:20
+msgid "Amount"
+msgstr "مبلغ"
+
+#: parts/single-projects-instalments.php:21
+msgid "Due"
+msgstr "سررسید"
+
+#: parts/single-projects-instalments.php:22
+msgid "Concern"
+msgstr "بابت"
+
+#: parts/single-projects-instalments.php:36
+msgid "This project has not any instalments yet."
+msgstr "این پروژه تا کنون هزینه‌ای نداشته است."
+
+#: parts/single-projects-payments.php:12
+msgid "Payment"
+msgstr "پرداخت"
+
+#: parts/single-projects-payments.php:13
+msgid "Date"
+msgstr "تاریخ"
+
+#: parts/single-projects-payments.php:14
+msgid "Pursuit"
+msgstr "شماره پیگیری"
+
+#: parts/single-projects-payments.php:15
+msgid "Note"
+msgstr "شرح"
+
+#: parts/single-projects-payments.php:30
+msgid "This project has not any payments yet."
+msgstr "این پروژه تا کنون پرداختی نداشته است."
+
 #: searchform.php:4
 msgid "Search"
 msgstr "جستجو"
@@ -379,11 +439,11 @@ msgstr "عنوان سفارش"
 msgid "Order detail"
 msgstr "جزئیات سفارش"
 
-#: single-orders.php:161
+#: single-orders.php:162
 msgid "Submit order"
 msgstr "ثبت سفارش"
 
-#: single-orders.php:161
+#: single-orders.php:162
 msgid "Update order"
 msgstr "به روز رسانی سفارش"
 
@@ -412,6 +472,10 @@ msgid "Remaining time"
 msgstr "باقی مانده"
 
 #: single-projects.php:128
+msgid "Project instalments"
+msgstr "هزینه‌های پروژه"
+
+#: single-projects.php:132
 msgid "Payment history"
 msgstr "سابقه پرداخت‌های این پروژه"
 
