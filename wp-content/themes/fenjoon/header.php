@@ -13,6 +13,9 @@
 </head>
 <body>
 <header><?php
+global $msg, $err;
+$msg = fjn_messages();
+$err = fjn_errors();
 if( is_user_logged_in() ){
 global $current_user;
 ?>

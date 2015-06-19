@@ -48,10 +48,11 @@ function add_fenjoon_admin_css() {
 add_action( 'admin_enqueue_scripts', 'add_fenjoon_admin_css' );
 function add_fenjoon_js() {
 	if( is_page_template( 'single-orders.php' ) || is_singular( 'orders' ) ){
-		wp_enqueue_script( 'fenjoon', THEME_URI . '/js/fenjoon.js', array(), '1.0', true );
+		wp_enqueue_script( 'order', THEME_URI . '/js/order.js', array(), '1.0', true );
 	}
 	if( is_page_template( 'single-projects.php' ) || is_singular( 'projects' ) ){
-		wp_enqueue_script( 'fenjoon', THEME_URI . '/js/gauge.js', array(), '1.0', true );
+		wp_enqueue_script( 'gauge', THEME_URI . '/js/gauge.js', array(), '1.0', true );
+		wp_enqueue_script( 'project', THEME_URI . '/js/project.js', array(), '1.0', true );
 	}
 }
 add_action( 'wp_enqueue_scripts', 'add_fenjoon_js' );
@@ -71,9 +72,10 @@ function fjn_register_menu() {
 add_action( 'init', 'fjn_register_menu' );
 
 function fjn_wp_nav_menu( $loc ){
+	$menu = ( is_user_logged_in() ? 'top_member' : 'top' );
 	$args = array(
 		'theme_location'  => $loc,
-		'menu'            => '',
+		'menu'            => $menu,
 		'container'       => 'nav',
 		'container_class' => $loc,
 		'container_id'    => '',
@@ -165,6 +167,52 @@ function fjn_template_query( $cpt, $user_id = null ){
 	}
 	$the_query = new WP_Query( $args );
 	return $the_query;
+}
+
+function fjn_messages(){
+	$msg[1] = __( 'Order submitted successfully', 'fenjoon' );
+	$msg[2] = __( 'Order updated successfully', 'fenjoon' );
+	$msg[3] = __( 'Payment item submitted successfully', 'fenjoon' );
+	$msg[4] = __( 'Payment item submitted successfully', 'fenjoon' );
+	return $msg;
+}
+
+function fjn_errors(){
+	$err[1] = __( 'Title and Content incorrect', 'fenjoon' );
+	$err[2] = __( 'Access denied. this operation is not permitted', 'fenjoon' );
+	$err[3] = __( 'Order did not submit and error occurred', 'fenjoon' );
+	$err[4] = __( 'Unknown error', 'fenjoon' );
+	$err[5] = __( 'Item in progress and cant be removed from order any more', 'fenjoon' );
+	$err[6] = __( 'Order did not update and error occurred', 'fenjoon' );
+	$err[7] = __( 'Date fields are not filled correctly', 'fenjoon' );
+	$err[8] = __( 'Pursuit field should be filled correctly', 'fenjoon' );
+	$err[9] = __( 'Payment field should be filled correctly', 'fenjoon' );
+	$err[10] = __( 'Payment item did not submit and error occurred', 'fenjoon' );
+	$err[11] = __( 'Access is restricted to members. Please register or login first', 'fenjoon' );
+	return $err;
+}
+
+function fjn_msg_reporting( $msg, $err ){
+	$output = '<div id="alerts">';
+	$content = '';
+	$e = $_GET['err'];
+	if( !empty( $e ) ){
+		$e = explode( '-', $e );
+		$e = array_unique( $e );
+		foreach( $e as $item ){
+			$content .= '<div class="alert tile red padding1 size2 mb1">'. $err[$item] .'</div>';
+		}
+	}
+	$m = $_GET['msg'];
+	if( !empty( $m ) ){
+		$m = explode( '-', $m );
+		$m = array_unique( $m );
+		foreach( $m as $item ){
+			$content .= '<div class="alert tile green padding1 size2 mb1">'. $msg[$item] .'</div>';
+		}
+	}
+	$output .= $content . '</div>';
+	if( '' != $content ) echo $output;
 }
 //******************************************
 // CPT - General + field taxonomy

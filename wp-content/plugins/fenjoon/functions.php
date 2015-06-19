@@ -243,17 +243,17 @@ function cpt_projects(){
 		'label'               => __( 'Projects', 'fenjoon' ),
 		'description'         => __( 'The Projects which are submitted known as Projects!', 'fenjoon' ),
 		'labels'              => $labels,
-		'supports'            => array( 'title', 'editor','comment' ),
+		'supports'            => array( 'title', 'editor','comments' ),
 		'exclude_from_search' => true,
 		'hierarchical'        => false,
 		'public'              => false,
 		'show_ui'             => true,
 		'show_in_menu'        => true,
-		'show_in_nav_menus'   => true,
+		'show_in_nav_menus'   => false,
 		'show_in_admin_bar'   => true,
 		'menu_position'       => 10,
 	  'menu_icon'					  => 'dashicons-welcome-widgets-menus',
-		'has_archive'         => true,
+		'has_archive'         => false,
 		'publicly_queryable'  => true,
 		'capability_type'     => 'post',
 	);
@@ -686,14 +686,19 @@ function fjn_valid_string( $string ){
 		return false;
 	}
 }
+
 function fjn_remove_querystring_var( $url, $key ){ 
-	$url = preg_replace('/(.*)(?|&)' . $key . '=[^&]+?(&)(.*)/i', '$1$2$4', $url . '&'); 
-	$url = substr($url, 0, -1); 
-	return $url; 
+	while( false !== strpos( $url, $key ) ){
+			$url = preg_replace('/(.*)(\?|&)' . $key . '=[^&]+?(&)(.*)/i', '$1$2$4', $url . '&');
+			$url = substr($url, 0, -1);
+	}
+	return ($url); 
 }
+
 function is_blank( $value ){
 	return empty( $value ) && !is_numeric( $value );
 }
+
 function fjn_frontend_post(){
 	if( !empty( $_POST ) && !is_admin() ){
 		if( !empty( $_POST['fjn_nonce'] ) && !empty( $_POST['action'] ) && empty( $_POST['email'] ) ){ // email field is a bot trap
@@ -724,7 +729,7 @@ function fjn_frontend_post(){
 							)
 						);
 						if( isset( $order_id ) ){
-							$msg[] = 1; // order submitted successfully!
+							$msg[] = 1; // Order submitted successfully!
 							if( $fenjoon_settings = get_option( 'fenjoon_settings' ) ){
 								$developer_count = $fenjoon_settings[ 'developer_count' ];
 								$man_hour_fee = $fenjoon_settings[ 'man_hour_fee' ];
@@ -748,7 +753,7 @@ function fjn_frontend_post(){
 							update_post_meta( $order_id, 'total_time', $total_work / $daily_man_power );
 							update_post_meta( $order_id, 'order_code', 1121000 + $order_id );
 						}else{
-							$err[] = 3; // order did not submit and error occurred!
+							$err[] = 3; // Order did not submit and error occurred!
 						}
 					}
 				}elseif( 'update_order' == $_POST['action'] && !empty( $_POST['order_id'] ) && is_numeric( $_POST['order_id'] ) && !empty( $_POST['string'] ) ){
@@ -788,7 +793,7 @@ function fjn_frontend_post(){
 							update_post_meta( $order_id, 'test', $man_hour_fee );
 							$t_p = ceil( $total_price + ( $delta_work * $man_hour_fee ) );
 							$t_t = ceil( $total_time + ( $delta_work / $daily_man_power  ) );
-							if( is_blank( $t_p ) || is_blank( $t_t ) ) $err[] = 6; // Unknown error
+							if( is_blank( $t_p ) || is_blank( $t_t ) ) $err[] = 4; // Unknown error
 						}
 						$project_id = get_post_meta( $order_id, 'project_id', 1 );
 						if( !empty( $project_id ) ){
@@ -797,7 +802,7 @@ function fjn_frontend_post(){
 							if( !empty( $progress_str ) ) $progress_arr = explode( '+', $progress_str );
 							foreach( $progress_arr as $item ){
 								if( !in_array( $item, $array ) ){
-									$err[] = 4; // Item in progress and cant be removed from order any more
+									$err[] = 5; // Item in progress and cant be removed from order any more
 									break;
 								}
 							}
@@ -812,17 +817,45 @@ function fjn_frontend_post(){
 							)
 						);
 						if( !empty( $result ) ){
-							$msg[] = 2; // order updated successfully!
+							$msg[] = 2; // Order updated successfully!
 							update_post_meta( $order_id, 'order_str', $string );
 							if( !empty( $project_id ) ) update_post_meta( $project_id, 'project_str', $string );
 							if( !is_blank( $t_p ) ) update_post_meta( $order_id, 'total_price', $t_p );
 							if( !is_blank( $t_t ) ) update_post_meta( $order_id, 'total_time', $t_t );
 						}else{
-							$err[] = 5; // order did not update and error occurred!
+							$err[] = 6; // Order did not update and error occurred!
+						}
+					}
+				}
+			}elseif( wp_verify_nonce( $_POST['fjn_nonce'], 'fjn_submit-payment' ) ){
+				if( 'payment' == $_POST['action'] && !empty( $_POST['project_id'] ) && is_numeric( $_POST['project_id'] ) && !empty( $_POST['payment'] ) ){
+					$project_id = $_POST['project_id'];
+					if( !current_user_can( 'edit_post', $project_id ) ) return;
+					global $wpdb;
+					if( empty( $_POST['payment']['year'] ) || empty( $_POST['payment']['month'] ) || empty( $_POST['payment']['day'] ) ) $err[] = 7;
+					if( function_exists( 'jalali_to_gregorian' ) ){
+						$date = jalali_to_gregorian( $_POST['payment']['year'], $_POST['payment']['month'], $_POST['payment']['day']);
+						$date = implode( '-', $date );
+					}else{
+						$date = $_POST['payment']['year'] . '-' . $_POST['payment']['month'] . '-' . $_POST['payment']['day'];
+					}
+					if( empty( $_POST['payment']['pursuit'] ) ) $err[] = 8;
+					if( empty( $_POST['payment']['pay'] ) ) $err[] = 9;
+					if( empty( $err ) ){
+						$payments_table = $wpdb->prefix . 'payments';
+						$wpdb->insert( $payments_table, array( 'project_id' => $project_id, 'pursuit' => $_POST['payment']['pursuit'], 'pay' => $_POST['payment']['pay'], 'date' => $date, 'note' => $_POST['payment']['note'] ), array( '%d', '%d', '%d', '%s', '%s' ) );
+						if( $wpdb->insert_id ){
+							$msg[] = 4; // Payment item submitted successfully!
+						}else{
+							$err[] = 10; // Payment item did not submit and error occurred!
 						}
 					}
 				}
 			}
+
+			$msg = array_unique( $msg );
+			$err = array_unique( $err );
+			
 			$msg = implode( '-', $msg );
 			$err = implode( '-', $err );
 			$query_var = '';
@@ -843,15 +876,7 @@ function fjn_frontend_post(){
 				}
 				wp_redirect( $referer . $query_var );
 			}else{
-				$referer = $_POST['referrer'];
-				$referer = filter_var( $referer, FILTER_SANITIZE_URL );
-				if ( !filter_var( $referer, FILTER_VALIDATE_URL ) === false ){
-					$referer_arr = parse_url( $referer );
-					$home_url = parse_url( home_url() );
-					if( $referer_arr['host'] == $home_url['host'] )
-						$referer = strtok( $referer, '?' );
-						wp_redirect( $referer . $query_var );
-				}
+				wp_redirect( home_url() );
 			}
 			exit;
 		}
@@ -1565,7 +1590,7 @@ function fjn_payment_history( $post ){
 					</table>
 				</td>
 				<td class="w10">
-					<select id="approved" name="instalment[approved]">
+					<select id="approved" name="payment[approved]">
 						<option><?php _e( 'Select', 'fenjoon' );?></option><?php
 						foreach( $approved as $k => $c ){?>
 							<option value="<?php echo $k;?>"><?php echo $c;?></option><?php

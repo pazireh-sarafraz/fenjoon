@@ -24,7 +24,7 @@
 			</thead>
 			<tbody><?php
 			foreach( $results as $instalment ){?>
-				<tr class="instalment <?php echo( $instalment->passed ? 'passed' : '' );?>">
+				<tr class="instalment<?php echo( $instalment->passed ? ' bglightgreen' : '' );?>">
 					<td class="w15"><?php echo number_format( $instalment->amount );?></td>
 					<td class="w20"><?php echo ( function_exists( 'jdate' ) ? jdate( 'Y/m/d', $instalment->due ) : date( 'Y/m/d', $instalment->due ) );?></td>
 					<td class="w35" value="<?php echo( $instalment->concern ? $instalment->concern : 0 );?>"><?php echo( $instalment->concern ? $concern[ $instalment->concern ] : '' );?></td>

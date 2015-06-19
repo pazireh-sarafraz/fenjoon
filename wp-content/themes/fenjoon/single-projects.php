@@ -1,6 +1,14 @@
 <?php
-get_header();
-
+get_header();?>
+<div class="full backblue">
+	<div class="wrapper">
+		<div class="cols">
+			<div class="col col11">
+				<h1 class="paddingtb4"><?php _e( 'Fenjoon Group Website', 'fenjoon' );?></h1>
+			</div>
+		</div>
+	</div>
+</div><?php
 if( have_posts() ){
 	while( have_posts() ){
 		the_post();
@@ -25,8 +33,10 @@ if( have_posts() ){
 		$remaining_time = human_time_diff( current_time('timestamp') - $created + strtotime('+' . $total_time . 'days' ) );
 		//$remaining_time = $total_time - $elapsed_time;
 	}
-}
-
+}?>
+<div class="wrapper"><?php
+if( !empty( $project_code ) && current_user_can( 'edit_post', $project_id ) ){
+fjn_msg_reporting( $msg, $err );
 $project_arr = explode( '+', $project_str );
 $progress_arr = explode( '+', $progress_str );
 $done_arr = explode( '+', $done_str );
@@ -65,19 +75,7 @@ foreach( $statuses as $status ){
 $backcolor[ 'done' ] = 'backgreen';
 $backcolor[ 'inprogress' ] = 'backorange';
 $backcolor[ 'inqueue' ] = 'backred';
-?>
-
-<div class="full backblue">
-	<div class="wrapper">
-		<div class="cols">
-			<div class="col col11">
-				<h1 class="paddingtb4"><?php _e( 'Fenjoon Group Website', 'fenjoon' );?></h1>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="wrapper">
-	<?php get_sidebar( 'projects' );?><main class="main">
+	get_sidebar( 'projects' );?><main class="main">
 		<div class="cols">
 			<div class="col col23">
 				<div class="tile padding2">
@@ -128,15 +126,26 @@ $backcolor[ 'inqueue' ] = 'backred';
 						<h2 class="icon"><?php _e( 'Project instalments', 'fenjoon' );?></h2>
 						<?php get_template_part( 'parts/single-projects', 'instalments' );?>
 					</section>
-					<section class="section">
+					<section class="section mb2">
 						<h2 class="icon"><?php _e( 'Payment history', 'fenjoon' );?></h2>
 						<?php get_template_part( 'parts/single-projects', 'payments' );?>
+					</section>
+					<section class="section">
+						<h2 class="icon"><?php _e( 'Submit new payment', 'fenjoon' );?></h2>
+						<?php get_template_part( 'parts/single-projects', 'payment' );?>
 					</section>
 				</div>
 			</div>
 			</div><div class="col col13 last-child">
 			</div>
 		</div>
-	</main>
+	</main><?php
+}else{?>
+	<div class="cols">
+		<div class="col col11">
+			<div class="tile red padding1 size2 mb1"><?php echo $err[11];?></div>
+		</div>
+	</div><?php
+}?>
 </div><?php
 get_footer( 'projects' ); ?>

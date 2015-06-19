@@ -152,7 +152,7 @@ a, img, a:hover, img:hover{
 	color: #FFFFFF;
 }
 .backred{
-	background-color: #FF3A00;
+	background-color: #B95252;
 	color: #FFFFFF;
 }
 ul .right{
@@ -255,6 +255,12 @@ ul.indent{
 	background: #406E9F none repeat scroll 0% 0%;
 	color: #FFFFFF;
 }
+.tile.red{
+	border: 1px solid #B24A4A;
+  background-color: #B95252;
+	background: #B95252 none repeat scroll 0% 0%;
+	color: #FFFFFF;
+}
 .tile h1, .tile h2, .tile h3{
 	margin-top: 0;
 	margin-bottom: 0.7em;
@@ -263,7 +269,7 @@ ul.indent{
 	margin-top: 20px;
 }
 /******************************* Form *************************/
-input[type=color], input[type=date], input[type=datetime-local], input[type=datetime], input[type=email], input[type=month], input[type=number], input[type=password], input[type=search], input[type=tel], input[type=text], input[type=time], input[type=url], input[type=week], select, textarea{
+input[type=date], input[type=datetime-local], input[type=datetime], input[type=email], input[type=number], input[type=password], input[type=search], input[type=tel], input[type=text], input[type=time], input[type=url], select, textarea{
 	font-family: 'BKoodakBold';
 	vertical-align: baseline;
   display: block;
@@ -298,7 +304,6 @@ textarea {
 	line-height: 2;
   font-size: 1.3em;
   cursor: pointer;
-  box-shadow: 0 1px 0 rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.2),inset 0 -1px 0 rgba(0,0,0,.2);
   text-decoration: none;
   color: #FFFFFF;
 	-webkit-appearance: button;
@@ -325,6 +330,15 @@ th{
 table, td, th, tr{
   border: 1px solid #CDCDCD;
   border-collapse: collapse;
+}
+table.date, table.date td, table.date th, table.date tr{
+	border: none;
+}
+table.date input{
+	margin: 0;
+}
+tr.bglightgreen{
+	background-color: #CDFFB8;
 }
 /****************************** Icons ****************************/
 .icon:before{
@@ -396,7 +410,7 @@ and (min-width: 1100px){
 		text-decoration: none;
 		color: #444444;
 	}
-	.top .menu li a:hover{
+	.top .menu li a:hover, .top .menu li.current-menu-item a{
 		padding-top: 2px;
 		border-top: 6px solid #406E9F;
 		background-color: #EFEFEF;

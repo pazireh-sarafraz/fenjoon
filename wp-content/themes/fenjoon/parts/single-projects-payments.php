@@ -10,14 +10,14 @@
 			<thead>
 				<tr>
 					<th class="w15"><?php _e( 'Payment', 'fenjoon' );?></th>
-					<th class="w20"><?php _e( 'Date', 'fenjoon' );?></th>
+					<th class="w20"><?php _e( 'Payment date', 'fenjoon' );?></th>
 					<th class="w15"><?php _e( 'Pursuit', 'fenjoon' );?></th>
 					<th class="w20"><?php _e( 'Note', 'fenjoon' );?></th>
 				</tr>
 			</thead>
 			<tbody><?php
 			foreach( $results as $payment ){?>
-				<tr class="payment <?php echo( $payment->approved ? 'approved' : '' );?>">
+				<tr class="payment<?php echo( $payment->approved ? ' bglightgreen' : '' );?>">
 					<td class="w15"><?php echo number_format( $payment->pay );?></td>
 					<td class="w20"><?php echo ( function_exists( 'jdate' ) ? jdate( 'Y/m/d', $payment->date ) : date( 'Y/m/d', $payment->date ) );?></td>
 					<td class="w15"><?php echo $payment->pursuit;?></td>

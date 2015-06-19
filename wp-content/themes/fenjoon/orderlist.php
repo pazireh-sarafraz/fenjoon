@@ -2,8 +2,7 @@
 /*
 Template Name: Order list
 */
-get_header();
-$the_query = fjn_template_query( 'orders', $current_user->ID );?>
+get_header();?>
 <div class="full backblue">
 	<div class="wrapper">
 		<div class="cols">
@@ -13,14 +12,16 @@ $the_query = fjn_template_query( 'orders', $current_user->ID );?>
 		</div>
 	</div>
 </div>
-<div class="wrapper">
+<div class="wrapper"><?php
+if( !empty( $current_user->ID ) ){
+$the_query = fjn_template_query( 'orders', $current_user->ID );?>
 	<?php get_sidebar();?><main class="main">
 		<div class="cols">
 			<div class="col col11">
-				<div class="tile padding2"><?php
-					if( $the_query->have_posts() ){?>
+				<div class="tile padding2">
 					<section class="section">
-					<h2 class="icon size3 cart"><?php _e( 'List of your orders', 'fenjoon' );?></h2>
+					<h2 class="icon cart"><?php _e( 'List of your orders', 'fenjoon' );?></h2><?php
+					if( $the_query->have_posts() ){?>
 						<table>
 							<thead>
 								<tr>
@@ -55,9 +56,17 @@ $the_query = fjn_template_query( 'orders', $current_user->ID );?>
 					}else{
 						
 					}?>
+					</section>
 				</div>					
 			</div>					
 		</div>
-	</main>
+	</main><?php
+}else{?>
+		<div class="cols">
+			<div class="col col11">
+				<div class="tile red padding1 size2 mb1"><?php echo $err[11];?></div>
+			</div>
+		</div><?php
+}?>
 </div>
 <?php get_footer();?>

@@ -2,7 +2,16 @@
 /*
 Template Name: New order
 */
-get_header();
+get_header();?>
+<div class="full backblue">
+	<div class="wrapper">
+		<div class="cols">
+			<div class="col col11">
+				<h1 class="paddingtb4"><?php _e( 'Fenjoon Group Website', 'fenjoon' );?></h1>
+			</div>
+		</div>
+	</div>
+</div><?php
 $order_arr = array();
 $progress_arr = array();
 if( have_posts() ){
@@ -28,7 +37,10 @@ if( have_posts() ){
 			}
 		}
 	}
-}
+}?>
+<div class="wrapper"><?php
+if( ( !empty( $order_code ) && current_user_can( 'edit_post', $order_id ) ) || empty( $order_code ) ){
+fjn_msg_reporting( $msg, $err );
 
 if( $fenjoon_settings = get_option( 'fenjoon_settings' ) ){
 	$developer_count = $fenjoon_settings[ 'developer_count' ];
@@ -74,18 +86,7 @@ if( $the_query->have_posts() ){
 		}
 	}
 }
-?>
-<div class="full backblue">
-	<div class="wrapper">
-		<div class="cols">
-			<div class="col col11">
-				<h1 class="paddingtb4"><?php _e( 'Fenjoon Group Website', 'fenjoon' );?></h1>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="wrapper">
-	<?php get_sidebar( 'orders' );?><main class="main"><?php
+	get_sidebar( 'orders' );?><main class="main"><?php
 		if( $the_query->have_posts() ){
 			foreach( $order_sections as $key => $order_section ){
 				$post_type = get_post_type_object( $key );
@@ -165,6 +166,13 @@ if( $the_query->have_posts() ){
 					</div>
 				</div><?php
 		}?>
-	</main>
+	</main><?php
+}else{?>
+	<div class="cols">
+		<div class="col col11">
+			<div class="tile red padding1 size2 mb1"><?php echo $err[11];?></div>
+		</div>
+	</div><?php
+}?>
 </div><?php
 get_footer(); ?>

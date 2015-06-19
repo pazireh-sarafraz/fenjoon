@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Fenjoon\n"
-"POT-Creation-Date: 2015-06-19 00:27+0330\n"
-"PO-Revision-Date: 2015-06-19 00:28+0330\n"
+"POT-Creation-Date: 2015-06-19 08:15+0330\n"
+"PO-Revision-Date: 2015-06-19 08:16+0330\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fa_IR\n"
@@ -23,157 +23,220 @@ msgstr ""
 msgid "Project progress"
 msgstr "درصد پیشرفت پروژه"
 
-#: functions.php:69
+#: functions.php:70
 msgid "Top Menu"
 msgstr "منوی اصلی"
 
-#: functions.php:174 functions.php:175 functions.php:176 functions.php:189
+#: functions.php:173
+msgid "Order submitted successfully"
+msgstr "سفارش شما با موفقیت ثبت شد"
+
+#: functions.php:174
+msgid "Order updated successfully"
+msgstr "اطلاعات سفارش شما با موفقیت به روز رسانی شد"
+
+#: functions.php:175
+msgid "Payment item submitted successfully"
+msgstr ""
+"پرداخت شما با موفقیت ثبت شد. لطفا به منظور مشاهده نتیجه بررسی، طی 24 ساعت "
+"آینده به این صفحه مراجعه کنید"
+
+#: functions.php:180
+msgid "Title and Content incorrect"
+msgstr "قسمت‌های عنوان و جزئیات سفارش به طور صحیح پر نشده‌اند"
+
+#: functions.php:181
+msgid "Access denied. this operation is not permitted"
+msgstr "دسترسی غیر مجاز! شما مجاز به انجام این پردازش نیستید"
+
+#: functions.php:182
+msgid "Order did not submit and error occurred"
+msgstr "سفارش شما ثبت نشد. طی تلاش برای ثبت این سفارش خطایی رخ داد"
+
+#: functions.php:183
+msgid "Unknown error"
+msgstr "سیستم حین پردازش درخواست شما با خطای غیرمنتظره‌ای مواجه شد"
+
+#: functions.php:184
+msgid "Item in progress and cant be removed from order any more"
+msgstr ""
+"کار مربوط به برخی از گزینه‌هایی که از لیست سفارش حذف کردید آغاز شده و امکان "
+"حذف آن وجود ندارد"
+
+#: functions.php:185
+msgid "Order did not update and error occurred"
+msgstr ""
+"اطلاعات سفارش به روز رسانی نشد و طی به روز رسانی سفارش شما خطایی رخ داد"
+
+#: functions.php:186
+msgid "Date fields are not filled correctly"
+msgstr "فیلد تاریخ به درستی پر نشده است"
+
+#: functions.php:187
+msgid "Pursuit field should be filled correctly"
+msgstr "فیلد شماره پیگیری به درستی پر نشده است"
+
+#: functions.php:188
+msgid "Payment field should be filled correctly"
+msgstr "فیلد مبلغ به درستی پر نشده است"
+
+#: functions.php:189
+msgid "Payment item did not submit and error occurred"
+msgstr "پرداخت شما ثبت نشد. حین پردازش ثبت این پرداخت، خطای رخ داد"
+
+#: functions.php:190
+msgid "Access is restricted to members. Please register or login first"
+msgstr ""
+"دسترسی به این بخش از وبسایت مختص اعضا است. لطفا ابتدا ثبت نام کرده و یا با "
+"مشخصات کاربری خود وارد شوید"
+
+#: functions.php:221 functions.php:222 functions.php:223 functions.php:236
 msgid "General"
 msgstr "عمومی"
 
-#: functions.php:177
+#: functions.php:224
 msgid "Parent General"
 msgstr "آیتم عمومی اصلی"
 
-#: functions.php:178
+#: functions.php:225
 msgid "All General"
 msgstr "همه عمومی ها"
 
-#: functions.php:179
+#: functions.php:226
 msgid "View General"
 msgstr "مشاهده آیتم عمومی"
 
-#: functions.php:180
+#: functions.php:227
 msgid "Add New General"
 msgstr "افزودن آیتم عمومی"
 
-#: functions.php:181 functions.php:261
+#: functions.php:228 functions.php:308
 msgid "Add New"
 msgstr "افزودن"
 
-#: functions.php:182
+#: functions.php:229
 msgid "Edit General"
 msgstr "ویرایش آیتم عمومی"
 
-#: functions.php:183
+#: functions.php:230
 msgid "Update General"
 msgstr "به روز رسانی آیتم عمومی"
 
-#: functions.php:184
+#: functions.php:231
 msgid "Search General"
 msgstr "جستجوی آیتم های عمومی"
 
-#: functions.php:185 functions.php:265
+#: functions.php:232 functions.php:312
 msgid "Not found"
 msgstr "پیدا نشد"
 
-#: functions.php:186 functions.php:266
+#: functions.php:233 functions.php:313
 msgid "Not found in Trash"
 msgstr "در زباله دان پیدا نشد"
 
-#: functions.php:190
+#: functions.php:237
 msgid "General information for the site"
 msgstr "آیتم های عمومی وبسایت"
 
-#: functions.php:218
+#: functions.php:265
 msgid "General Field"
 msgstr "دسته آیتم های عمومی"
 
-#: functions.php:219
+#: functions.php:266
 msgid "Add New Field"
 msgstr "افزودن فیلد جدید"
 
-#: functions.php:220
+#: functions.php:267
 msgid "New Field"
 msgstr "فیلد جدید"
 
-#: functions.php:233
+#: functions.php:280
 msgid "Field"
 msgstr "دسته"
 
-#: functions.php:244
+#: functions.php:291
 msgid "Field not set!"
 msgstr "دسته نامشخص"
 
-#: functions.php:254 functions.php:255 functions.php:256 functions.php:269
+#: functions.php:301 functions.php:302 functions.php:303 functions.php:316
 #: home.php:130
 msgid "Portfolio"
 msgstr "نمونه کار"
 
-#: functions.php:257
+#: functions.php:304
 msgid "Parent Portfolio"
 msgstr "نمونه کار اصلی"
 
-#: functions.php:258
+#: functions.php:305
 msgid "All Portfolio"
 msgstr "همه نمونه کارها"
 
-#: functions.php:259
+#: functions.php:306
 msgid "View Portfolio"
 msgstr "مشاهده نمونه کار"
 
-#: functions.php:260
+#: functions.php:307
 msgid "Add New Portfolio"
 msgstr "افزودن نمونه کار"
 
-#: functions.php:262
+#: functions.php:309
 msgid "Edit Portfolio"
 msgstr "ویرایش نمونه کار"
 
-#: functions.php:263
+#: functions.php:310
 msgid "Update Portfolio"
 msgstr "به روز رسانی نمونه کار"
 
-#: functions.php:264
+#: functions.php:311
 msgid "Search Portfolio"
 msgstr "جستجوی نمونه کارها"
 
-#: functions.php:270
+#: functions.php:317
 msgid "Portfolio items"
 msgstr "نمونه کارها"
 
-#: functions.php:298
+#: functions.php:345
 msgid "Portfolio Cat"
 msgstr "دسته نمونه کارها"
 
-#: functions.php:299
+#: functions.php:346
 msgid "Add New Cat"
 msgstr "افزودن دسته جدید"
 
-#: functions.php:300
+#: functions.php:347
 msgid "New Cat"
 msgstr "دسته جدید"
 
-#: functions.php:317
+#: functions.php:364
 msgid "Portfolio Metadata"
 msgstr "اطلاعات تکمیلی نمونه کار"
 
-#: functions.php:334
+#: functions.php:381
 msgid "technology"
 msgstr "تکنولوژی"
 
-#: functions.php:344
+#: functions.php:391
 msgid "start"
 msgstr "تاریخ شروع"
 
-#: functions.php:354
+#: functions.php:401
 msgid "finish"
 msgstr "تاریخ اتمام"
 
-#: functions.php:364
+#: functions.php:411
 msgid "workforce"
 msgstr "نیروی کار"
 
-#: functions.php:374
+#: functions.php:421
 msgid "security"
 msgstr "امنیت"
 
-#: header.php:23
+#: header.php:26
 #, php-format
 msgid "Welcome dear user %s."
 msgstr "کاربر محترم %s خوش آمدید"
 
-#: home.php:6 orderlist.php:11 single-orders.php:82 single-projects.php:74
+#: home.php:6 orderlist.php:10 single-orders.php:10 single-projects.php:7
 msgid "Fenjoon Group Website"
 msgstr "طعم خوش وب با فنجون"
 
@@ -205,7 +268,7 @@ msgstr "آمار گروه فنجون"
 msgid "Activity duration"
 msgstr "مدت زمان فعالیت"
 
-#: home.php:96
+#: home.php:96 parts/single-projects-payment.php:11
 msgid "Year"
 msgstr "سال"
 
@@ -249,44 +312,44 @@ msgstr "متاسفانه پستی با این مشخصات پیدا نشد"
 msgid "List of your orders"
 msgstr "لیست سفارش‌های شما"
 
-#: orderlist.php:27
+#: orderlist.php:28
 msgid "Code"
 msgstr "شناسه"
 
-#: orderlist.php:28
+#: orderlist.php:29
 msgid "Title"
 msgstr "عنوان"
 
-#: orderlist.php:29 sidebar-orders.php:32 sidebar-orders.php:37
+#: orderlist.php:30 sidebar-orders.php:32 sidebar-orders.php:37
 #: sidebar-projects.php:32 sidebar-projects.php:37
 msgid "Date created"
 msgstr "ثبت"
 
-#: orderlist.php:30
+#: orderlist.php:31
 msgid "Date modified"
 msgstr "آخرین تغییر"
 
-#: orderlist.php:31
+#: orderlist.php:32
 msgid "Price"
 msgstr "قیمت"
 
-#: orderlist.php:32
+#: orderlist.php:33
 msgid "Time"
 msgstr "زمان"
 
-#: orderlist.php:33
+#: orderlist.php:34
 msgid "Status"
 msgstr "وضعیت"
 
-#: orderlist.php:50 sidebar-orders.php:64
+#: orderlist.php:51 sidebar-orders.php:64
 msgid "Project"
 msgstr "پروژه"
 
-#: orderlist.php:50
+#: orderlist.php:51
 msgid "Submitted"
 msgstr "ثبت شده"
 
-#: orderlist.php:50
+#: orderlist.php:51
 msgid "Checking"
 msgstr "بررسی"
 
@@ -316,7 +379,7 @@ msgstr "جریمه تأخیر پرداخت"
 
 #: parts/single-projects-instalments.php:20
 msgid "Amount"
-msgstr "مبلغ"
+msgstr "مبلغ (تومان)"
 
 #: parts/single-projects-instalments.php:21
 msgid "Due"
@@ -330,21 +393,33 @@ msgstr "بابت"
 msgid "This project has not any instalments yet."
 msgstr "این پروژه تا کنون هزینه‌ای نداشته است."
 
-#: parts/single-projects-payments.php:12
+#: parts/single-projects-payment.php:4 parts/single-projects-payments.php:12
 msgid "Payment"
 msgstr "پرداخت"
 
-#: parts/single-projects-payments.php:13
-msgid "Date"
-msgstr "تاریخ"
+#: parts/single-projects-payment.php:7
+msgid "Day"
+msgstr "روز"
 
-#: parts/single-projects-payments.php:14
+#: parts/single-projects-payment.php:9
+msgid "Month"
+msgstr "ماه"
+
+#: parts/single-projects-payment.php:14 parts/single-projects-payments.php:14
 msgid "Pursuit"
 msgstr "شماره پیگیری"
 
-#: parts/single-projects-payments.php:15
+#: parts/single-projects-payment.php:15 parts/single-projects-payments.php:15
 msgid "Note"
 msgstr "شرح"
+
+#: parts/single-projects-payment.php:26
+msgid "Submit payment"
+msgstr "ثبت پرداخت"
+
+#: parts/single-projects-payments.php:13
+msgid "Payment date"
+msgstr "تاریخ پرداخت"
 
 #: parts/single-projects-payments.php:30
 msgid "This project has not any payments yet."
@@ -366,8 +441,8 @@ msgstr "شناسه"
 msgid "Correction"
 msgstr "تغییر"
 
-#: sidebar-orders.php:48 sidebar-projects.php:48 single-orders.php:133
-#: single-orders.php:134
+#: sidebar-orders.php:48 sidebar-projects.php:48 single-orders.php:134
+#: single-orders.php:135
 msgid "Toman"
 msgstr "تومان"
 
@@ -387,7 +462,7 @@ msgstr "راهنما"
 msgid "Selected"
 msgstr "انتخاب شده"
 
-#: sidebar-orders.php:74 single-projects.php:34
+#: sidebar-orders.php:74 single-projects.php:44
 msgid "In progress"
 msgstr "در دست اجرا"
 
@@ -423,61 +498,68 @@ msgstr "یک سفارش جدید ثبت کنید!"
 msgid "Register new order"
 msgstr "ثبت سفارش جدید"
 
-#: single-orders.php:131
+#: single-orders.php:132
 msgid "Sum"
 msgstr "جمع"
 
-#: single-orders.php:145
+#: single-orders.php:146
 msgid "Complementary information"
 msgstr "اطلاعات تکمیلی"
 
-#: single-orders.php:147
+#: single-orders.php:148
 msgid "Order title"
 msgstr "عنوان سفارش"
 
-#: single-orders.php:152
+#: single-orders.php:153
 msgid "Order detail"
 msgstr "جزئیات سفارش"
 
-#: single-orders.php:162
+#: single-orders.php:163
 msgid "Submit order"
 msgstr "ثبت سفارش"
 
-#: single-orders.php:162
+#: single-orders.php:163
 msgid "Update order"
 msgstr "به روز رسانی سفارش"
 
-#: single-projects.php:34
+#: single-projects.php:44
 msgid "Done"
 msgstr "انجام شده"
 
-#: single-projects.php:34
+#: single-projects.php:44
 msgid "In queue"
 msgstr "در صف شروع"
 
-#: single-projects.php:85
+#: single-projects.php:83
 msgid "Project status"
 msgstr "وضعیت پروژه"
 
-#: single-projects.php:106
+#: single-projects.php:104
 msgid "Project summary"
 msgstr "خلاصه پروژه"
 
-#: single-projects.php:111
+#: single-projects.php:109
 msgid "Elapsed time"
 msgstr "سپرسی شده"
 
-#: single-projects.php:117
+#: single-projects.php:115
 msgid "Remaining time"
 msgstr "باقی مانده"
 
-#: single-projects.php:128
+#: single-projects.php:126
 msgid "Project instalments"
 msgstr "هزینه‌های پروژه"
 
-#: single-projects.php:132
+#: single-projects.php:130
 msgid "Payment history"
 msgstr "سابقه پرداخت‌های این پروژه"
+
+#: single-projects.php:134
+msgid "Submit new payment"
+msgstr "ثبت پرداخت جدید"
+
+#~ msgid "Date"
+#~ msgstr "تاریخ پرداخت"
 
 #~ msgid "New order"
 #~ msgstr "ثبت سفارش"
