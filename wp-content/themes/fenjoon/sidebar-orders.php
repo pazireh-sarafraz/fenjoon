@@ -8,10 +8,10 @@ if( !empty( $order_code ) && file_exists( THEME_DIR . '/tcpdf/tcpdf_barcodes_2d.
 <aside class="aside">
 	<div class="cols">
 		<div class="col11">
-			<div class="tile padding1 mb2">
+			<div class="tile p1 mb2">
 				<?php get_search_form();?>
 			</div>
-			<div class="tile padding2 green mb2">
+			<div class="tile p2 green mb2">
 				<p class="center size3 mb2"><?php
 					if( !empty( $title ) ){
 						echo $title;
@@ -52,19 +52,19 @@ if( !empty( $order_code ) && file_exists( THEME_DIR . '/tcpdf/tcpdf_barcodes_2d.
 						<span class="left"><?php _e( 'Days', 'fenjoon' );?></span>
 					</li><?php
 					if( !empty( $barcodeobj ) ){?>
-						<li class="mt1 center"><?php
+						<li class="mt1 center mhidden"><?php
 							echo $barcodeobj->getBarcodeHTML();?>
 						</li><?php
 					}?>
 				</ul>
 			</div><?php
 			if( !empty( $project_id ) ){?>
-			<div class="tile padding2 blue mb2">
+			<div class="tile p2 blue mb2">
 				<p class="center size3 mb2"><?php _e( 'Related project', 'fenjoon' );?></p>
 				<a class="button green" title="<?php the_title_attribute( array( 'post' => $project_id ) ); ?>" href="<?php echo get_permalink( $project_id );?>"><?php _e( 'Project', 'fenjoon' );?></a>
 			</div><?php
 			}?>
-			<div class="tile padding2 mb2">
+			<div class="tile p2 mb2">
 				<p class="center size3 mb2"><?php _e( 'Help', 'fenjoon' );?></p>
 				<ul>
 					<li class="icon size3 green checkbox checked">

@@ -8,10 +8,10 @@ if( !empty( $project_code ) && file_exists( THEME_DIR . '/tcpdf/tcpdf_barcodes_2
 <aside class="aside">
 	<div class="cols">
 		<div class="col11">
-			<div class="tile padding1 mb2">
+			<div class="tile p1 mb2">
 				<?php get_search_form();?>
 			</div>
-			<div class="tile padding2 green mb2">
+			<div class="tile p2 green mb2">
 				<p class="center size3 mb2"><?php
 					if( !empty( $title ) ){
 						echo $title;
@@ -59,12 +59,12 @@ if( !empty( $project_code ) && file_exists( THEME_DIR . '/tcpdf/tcpdf_barcodes_2
 				</ul>
 			</div><?php
 			if( !empty( $order_id ) ){?>
-			<div class="tile padding2 blue mb2">
+			<div class="tile p2 blue mb2">
 				<p class="center size3 mb2"><?php _e( 'Related order', 'fenjoon' );?></p>
 				<a class="button green" title="<?php the_title_attribute( array( 'post' => $order_id ) ); ?>" href="<?php echo get_permalink( $order_id );?>"><?php _e( 'Order', 'fenjoon' );?></a>
 			</div><?php
 			}?>
-			<div class="tile padding2 mb2">
+			<div class="tile p2 mb2">
 				<p class="center size3 mb2"><?php _e( 'Help', 'fenjoon' );?></p>
 				<ul>
 					<li class="icon size3 modules">

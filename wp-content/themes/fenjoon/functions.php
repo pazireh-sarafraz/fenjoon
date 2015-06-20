@@ -64,6 +64,28 @@ function fjn_thumb_sizes() {
 }
 add_action( 'after_setup_theme', 'fjn_thumb_sizes' );
 //******************************************
+// full tiny mce editor
+//******************************************
+function fjn_enable_more_buttons( $buttons ){
+	$buttons[] = 'fontselect';
+	$buttons[] = 'fontsizeselect';
+	$buttons[] = 'styleselect';
+	$buttons[] = 'backcolor';
+	$buttons[] = 'newdocument';
+	$buttons[] = 'cut';
+	$buttons[] = 'copy';
+	$buttons[] = 'charmap';
+	$buttons[] = 'hr';
+	$buttons[] = 'visualaid';
+	return $buttons;
+}
+add_filter( 'mce_buttons_3', 'fjn_enable_more_buttons' );
+function fjn_formatTinyMCE( $in ){
+	$in['wordpress_adv_hidden'] = FALSE;
+	return $in;
+}
+add_filter( 'tiny_mce_before_init', 'fjn_formatTinyMCE' );
+//******************************************
 // register menu
 //******************************************
 function fjn_register_menu() {
@@ -77,8 +99,8 @@ function fjn_wp_nav_menu( $loc ){
 		'theme_location'  => $loc,
 		'menu'            => $menu,
 		'container'       => 'nav',
-		'container_class' => $loc,
-		'container_id'    => '',
+		'container_class' => $loc . ' mhidden',
+		'container_id'    => $loc . '_menu',
 		'menu_class'      => 'menu',
 		'menu_id'         => '',
 		'echo'            => true,
@@ -93,6 +115,13 @@ function fjn_wp_nav_menu( $loc ){
 	);
 	wp_nav_menu( $args );
 }
+
+function fjn_add_classes_on_li( $classes, $item, $args ){
+  $classes = array_diff( $classes, array( 'menu-item-type-custom', 'menu-item-object-custom', 'menu-item', 'menu-item-type-post_type', 'menu-item-object-page', 'page_item', 'current_page_item' ) );
+	//$classes[] = 'icon';
+  return $classes;
+}
+add_filter( 'nav_menu_css_class', 'fjn_add_classes_on_li', 1, 3 );
 //******************************************
 // Custom classes for menu items
 //******************************************
@@ -122,49 +151,33 @@ add_filter( 'wp_nav_menu_objects', 'fjn_filter_menu_class', 10, 2 );
 //******************************************
 // Template functions
 //******************************************
-function fjn_template_query( $cpt, $user_id = null ){
-	if( 'orders' == $cpt ){
-		$args = array(
-			'post_type'				=> 'orders',
-			'post_status'			=> array( 'publish', 'pending' ),
-			'posts_per_page'	=> -1,
-			'orderby'					=> 'date',
-			'order'						=> 'DESC',
-			'author'					=> $user_id
-		);
-	}elseif( 'general' == $cpt ){
-		$args = array(
-			'post_type'				=> 'general',
-			'post_status'			=> 'publish',
-			'posts_per_page'	=> -1,
-			'orderby'					=> 'title',
-			'order'						=> 'ASC',
-			'tax_query'				=> array(
+function fjn_template_query( $params ){
+	$args = array(
+		'posts_per_page'	=> -1,
+		'post_status'			=> 'publish',
+		'orderby'					=> 'title',
+		'order'						=> 'ASC'
+	);
+	if( array_key_exists( 'post_type', $params ) ){
+		$cpt = $params[ 'post_type' ];
+		$args[ 'post_type' ] = $cpt;
+		if( 'orders' == $cpt ){
+			$args[ 'post_status' ]	= array( 'publish', 'pending' );
+			$args[ 'orderby']				= 'date';
+			$args[ 'order' ]				= 'DESC';
+		}elseif( 'general' == $cpt ){
+			$args[ 'tax_query' ]	= array(
 				'relation'			=> 'OR',
 				array(
 					'taxonomy'		=> 'field',
 					'field'				=> 'slug',
 					'terms'				=> array( 'about', 'difference', 'offered-services', 'unoffered-services', 'responsibility' )
 				)
-			)
-		);
-	}elseif( 'portfolio' == $cpt ){
-		$args = array(
-			'post_type'				=> 'portfolio',
-			'post_status'			=> 'publish',
-			'posts_per_page'	=> -1,
-			'orderby'					=> 'title',
-			'order'						=> 'ASC'
-		);
-	}elseif( is_array( $cpt ) && array_key_exists( 'post_type', $cpt ) ){
-		$args = array(
-			'post_type'				=> $cpt[ 'post_type' ],
-			'post_status'			=> 'publish',
-			'posts_per_page'	=> -1,
-			'orderby'					=> 'menu_order',
-			'order'						=> 'ASC'
-		);
+			);
+		}
 	}
+	if( array_key_exists( 'user', $params ) ) $args[ 'user' ] = $params[ 'user' ];
+	if( array_key_exists( 'tag', $params ) ) $args[ 'tag' ] = $params[ 'tag' ];
 	$the_query = new WP_Query( $args );
 	return $the_query;
 }
@@ -200,7 +213,7 @@ function fjn_msg_reporting( $msg, $err ){
 		$e = explode( '-', $e );
 		$e = array_unique( $e );
 		foreach( $e as $item ){
-			$content .= '<div class="alert tile red padding1 size2 mb1">'. $err[$item] .'</div>';
+			$content .= '<div class="alert tile red p1 size2 mb1">'. $err[$item] .'</div>';
 		}
 	}
 	$m = $_GET['msg'];
@@ -208,7 +221,7 @@ function fjn_msg_reporting( $msg, $err ){
 		$m = explode( '-', $m );
 		$m = array_unique( $m );
 		foreach( $m as $item ){
-			$content .= '<div class="alert tile green padding1 size2 mb1">'. $msg[$item] .'</div>';
+			$content .= '<div class="alert tile green p1 size2 mb1">'. $msg[$item] .'</div>';
 		}
 	}
 	$output .= $content . '</div>';
@@ -238,7 +251,7 @@ function cpt_general(){
 		'description'         => __( 'General information for the site', 'fenjoon' ),
 		'labels'              => $labels,
 		'supports'            => array( 'title', 'editor', 'thumbnail' ),
-		'taxonomies'          => array(),
+		'taxonomies'          => array( 'post_tag' ),
 		'hierarchical'        => false,
 		'public'              => true,
 		'show_ui'             => true,

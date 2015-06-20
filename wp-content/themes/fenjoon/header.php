@@ -13,24 +13,24 @@
 </head>
 <body>
 <header><?php
-global $msg, $err;
-$msg = fjn_messages();
-$err = fjn_errors();
-if( is_user_logged_in() ){
-global $current_user;
-?>
-<div class="full backblue">
-	<div class="wrapper">
-		<div class="cols">
-			<div class="col col11">
-				<p class="paddingtb1"><?php printf( __( 'Welcome dear user %s.', 'fenjoon' ), $current_user->display_name );?></p>
+	global $msg, $err;
+	$msg = fjn_messages();
+	$err = fjn_errors();
+	global $current_user;?>
+	<div class="full backblue">
+		<div class="wrapper">
+			<div class="cols mb0">
+				<div class="col col11">
+					<div id="menu_box" class="icon menu ib vam size30 dhidden"></div><p class="ib ptb1"><?php 
+					if( is_user_logged_in() ){
+						printf( __( 'Welcome %s.', 'fenjoon' ), $current_user->display_name );
+					}else{
+						_e( 'Welcome guest', 'fenjoon' );						
+					}?></p>
+					<div class="icon home left vam size30"></div>
+				</div>
 			</div>
 		</div>
-	</div>
-</div><?php	
-}?>
-	<div class="banner" role="banner">
-	
 	</div>
 	<div class="navigation" role="navigation">
 		<div class="wrapper">
@@ -38,3 +38,12 @@ global $current_user;
 		</div>
 	</div>
 </header>
+<div class="full backblue mhidden">
+	<div class="wrapper">
+		<div class="cols">
+			<div class="col col11">
+				<h1 class="ptb4"><?php _e( 'Fenjoon Group Website', 'fenjoon' );?></h1>
+			</div>
+		</div>
+	</div>
+</div>

@@ -2,16 +2,7 @@
 /*
 Template Name: New order
 */
-get_header();?>
-<div class="full backblue">
-	<div class="wrapper">
-		<div class="cols">
-			<div class="col col11">
-				<h1 class="paddingtb4"><?php _e( 'Fenjoon Group Website', 'fenjoon' );?></h1>
-			</div>
-		</div>
-	</div>
-</div><?php
+get_header();
 $order_arr = array();
 $progress_arr = array();
 if( have_posts() ){
@@ -53,8 +44,7 @@ if( $fenjoon_settings = get_option( 'fenjoon_settings' ) ){
 }
 $daily_man_power = ( 0 != ( $developer_count * $daily_work_hours ) ) ? ( $developer_count * $daily_work_hours ) : 1;
 $choice_sections = array( 'sitetypes', 'modules', 'features', 'standards' );
-$cpt = array( 'post_type' => $choice_sections );
-$the_query = fjn_template_query( $cpt );
+$the_query = fjn_template_query( array( 'post_type' => $choice_sections ) );
 if( $the_query->have_posts() ){
 	$order_sections = array();
 	foreach( $choice_sections as $choice_section){
@@ -93,7 +83,7 @@ if( $the_query->have_posts() ){
 				if( $post_type && !empty( $order_section ) ){?>
 				<div class="cols <?php if( 'sitetypes' != $key ) echo 'post_type';?>">
 					<div class="col col23">
-						<div class="tile padding2">
+						<div class="tile p2">
 							<section class="section">
 								<h2 class="icon <?php echo $post_type->name;?>"><?php echo $post_type->label;?></h2>
 								<ul><?php
@@ -111,9 +101,9 @@ if( $the_query->have_posts() ){
 										if( !empty( $children[ $choice_id ] ) ){
 											$coselected = get_post_meta( $choice_id, 'coselected_children', 1 );
 											?>
-											<ul class="indent"><?php
+											<ul class="pr3"><?php
 												foreach( $children[ $choice_id ] as $child_id ){?>
-													<li class="icon green option size1 checkbox <?php echo (in_array( $choice_id, $order_arr ) ? 'checked' : 'unchecked');?> <?php echo (in_array( $choice_id, $progress_arr ) ? 'started' : '');?> children<?php echo $choice_id; echo( in_array( $child_id, explode( ',', $coselected ) ) ? ' coselection' : '' );?>" value="<?php echo $child_id;?>" id="option<?php echo $child_id;?>" <?php if( 'sitetypes' != $key ){
+													<li class="icon green option size2 checkbox <?php echo (in_array( $choice_id, $order_arr ) ? 'checked' : 'unchecked');?> <?php echo (in_array( $choice_id, $progress_arr ) ? 'started' : '');?> children<?php echo $choice_id; echo( in_array( $child_id, explode( ',', $coselected ) ) ? ' coselection' : '' );?>" value="<?php echo $child_id;?>" id="option<?php echo $child_id;?>" <?php if( 'sitetypes' != $key ){
 											echo( $order_sections[ $key ][ $child_id ][ 'workforce' ] ? ' workforce="' . $order_sections[ $key ][ $child_id ][ 'workforce' ] . '"' : '' );
 										}?>><?php echo $order_sections[ $key ][ $child_id ]['title'];?>
 														<p class="description hidden"><?php echo $order_sections[ $key ][ $child_id ]['description'];?></p>
@@ -126,9 +116,9 @@ if( $the_query->have_posts() ){
 								</ul>
 							</section>
 						</div>
-					</div><div class="col col13 last-child">
 						<?php if( 'sitetypes' != $key ){?>
-						<div class="tile padding2">
+					</div><div class="col col13 last-child">
+						<div class="tile p2">
 							<p class="center size5"><?php _e( 'Sum', 'fenjoon' ); echo ' ' . $post_type->label;?></p>
 							<ul>
 								<li class="icon green size5 align-right"><span class="your_pt_price ib">0</span><span class="left"><?php _e( 'Toman', 'fenjoon' );?></span></li>
@@ -142,7 +132,7 @@ if( $the_query->have_posts() ){
 			}?>
 				<div class="cols">
 					<div class="col col23">
-						<div class="tile padding2">
+						<div class="tile p2">
 							<h2><?php _e( 'Complementary information', 'fenjoon' );?></h2>
 							<form id="new_order" action="<?php echo site_url(); ?>/" method="post">
 								<input type="text" name="title" value="<?php if( !empty( $order_code ) && !empty( $title ) ) echo $title;?>" placeholder="<?php _e( 'Order title', 'fenjoon' );?>"><?php
@@ -170,7 +160,7 @@ if( $the_query->have_posts() ){
 }else{?>
 	<div class="cols">
 		<div class="col col11">
-			<div class="tile red padding1 size2 mb1"><?php echo $err[11];?></div>
+			<div class="tile red p1 size2 mb1"><?php echo $err[11];?></div>
 		</div>
 	</div><?php
 }?>

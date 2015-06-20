@@ -13,6 +13,9 @@
  *
  * @package WordPress
  */
+//define('WP_HOME','http://192.168.1.2/fenjoon');
+//define('WP_SITEURL','http://192.168.1.2/fenjoon');
+ 
 define('WP_POST_REVISIONS', false);
 define( 'AUTOSAVE_INTERVAL', 3600 ); // Default is 60
 //define( WP_DEBUG, true );

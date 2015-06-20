@@ -12,6 +12,7 @@ if( current_user_can( 'edit_post', $project_id ) && !empty( $workforce_values ) 
 	?>
 	<script>
 	window.onload = function(){
+		menu_box();
 		msg_reporting();
 		var g1 = new JustGage({
 			id: 'g1', 

@@ -113,7 +113,7 @@ function switch_radio( radio ){
 	}
 }
 
-window.onload = function(){
+function order_onload(){
   var alerts = document.getElementById('alerts');
   if (alerts) {
     var alert = alerts.getElementsByClassName('alert');

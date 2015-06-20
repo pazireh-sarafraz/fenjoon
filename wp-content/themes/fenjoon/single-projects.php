@@ -1,14 +1,5 @@
 <?php
-get_header();?>
-<div class="full backblue">
-	<div class="wrapper">
-		<div class="cols">
-			<div class="col col11">
-				<h1 class="paddingtb4"><?php _e( 'Fenjoon Group Website', 'fenjoon' );?></h1>
-			</div>
-		</div>
-	</div>
-</div><?php
+get_header();
 if( have_posts() ){
 	while( have_posts() ){
 		the_post();
@@ -78,7 +69,7 @@ $backcolor[ 'inqueue' ] = 'backred';
 	get_sidebar( 'projects' );?><main class="main">
 		<div class="cols">
 			<div class="col col23">
-				<div class="tile padding2">
+				<div class="tile p2">
 					<section class="section">
 						<h2 class="icon"><?php _e( 'Project status', 'fenjoon' );?></h2><?php
 						foreach( $titles_sorted as $status => $status_titles ){?>
@@ -97,7 +88,7 @@ $backcolor[ 'inqueue' ] = 'backred';
 					</section>
 				</div>
 			</div><div class="col col13 last-child">
-				<div class="tile padding2"><?php
+				<div class="tile p2"><?php
 				if( !empty( $workforce_values ) ){?>
 					<div id="g1" style="width:100X;"></div><?php
 				}?>
@@ -121,7 +112,7 @@ $backcolor[ 'inqueue' ] = 'backred';
 		</div>
 		<div class="cols">
 			<div class="col col23">
-				<div class="tile padding2">
+				<div class="tile p2">
 					<section class="section mb2">
 						<h2 class="icon"><?php _e( 'Project instalments', 'fenjoon' );?></h2>
 						<?php get_template_part( 'parts/single-projects', 'instalments' );?>
@@ -143,7 +134,7 @@ $backcolor[ 'inqueue' ] = 'backred';
 }else{?>
 	<div class="cols">
 		<div class="col col11">
-			<div class="tile red padding1 size2 mb1"><?php echo $err[11];?></div>
+			<div class="tile red p1 size2 mb1"><?php echo $err[11];?></div>
 		</div>
 	</div><?php
 }?>

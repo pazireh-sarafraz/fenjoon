@@ -1,111 +1,36 @@
 <?php get_header();?>
-<div class="full backblue">
-	<div class="wrapper">
-		<div class="cols">
-			<div class="col col11">
-				<h1 class="paddingtb4"><?php _e( 'Fenjoon Group Website', 'fenjoon' );?></h1>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="wrapper">
-	<main class="main full"><?php
-	$second_query = fjn_template_query( 'general' );
-	if( $second_query->have_posts() ){?>
-		<div class="cols">
-			<div class="col col12">
-				<div class="tile padding2">
-					<section>
-						<h2><?php _e( 'About us', 'fenjoon' );?></h2>
-						<ul><?php
-							while( $second_query->have_posts() ){
-								$second_query->the_post(); 
-								if( has_term( 'about', 'field' ) ){?>
-									<li class="icon pencil blue"><?php the_title(); ?></li><?php
-								}
-							}?>
-						</ul>
-					</section>
-				</div><?php rewind_posts();?>					
-			</div><div class="col col12 last-child">
-				<div class="tile padding2">
-					<section>
-						<h2><?php _e( 'Our difference', 'fenjoon' );?></h2>
-						<ul><?php
-							while( $second_query->have_posts() ){
-								$second_query->the_post(); 
-								if( has_term( 'difference', 'field' ) ){?>
-									<li class="icon checkmark green"><?php the_title(); ?></li><?php
-								}
-							}?>
-						</ul>
-					</section>
-				</div><?php rewind_posts();?>
-			</div>
-		</div>
-		
-		<div class="cols">
-			<div class="col col12">
-				<div class="tile padding2">
-					<section>
-						<h2><?php _e( 'Services we offer', 'fenjoon' );?></h2>
-						<ul><?php
-							while( $second_query->have_posts() ){
-								$second_query->the_post(); 
-								if( has_term( 'offered-services', 'field' ) ){?>
-									<li class="icon checkmark green"><?php the_title(); ?></li><?php
-								}
-							}?>
-						</ul>
-					</section>
-				</div><?php rewind_posts();?>
-			</div><div class="col col12 last-child">
-				<div class="tile padding2">
-					<section>
-						<h2><?php _e( 'Services we do not offer', 'fenjoon' );?></h2>
-						<ul><?php
-							while( $second_query->have_posts() ){
-								$second_query->the_post(); 
-								if( has_term( 'unoffered-services', 'field' ) ){?>
-									<li class="icon cross red"><?php the_title(); ?></li><?php
-								}
-							}?>
-						</ul>
-					</section>
-				</div><?php rewind_posts();?>
-				<div class="tile  padding2 tilestack">
-					<section>
-						<h2><?php _e( 'Public responsibility', 'fenjoon' );?></h2><?php
-						while ($second_query->have_posts()){
-							$second_query->the_post(); 
-							if( has_term( 'responsibility', 'field' ) ){?>
-								<p><?php the_title(); ?></p><?php
-							}
-						}?>
-					</section><?php rewind_posts();wp_reset_postdata();?>
+<div class="wrapper"><?php
+	get_sidebar();?><main class="main"><?php
+	$second_query = fjn_template_query( array( 'post_type' => 'general' ) );
+	if( $second_query->have_posts() ){
+		$term_ids = array( 'about' => '', 'difference' => '', 'offered-services' => '', 'unoffered-services' => '', 'responsibility' => '' );
+		$title = array( 'about' => __( 'About us', 'fenjoon' ), 'difference' => __( 'Our difference', 'fenjoon' ), 'offered-services' => __( 'Services we offer', 'fenjoon' ), 'unoffered-services' => __( 'Services we do not offer', 'fenjoon' ), 'responsibility' => __( 'Public responsibility', 'fenjoon' ) );
+		foreach( $term_ids as $term => $id ){
+			$t = get_term_by( 'slug', $term, 'field' );?>
+			<div class="cols">
+				<div class="col col23">
+					<div class="tile p2">
+						<section>
+							<h2><?php echo $title[ $term ];?></h2>
+							<ul><?php
+								while( $second_query->have_posts() ){
+									$second_query->the_post(); 
+									if( has_term( $term, 'field' ) ){?>
+										<li class="icon blue <?php echo $term;?>"><?php the_title(); ?></li><?php
+									}
+								}?>
+							</ul>
+						</section>
+					</div><?php rewind_posts();?>					
+				</div><div class="col col13 last-child">
+					<div class="tile p2">
+						<div class="icon center blue <?php echo $term;?> size50 mtb2"></div>
+						<p class="justify"><?php echo strtok( strip_tags( term_description( $t->term_id, 'field' ) ), '.' ) . '.';?></p>
+						<a class="button green mtb1" title="<?php echo $title[ $term ]; ?>" href="<?php echo home_url( $term );?>"><?php _e( 'Say more', 'fenjoon' );?></a>
+					</div>
 				</div>
-			</div>
-		</div>
-	
-		<div class="cols">
-			<div class="col col12">
-				<div class="tile padding2">
-					<section>
-						<h2><?php _e( 'Our statistics', 'fenjoon' );?></h2>
-						<ul>
-							<li class="large icon calendar blue"><?php _e( 'Activity duration', 'fenjoon' );?><span class="left">2 <?php _e( 'Year', 'fenjoon' );?></span></li>
-							<li class="large icon man-woman blue"><?php _e( 'Number of customers', 'fenjoon' );?><span class="left">18 <?php _e( 'Person', 'fenjoon' );?></span></li>
-							<li class="large icon fire blue"><?php _e( 'Number of designed and developed websites', 'fenjoon' );?><span class="left">30 <?php _e( 'Website', 'fenjoon' );?></span></li>
-							<li class="large icon power blue"><?php _e( 'Number of designed and developed web applications', 'fenjoon' );?><span class="left">5 <?php _e( 'Web application', 'fenjoon' );?></span></li>
-						</ul>
-					</section>
-				</div>
-			</div><div class="col col12 last-child">
-				<div class="tile padding2">
-
-				</div>
-			</div>
-		</div><?php
+			</div><?php
+		}
 	}?>
 	</main>
 </div>
@@ -113,7 +38,7 @@
 	<div class="wrapper">
 		<div class="cols">
 			<div class="col col11">
-				<p class="size5 paddingtb4"><?php
+				<p class="size5 ptb4"><?php
 					_e( 'Push this new order button right now!', 'fenjoon' );?>
 				</p>
 			</div>
@@ -122,14 +47,14 @@
 </div>
 <div class="wrapper">
 	<div class="main full"><?php
-	$third_query = fjn_template_query( 'portfolio' );
+	$third_query = fjn_template_query( array( 'post_type' => 'portfolio' ) );
 	if ($third_query->have_posts()){
 		?>
 		<div class="cols">
 			<section>
 				<h2><?php _e( 'Portfolio', 'fenjoon' );?></h2>
 				<div class="row hightop">
-					<div class="col col14 tile padding2"><?php
+					<div class="col col14 tile p2"><?php
 					while ($third_query->have_posts()){ $third_query->the_post();
 						$metadata = get_post_meta( $post->ID );?>
 						<a class="thumb" href="<?php the_permalink();?>" title="<?php the_title_attribute(); ?>"><?php
@@ -149,9 +74,9 @@
 						}?>
 						</ul><?php
 						if( ( $third_query->current_post + 2 ) < ( $third_query->post_count ) ){?>
-							</div><!-- --><div class="col col14 tile padding2"><?php						
+							</div><!-- --><div class="col col14 tile p2"><?php						
 						}elseif( ( $third_query->current_post + 2 ) == ( $third_query->post_count ) ){?>
-							</div><!-- --><div class="col col14 tile padding2 last-child"><?php						
+							</div><!-- --><div class="col col14 tile p2 last-child"><?php						
 						}
 					}?>
 					</div>
@@ -162,5 +87,4 @@
 	</div>
 </div>
 <?php rewind_posts();
-get_footer();
-?>
+get_footer();?>
