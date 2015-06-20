@@ -373,22 +373,32 @@ textarea {
   vertical-align: middle;
   width: 100%;
   border-radius: 2px;
-  text-align: center;
-	line-height: 2;
-  font-size: 1.3em;
   cursor: pointer;
+	line-height: 2;
+  text-align: center;
+  font-size: 1.3em;
   text-decoration: none;
+	text-shadow: -1px -1px 0 rgba(0,0,0,0.2);
   color: #FFFFFF;
+  -webkit-transition: background-color 0.3s linear;
+	-moz-transition: background-color 0.3s linear;
+  -o-transition: background-color 0.3s linear;
+	-ms-transition: background-color 0.3s linear;
+  transition: background-color 0.3s linear;
 }
 .button.green{
-  background-image: -webkit-linear-gradient(270deg,#7fb952  0,#7fb952  20%,#26b732 100%);
-  background-image: linear-gradient(180deg,#7fb952  0,#7fb952  20%,#7fb952  100%);
+	border: 1px solid #669442;
   background-color: #7fb952 ;
 }
+.button.green:hover{
+  background-color: #72A64A ;
+}
 .button.blue{
-  background-image: -webkit-linear-gradient(270deg,#406E9F  0,#406E9F  20%,#1387D7 100%);
-  background-image: linear-gradient(180deg,#406E9F  0,#406E9F  20%,#406E9F  100%);
+	border:1px solid #3A638F;
   background-color: #406E9F ;
+}
+.button.blue:hover{
+  background-color: #537CA9 ;
 }
 .button.link{
 	width: auto;
