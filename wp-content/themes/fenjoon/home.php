@@ -37,10 +37,11 @@
 <div class="full backgreen">
 	<div class="wrapper">
 		<div class="cols">
-			<div class="col col11">
-				<p class="size5 ptb4"><?php
+			<div class="col col11 center">
+				<p class="size5 mt3 mb2"><?php
 					_e( 'Push this new order button right now!', 'fenjoon' );?>
 				</p>
+				<a class="button link blue prl2 mb3" href="<?php echo home_url( 'order' );?>"><?php _e( 'Register new order', 'fenjoon' );?></a>
 			</div>
 		</div>
 	</div>

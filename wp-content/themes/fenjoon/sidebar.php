@@ -13,8 +13,8 @@ $projects = wp_count_posts( 'projects' );
 					<p class="center size3 mb2"><?php _e( 'Submit a new order!', 'fenjoon' );?></p>
 					<a class="button green" href="<?php echo home_url( 'order' );?>"><?php _e( 'Register new order', 'fenjoon' );?></a>
 				</div>
-				<div class="tile p2">
-					<p class="center size3"><?php _e( 'Our statistics', 'fenjoon' );?></p>
+				<div class="tile p2 mb2">
+					<p class="center size3 mb1"><?php _e( 'Our statistics', 'fenjoon' );?></p>
 					<ul>
 						<li class="large icon calendar blue"><?php _e( 'Activity start', 'fenjoon' );?><span class="left"><?php _e( 'Year', 'fenjoon' );?> 1389</span></li><?php
 						if( $users['avail_roles']['contributor'] ){?>

@@ -165,6 +165,15 @@ a, img, a:hover, img:hover{
 .pr3{
 	padding-right: 30px;
 }
+.prl1{
+	padding: 0 10px;
+}
+.prl2{
+	padding: 0 20px;
+}
+.prl3{
+	padding: 0 30px;
+}
 .ptb1{
 	padding: 10px 0;
 }
@@ -380,6 +389,9 @@ textarea {
   background-image: -webkit-linear-gradient(270deg,#406E9F  0,#406E9F  20%,#1387D7 100%);
   background-image: linear-gradient(180deg,#406E9F  0,#406E9F  20%,#406E9F  100%);
   background-color: #406E9F ;
+}
+.button.link{
+	width: auto;
 }
 /****************************** Table ****************************/
 table{
