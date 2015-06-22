@@ -1,5 +1,8 @@
-<?php get_header();?>
-<div class="wrapper"><?php
+<?php
+/*
+Template Name: General
+*/
+get_header();
 	get_sidebar();?><main class="main"><?php
 	$the_query = fjn_template_query( array( 'post_type' => 'general' ) );
 	if( $the_query->have_posts() ){
@@ -9,17 +12,17 @@
 			<div class="col col23">
 				<div class="tile p2">
 					<section>
-						<h2><?php echo $post->post_title;?></h2>
+						<h2><?php echo the_title();?></h2>
 						<p class="justify mb2"><?php echo strip_tags( term_description( $t->term_id, 'field' ) );?></p><?php
 							while( $the_query->have_posts() ){
 								$the_query->the_post(); 
 								if( has_term( $slug, 'field' ) ){?>
-									<section>
+									<section class="mb2">
 										<h3 class="icon backblue pr1 <?php echo $slug;?>"><?php the_title(); ?></h3><?php
 										the_content();?>
 									</section><?php
 								}
-							}rewind_posts();?>
+							}wp_reset_postdata();?>
 					</section>
 				</div>
 			</div><div class="col col13 last-child">
@@ -30,7 +33,7 @@
 						<div class="icon center blue <?php echo ( 'general' == $post->post_type ? $slug : $post->post_type );?> size50 mtb2"></div>
 						<p class="center"><?php the_title();?></p>
 						<a class="button green mtb1" title="<?php echo $post->post_title;?>" href="<?php the_permalink();?>"><?php _e( 'Say more', 'fenjoon' );?></a><?php
-					}rewind_posts();
+					}wp_reset_postdata();
 				}?>
 				</div>
 			</div>

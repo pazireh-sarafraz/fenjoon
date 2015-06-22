@@ -1,6 +1,6 @@
 <?php	global $project_code, $project_id;?>
 
-<form id="payment" action="<?php echo site_url(); ?>/submit.php" method="post">
+<form id="payment" action="<?php echo site_url(); ?>/submit/" method="post">
 	<input type="text" name="payment[pay]" class="center" maxlength="9" placeholder="<?php _e( 'Payment', 'fenjoon' );?>">
 	<table class="date mb1">
 		<tr>

@@ -1,5 +1,4 @@
-<?php get_header();?>
-<div class="wrapper"><?php
+<?php get_header();
 	get_sidebar();?><main class="main"><?php
 	$second_query = fjn_template_query( array( 'post_type' => 'general' ) );
 	if( $second_query->have_posts() ){

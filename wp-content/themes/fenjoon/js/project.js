@@ -4,7 +4,7 @@ function hasClass( el, clss ) {
 
 function new_payment(){
 	action = document.getElementById('payment').getAttribute( 'action' );
-	action = action.replace( 'submit.php', '' );
+	action = action.replace( 'submit/', '' );
 	document.getElementById('payment').setAttribute( 'action', action );
 	document.getElementById('payment').submit();
 }

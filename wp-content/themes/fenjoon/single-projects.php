@@ -1,5 +1,4 @@
 <?php
-get_header();
 if( have_posts() ){
 	while( have_posts() ){
 		the_post();
@@ -24,8 +23,7 @@ if( have_posts() ){
 		$remaining_time = human_time_diff( current_time('timestamp') - $created + strtotime('+' . $total_time . 'days' ) );
 		//$remaining_time = $total_time - $elapsed_time;
 	}
-}?>
-<div class="wrapper"><?php
+}
 if( !empty( $project_code ) && current_user_can( 'edit_post', $project_id ) ){
 fjn_msg_reporting( $msg, $err );
 $project_arr = explode( '+', $project_str );
@@ -66,6 +64,7 @@ foreach( $statuses as $status ){
 $backcolor[ 'done' ] = 'backgreen';
 $backcolor[ 'inprogress' ] = 'backorange';
 $backcolor[ 'inqueue' ] = 'backred';
+	get_header();
 	get_sidebar( 'projects' );?><main class="main">
 		<div class="cols">
 			<div class="col col23">

@@ -20,14 +20,13 @@
 	<div class="full backblue">
 		<div class="wrapper">
 			<div class="cols mb0">
-				<div class="col col11">
-					<div id="menu_box" class="icon menu ib vam size30 dhidden"></div><p class="ib ptb1"><?php 
+				<div class="col col11 mb0">
+					<div id="menu_box" class="icon menu ib pl1 vam size30 dhidden"></div><p class="ib ptb1"><?php 
 					if( is_user_logged_in() ){
 						printf( __( 'Welcome %s.', 'fenjoon' ), $current_user->display_name );
 					}else{
 						_e( 'Welcome guest', 'fenjoon' );						
 					}?></p>
-					<div class="icon home left vam size30"></div>
 				</div>
 			</div>
 		</div>
@@ -47,3 +46,5 @@
 		</div>
 	</div>
 </div>
+<div class="wrapper"><?php
+	fjn_msg_reporting( $msg, $err );?>

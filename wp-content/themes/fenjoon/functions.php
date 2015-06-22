@@ -116,12 +116,14 @@ function fjn_wp_nav_menu( $loc ){
 	wp_nav_menu( $args );
 }
 
-function fjn_add_classes_on_li( $classes, $item, $args ){
+function fjn_alter_classes_on_li( $classes, $item, $args ){
   $classes = array_diff( $classes, array( 'menu-item-type-custom', 'menu-item-object-custom', 'menu-item', 'menu-item-type-post_type', 'menu-item-object-page', 'page_item', 'current_page_item' ) );
 	//$classes[] = 'icon';
-  return $classes;
+  global $post;
+	if( in_array( $post->post_type, $classes ) ) $classes[] = 'current-menu-item';
+	return $classes;
 }
-add_filter( 'nav_menu_css_class', 'fjn_add_classes_on_li', 1, 3 );
+add_filter( 'nav_menu_css_class', 'fjn_alter_classes_on_li', 1, 3 );
 //******************************************
 // Custom classes for menu items
 //******************************************
@@ -176,6 +178,9 @@ function fjn_template_query( $params ){
 			);
 		}
 	}
+	if( array_key_exists( 'posts_per_page', $params ) ) $args[ 'posts_per_page' ] = $params[ 'posts_per_page' ];
+	if( array_key_exists( 'orderby', $params ) ) $args[ 'orderby' ] = $params[ 'orderby' ];
+	if( array_key_exists( 'order', $params ) ) $args[ 'order' ] = $params[ 'order' ];
 	if( array_key_exists( 'user', $params ) ) $args[ 'user' ] = $params[ 'user' ];
 	if( array_key_exists( 'tag', $params ) ) $args[ 'tag' ] = $params[ 'tag' ];
 	$the_query = new WP_Query( $args );
@@ -187,6 +192,9 @@ function fjn_messages(){
 	$msg[2] = __( 'Order updated successfully', 'fenjoon' );
 	$msg[3] = __( 'Payment item submitted successfully', 'fenjoon' );
 	$msg[4] = __( 'Payment item submitted successfully', 'fenjoon' );
+	$msg[5] = __( 'Your login was successful', 'fenjoon' );
+	$msg[6] = __( 'Your logout was successful', 'fenjoon' );
+	$msg[7] = __( 'Your registration was successful', 'fenjoon' );
 	return $msg;
 }
 
@@ -202,6 +210,10 @@ function fjn_errors(){
 	$err[9] = __( 'Payment field should be filled correctly', 'fenjoon' );
 	$err[10] = __( 'Payment item did not submit and error occurred', 'fenjoon' );
 	$err[11] = __( 'Access is restricted to members. Please register or login first', 'fenjoon' );
+	$err[12] = __( 'Your login was not successful', 'fenjoon' );
+	$err[13] = __( 'You must fill the form completely', 'fenjoon' );
+	$err[14] = __( 'Username already exists. Please choose another', 'fenjoon' );
+	$err[15] = __( 'Email address already exists. Please choose another', 'fenjoon' );
 	return $err;
 }
 
@@ -458,4 +470,101 @@ function save_portfolio_metadata(){
 	}
 }
 add_action( 'save_post', 'save_portfolio_metadata' );
+//******************************************
+// Loginout link to navigation
+//******************************************
+function fjn_loginout_menu_link( $menu ) {
+	if( is_user_logged_in() ){
+		$loginout = '<li class="left"><a title="' . __( 'Logout', 'fenjoon' ) . '" href="' . wp_logout_url( site_url( 'login' ) ) . '">' . __( 'Logout', 'fenjoon' ) . '</a></li>';
+	}else{
+		$loginout = '<li class="left"><a title="' . __( 'Login', 'fenjoon' ) . '" href="' . site_url( 'login' ) . '">' . __( 'Login', 'fenjoon' ) . '</a></li>';
+	}
+	$menu .= $loginout;
+	return $menu;
+}
+add_filter( 'wp_nav_menu_top_member_items', 'fjn_loginout_menu_link', 10, 2 );
+add_filter( 'wp_nav_menu_top_items', 'fjn_loginout_menu_link', 10, 2 );
+//******************************************
+// Front-end login
+//******************************************
+function fjn_frontend_login(){
+	if( !empty( $_POST ) && !is_admin() ){
+		if( empty( $_POST['email'] ) && !empty( $_POST['fjn_nonce'] ) && !empty( $_POST['action'] ) ){
+			if( is_user_logged_in() ){
+				wp_redirect( site_url( 'orderlist' ) );
+				exit;
+			}elseif( !empty( $_POST['username'] ) && !empty( $_POST['password'] ) ){
+				if( 'login' == $_POST['action'] && wp_verify_nonce( $_POST['fjn_nonce'], 'fjn_submit-login' ) ){
+					$user = wp_signon( array( 'user_login' => $_POST['username'], 'user_password' => $_POST['password'], 'remember' => true ), true );
+					if( $user && $user->ID ){
+						wp_redirect( site_url( 'orderlist' . '?msg=5' ) );   
+						exit;
+					}else{
+						wp_redirect( site_url( 'login' . '?err=12' ) );   
+						exit;
+					}
+				}elseif( 'register' == $_POST['action'] && wp_verify_nonce( $_POST['fjn_nonce'], 'fjn_submit-register' ) ){
+					$user_id = username_exists( $_POST['username'] );
+					if( !$user_id && false == email_exists( $_POST['useremail'] ) ){
+						$user_id = wp_create_user( $_POST['username'], $_POST['password'], $_POST['useremail'] );
+						if( $user_id ){
+							wp_signon( array( 'user_login' => $_POST['username'], 'user_password' => $_POST['password'], 'remember' => true ), true );
+							wp_redirect( site_url( 'orderlist' . '?msg=7' ) );
+							exit;
+						}else{
+							wp_redirect( site_url( 'register' . '?err=4' ) );
+							exit;
+						}
+					}elseif( $user_id ){
+						wp_redirect( site_url( 'register' . '?err=14' ) );
+						exit;					
+					}elseif( false != email_exists( $_POST['useremail'] ) ){
+						wp_redirect( site_url( 'register' . '?err=15' ) );
+						exit;
+					}
+				}
+			}else{
+				wp_redirect( site_url( 'login' . '?err=13' ) );   
+				exit;
+			}
+		}
+	}
+}
+add_action( 'after_setup_theme', 'fjn_frontend_login' );
+
+function fjn_redirect_login_page(){
+	$page_viewed = basename($_SERVER['REQUEST_URI']);
+	if( current_user_can( 'manage_options' ) ){
+	}else{
+		if( ( strpos( $page_viewed , 'wp-login' ) !== false || strpos( $page_viewed , 'wp-admin' ) !== false ) && strpos( $page_viewed , 'action=logout' ) === false ){
+			wp_redirect( site_url( '?err=34' ) );
+			exit;  
+		}
+	}
+}
+add_action( 'init', 'fjn_redirect_login_page' );
+
+function fjn_checkRole(){
+	if ( !current_user_can( 'manage_options' ) ){
+		wp_redirect( site_url( '?err=2' ) );
+		exit;
+	}
+}
+add_action( 'admin_init', 'fjn_checkRole' );
+
+function fjn_redirect_user(){
+	if( !is_user_logged_in() && is_page_template( 'orderlist.php' ) ){
+		wp_redirect( site_url() . 'login' . '?err=11' );
+		exit ();
+	}elseif( is_user_logged_in() && is_page_template( 'page-login.php' ) ){
+		wp_redirect( site_url( 'orderlist' ) );
+	}
+}
+add_action( 'template_redirect', 'fjn_redirect_user' ); 
+
+function fjn_logout_page() {
+	wp_redirect( site_url( 'login' . '?msg=6' ) );  
+	exit;  
+}  
+add_action( 'wp_logout', 'fjn_logout_page' );
 ?>

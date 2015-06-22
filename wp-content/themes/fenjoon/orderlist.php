@@ -2,8 +2,7 @@
 /*
 Template Name: Order list
 */
-get_header();?>
-<div class="wrapper"><?php
+get_header();
 if( !empty( $current_user->ID ) ){
 $the_query = fjn_template_query( array( 'post_type' => 'orders', 'user' => $current_user->ID ) );?>
 	<?php get_sidebar();?><main class="main">
