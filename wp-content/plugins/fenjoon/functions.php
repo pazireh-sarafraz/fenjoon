@@ -856,27 +856,31 @@ function fjn_frontend_post(){
 			$msg = array_unique( $msg );
 			$err = array_unique( $err );
 			
-			$msg = implode( '-', $msg );
-			$err = implode( '-', $err );
+			$msg_str = implode( '-', $msg );
+			$err_str = implode( '-', $err );
 			$query_var = '';
-			if( $msg ){
-				$query_var .= 'msg=' . $msg;
-				if( $err ) $query_var .= '&err=' . $err;
-			}elseif( $err ){
-				$query_var .= 'err=' . $err;
+			if( $msg_str ){
+				$query_var .= 'msg=' . $msg_str;
+				if( $err_str ) $query_var .= '&err=' . $err_str;
+			}elseif( $err_str ){
+				$query_var .= 'err=' . $err_str;
 			}
-			$referer = wp_get_referer();
-			if( $referer ){
-				$referer = fjn_remove_querystring_var( $referer, 'msg' );
-				$referer = fjn_remove_querystring_var( $referer, 'err' );
-				if( strpos( $referer, '?' ) === false ){
-					$query_var = '?' . $query_var;
-				}else{
-					$query_var = '&' . $query_var;
-				}
-				wp_redirect( $referer . $query_var );
+			if( in_array( 1, $msg ) ){
+				wp_redirect( site_url( 'orderlist' ) . '?msg=1' );
 			}else{
-				wp_redirect( home_url() );
+				$referer = wp_get_referer();
+				if( $referer ){
+					$referer = fjn_remove_querystring_var( $referer, 'msg' );
+					$referer = fjn_remove_querystring_var( $referer, 'err' );
+					if( strpos( $referer, '?' ) === false ){
+						$query_var = '?' . $query_var;
+					}else{
+						$query_var = '&' . $query_var;
+					}
+					wp_redirect( $referer . $query_var );
+				}else{
+					wp_redirect( site_url() );
+				}
 			}
 			exit;
 		}

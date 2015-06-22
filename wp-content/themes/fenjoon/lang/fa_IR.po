@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Fenjoon\n"
-"POT-Creation-Date: 2015-06-22 06:59+0330\n"
-"PO-Revision-Date: 2015-06-22 06:59+0330\n"
+"POT-Creation-Date: 2015-06-22 11:11+0330\n"
+"PO-Revision-Date: 2015-06-22 11:12+0330\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fa_IR\n"
@@ -19,7 +19,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: footer-projects.php:30
+#: footer.php:31
 msgid "Project progress"
 msgstr "درصد پیشرفت پروژه"
 
@@ -110,152 +110,160 @@ msgstr "تلاش شما برای ورود موفقیت آمیز نبود"
 msgid "You must fill the form completely"
 msgstr "لطفا فرم را به طور کامل پر کنید"
 
-#: functions.php:245 functions.php:246 functions.php:247 functions.php:260
+#: functions.php:215
+msgid "Username already exists. Please choose another"
+msgstr "این نام کاربری قبلا ثبت شده است. لطفا نام کاربری دیگری انتخاب کنید"
+
+#: functions.php:216
+msgid "Email address already exists. Please choose another"
+msgstr "آدرس ایمیل قبلا ثبت شده است. لطفا آدرس ایمیل دیگری را وارد کنید"
+
+#: functions.php:247 functions.php:248 functions.php:249 functions.php:262
 msgid "General"
 msgstr "عمومی"
 
-#: functions.php:248
+#: functions.php:250
 msgid "Parent General"
 msgstr "آیتم عمومی اصلی"
 
-#: functions.php:249
+#: functions.php:251
 msgid "All General"
 msgstr "همه عمومی ها"
 
-#: functions.php:250
+#: functions.php:252
 msgid "View General"
 msgstr "مشاهده آیتم عمومی"
 
-#: functions.php:251
+#: functions.php:253
 msgid "Add New General"
 msgstr "افزودن آیتم عمومی"
 
-#: functions.php:252 functions.php:332
+#: functions.php:254 functions.php:334
 msgid "Add New"
 msgstr "افزودن"
 
-#: functions.php:253
+#: functions.php:255
 msgid "Edit General"
 msgstr "ویرایش آیتم عمومی"
 
-#: functions.php:254
+#: functions.php:256
 msgid "Update General"
 msgstr "به روز رسانی آیتم عمومی"
 
-#: functions.php:255
+#: functions.php:257
 msgid "Search General"
 msgstr "جستجوی آیتم های عمومی"
 
-#: functions.php:256 functions.php:336
+#: functions.php:258 functions.php:338
 msgid "Not found"
 msgstr "پیدا نشد"
 
-#: functions.php:257 functions.php:337
+#: functions.php:259 functions.php:339
 msgid "Not found in Trash"
 msgstr "در زباله دان پیدا نشد"
 
-#: functions.php:261
+#: functions.php:263
 msgid "General information for the site"
 msgstr "آیتم های عمومی وبسایت"
 
-#: functions.php:289
+#: functions.php:291
 msgid "General Field"
 msgstr "دسته آیتم های عمومی"
 
-#: functions.php:290
+#: functions.php:292
 msgid "Add New Field"
 msgstr "افزودن فیلد جدید"
 
-#: functions.php:291
+#: functions.php:293
 msgid "New Field"
 msgstr "فیلد جدید"
 
-#: functions.php:304
+#: functions.php:306
 msgid "Field"
 msgstr "دسته"
 
-#: functions.php:315
+#: functions.php:317
 msgid "Field not set!"
 msgstr "دسته نامشخص"
 
-#: functions.php:325 functions.php:326 functions.php:327 functions.php:340
+#: functions.php:327 functions.php:328 functions.php:329 functions.php:342
 #: home.php:55
 msgid "Portfolio"
 msgstr "نمونه کار"
 
-#: functions.php:328
+#: functions.php:330
 msgid "Parent Portfolio"
 msgstr "نمونه کار اصلی"
 
-#: functions.php:329
+#: functions.php:331
 msgid "All Portfolio"
 msgstr "همه نمونه کارها"
 
-#: functions.php:330
+#: functions.php:332
 msgid "View Portfolio"
 msgstr "مشاهده نمونه کار"
 
-#: functions.php:331
+#: functions.php:333
 msgid "Add New Portfolio"
 msgstr "افزودن نمونه کار"
 
-#: functions.php:333
+#: functions.php:335
 msgid "Edit Portfolio"
 msgstr "ویرایش نمونه کار"
 
-#: functions.php:334
+#: functions.php:336
 msgid "Update Portfolio"
 msgstr "به روز رسانی نمونه کار"
 
-#: functions.php:335
+#: functions.php:337
 msgid "Search Portfolio"
 msgstr "جستجوی نمونه کارها"
 
-#: functions.php:341
+#: functions.php:343
 msgid "Portfolio items"
 msgstr "نمونه کارها"
 
-#: functions.php:369
+#: functions.php:371
 msgid "Portfolio Cat"
 msgstr "دسته نمونه کارها"
 
-#: functions.php:370
+#: functions.php:372
 msgid "Add New Cat"
 msgstr "افزودن دسته جدید"
 
-#: functions.php:371
+#: functions.php:373
 msgid "New Cat"
 msgstr "دسته جدید"
 
-#: functions.php:388
+#: functions.php:390
 msgid "Portfolio Metadata"
 msgstr "اطلاعات تکمیلی نمونه کار"
 
-#: functions.php:405
+#: functions.php:407
 msgid "technology"
 msgstr "تکنولوژی"
 
-#: functions.php:415
+#: functions.php:417
 msgid "start"
 msgstr "تاریخ شروع"
 
-#: functions.php:425
+#: functions.php:427
 msgid "finish"
 msgstr "تاریخ اتمام"
 
-#: functions.php:435
+#: functions.php:437
 msgid "workforce"
 msgstr "نیروی کار"
 
-#: functions.php:445
+#: functions.php:447
 msgid "security"
 msgstr "امنیت"
 
-#: functions.php:476
+#: functions.php:478
 msgid "Logout"
 msgstr "خروج"
 
-#: functions.php:478 page-register.php:22 parts/login-form.php:7
+#: functions.php:480 page-register.php:22 parts/login-form.php:7
 msgid "Login"
 msgstr "ورود"
 
@@ -348,6 +356,10 @@ msgstr "ثبت شده"
 #: orderlist.php:41
 msgid "Checking"
 msgstr "بررسی"
+
+#: orderlist.php:47
+msgid "You have not submitted any orders yet"
+msgstr "شما هنوز سفارشی ثبت نکرده‌اید"
 
 #: page-login.php:20
 msgid "Register on fenjoon to be able to submit new orders"

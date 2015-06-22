@@ -26,7 +26,7 @@ if( have_posts() ){
 				if( !empty( $progress_str ) ) $progress_arr = explode( '+', $progress_str );
 			}
 		}
-	}
+	}wp_reset_postdata();
 }
 if( ( !empty( $order_code ) && current_user_can( 'edit_post', $order_id ) ) || empty( $order_code ) ){
 	if( $fenjoon_settings = get_option( 'fenjoon_settings' ) ){
@@ -58,7 +58,7 @@ if( ( !empty( $order_code ) && current_user_can( 'edit_post', $order_id ) ) || e
 			}
 			$order_sections[ $post->post_type ][ $post->ID ]['title'] = $post->post_title;
 			$order_sections[ $post->post_type ][ $post->ID ]['description'] = $post->post_excerpt;
-		}
+		}wp_reset_postdata();
 		$total_pt_price = array();
 		foreach( $order_sections as $key => $order_section ){
 			$total_pt_price[ $key ] = 0;
@@ -131,7 +131,7 @@ if( ( !empty( $order_code ) && current_user_can( 'edit_post', $order_id ) ) || e
 			<div class="col col23">
 				<div class="tile p2">
 					<h2><?php _e( 'Complementary information', 'fenjoon' );?></h2>
-					<form id="new_order" action="<?php echo site_url(); ?>/" method="post">
+					<form id="new_order" action="<?php echo site_url(); ?>/submit/" method="post">
 						<input type="text" name="title" value="<?php if( !empty( $order_code ) && !empty( $title ) ) echo $title;?>" placeholder="<?php _e( 'Order title', 'fenjoon' );?>"><?php
 						wp_nonce_field( 'fjn_submit-order', 'fjn_nonce' );
 						$current_url = '';
@@ -147,7 +147,7 @@ if( ( !empty( $order_code ) && current_user_can( 'edit_post', $order_id ) ) || e
 						<input type="hidden" name="action" value="<?php echo( !empty( $order_code ) && !empty( $order_id ) ? 'update_order' : 'new_order' );?>">
 						<input type="hidden" id="daily_man_power" value="<?php echo $daily_man_power;?>">	
 						<input type="hidden" id="man_hour_fee" value="<?php echo $man_hour_fee;?>">	
-						<a class="button green" onclick="document.getElementById('new_order').submit();"><?php if( empty( $order_code ) ){ _e( 'Submit order', 'fenjoon' );}else{ _e( 'Update order', 'fenjoon' );}?></a>
+						<a class="button green" onclick="fjn_submit( 'new_order' );"><?php if( empty( $order_code ) ){ _e( 'Submit order', 'fenjoon' );}else{ _e( 'Update order', 'fenjoon' );}?></a>
 					</form>
 				</div>
 			</div>

@@ -3,9 +3,9 @@
 Template Name: Order list
 */
 get_header();
-if( !empty( $current_user->ID ) ){
-$the_query = fjn_template_query( array( 'post_type' => 'orders', 'user' => $current_user->ID ) );?>
-	<?php get_sidebar();?><main class="main">
+if( $current_user->ID ){
+$the_query = fjn_template_query( array( 'post_type' => 'orders', 'author' => $current_user->ID ) );
+	get_sidebar();?><main class="main">
 		<div class="cols">
 			<div class="col col11">
 				<div class="tile p2">
@@ -43,8 +43,8 @@ $the_query = fjn_template_query( array( 'post_type' => 'orders', 'user' => $curr
 							}?>
 							</tbody>
 						</table><?php
-					}else{
-						
+					}else{?>
+						<p><?php _e( 'You have not submitted any orders yet', 'fenjoon' );?></p><?php
 					}?>
 					</section>
 				</div>					

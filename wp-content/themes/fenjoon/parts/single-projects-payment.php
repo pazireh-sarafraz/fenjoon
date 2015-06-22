@@ -23,5 +23,5 @@
 	<input type="hidden" name="project_id" value="<?php echo $project_id;?>"><?php
 	}?>
 	<input type="hidden" name="action" value="payment">
-	<a class="button green" onclick="new_payment();"><?php _e( 'Submit payment', 'fenjoon' );?></a>
+	<a class="button green" onclick="fjn_submit( 'payment' );"><?php _e( 'Submit payment', 'fenjoon' );?></a>
 </form>

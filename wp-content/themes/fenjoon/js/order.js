@@ -1,7 +1,3 @@
-function hasClass( el, clss ) {
-	return el.className && new RegExp( "(^|\\s)" + clss + "(\\s|$)" ).test( el.className );
-}
-
 function exchangeClass( element, firstClass, secondClass ){
 	if( element==null || element.classList==null ) return;
 	if( hasClass( element, firstClass ) ) {
@@ -113,19 +109,7 @@ function switch_radio( radio ){
 	}
 }
 
-function order_onload(){
-  var alerts = document.getElementById('alerts');
-  if (alerts) {
-    var alert = alerts.getElementsByClassName('alert');
-    setTimeout(function() {
-      var interval = setInterval(function() {
-        alerts.removeChild(alert[0]);
-        if (!alert.length) {
-          clearInterval(interval)
-        }
-      }, 3000);
-    }, 5000);
-  }
+function onload_order(){
 	var daily_man_power = document.getElementById( 'daily_man_power' ).value;
 	var man_hour_fee = document.getElementById( 'man_hour_fee' ).value;
 	var checkboxes = document.getElementsByClassName( 'option checkbox' );

@@ -20,7 +20,7 @@ $projects = wp_count_posts( 'projects' );
 						if( $users['avail_roles']['contributor'] ){?>
 						<li class="large icon man-woman blue"><?php _e( 'Number of customers', 'fenjoon' );?><span class="left"><?php echo $users['avail_roles']['contributor'];?> <?php _e( 'Person', 'fenjoon' );?></span></li><?php
 						}if( $users['avail_roles']['editor'] ){?>
-						<li class="large icon man-woman blue"><?php _e( 'Team members', 'fenjoon' );?><span class="left"><?php echo $users['avail_roles']['editor'] + 1;?> <?php _e( 'Person', 'fenjoon' );?></span></li><?php
+						<li class="large icon user blue"><?php _e( 'Team members', 'fenjoon' );?><span class="left"><?php echo $users['avail_roles']['editor'] + 1;?> <?php _e( 'Person', 'fenjoon' );?></span></li><?php
 						}if( $orders->publish ){?>
 						<li class="large icon cart blue"><?php _e( 'Orders', 'fenjoon' );?><span class="left"><?php echo $orders->publish;?> <?php _e( 'Order', 'fenjoon' );?></span></li><?php
 						}if( $projects->publish ){?>

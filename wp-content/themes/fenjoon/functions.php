@@ -48,12 +48,12 @@ function add_fenjoon_admin_css() {
 add_action( 'admin_enqueue_scripts', 'add_fenjoon_admin_css' );
 function add_fenjoon_js() {
 	if( is_page_template( 'single-orders.php' ) || is_singular( 'orders' ) ){
-		wp_enqueue_script( 'order', THEME_URI . '/js/order.js', array(), '1.0', true );
+		wp_enqueue_script( 'order', THEME_URI . '/js/order.min.js', array(), '1.0', true );
 	}
 	if( is_page_template( 'single-projects.php' ) || is_singular( 'projects' ) ){
-		wp_enqueue_script( 'gauge', THEME_URI . '/js/gauge.js', array(), '1.0', true );
-		wp_enqueue_script( 'project', THEME_URI . '/js/project.js', array(), '1.0', true );
+		wp_enqueue_script( 'gauge', THEME_URI . '/js/gauge.min.js', array(), '1.0', true );
 	}
+	wp_enqueue_script( 'fenjoon', THEME_URI . '/js/fenjoon.min.js', array(), '1.0', true );
 }
 add_action( 'wp_enqueue_scripts', 'add_fenjoon_js' );
 //******************************************
@@ -119,7 +119,7 @@ function fjn_wp_nav_menu( $loc ){
 function fjn_alter_classes_on_li( $classes, $item, $args ){
   $classes = array_diff( $classes, array( 'menu-item-type-custom', 'menu-item-object-custom', 'menu-item', 'menu-item-type-post_type', 'menu-item-object-page', 'page_item', 'current_page_item' ) );
 	//$classes[] = 'icon';
-  global $post;
+	global $post;
 	if( in_array( $post->post_type, $classes ) ) $classes[] = 'current-menu-item';
 	return $classes;
 }
@@ -181,7 +181,7 @@ function fjn_template_query( $params ){
 	if( array_key_exists( 'posts_per_page', $params ) ) $args[ 'posts_per_page' ] = $params[ 'posts_per_page' ];
 	if( array_key_exists( 'orderby', $params ) ) $args[ 'orderby' ] = $params[ 'orderby' ];
 	if( array_key_exists( 'order', $params ) ) $args[ 'order' ] = $params[ 'order' ];
-	if( array_key_exists( 'user', $params ) ) $args[ 'user' ] = $params[ 'user' ];
+	if( array_key_exists( 'author', $params ) ) $args[ 'author' ] = $params[ 'author' ];
 	if( array_key_exists( 'tag', $params ) ) $args[ 'tag' ] = $params[ 'tag' ];
 	$the_query = new WP_Query( $args );
 	return $the_query;
@@ -489,11 +489,11 @@ add_filter( 'wp_nav_menu_top_items', 'fjn_loginout_menu_link', 10, 2 );
 //******************************************
 function fjn_frontend_login(){
 	if( !empty( $_POST ) && !is_admin() ){
-		if( empty( $_POST['email'] ) && !empty( $_POST['fjn_nonce'] ) && !empty( $_POST['action'] ) ){
+		if( empty( $_POST['email'] ) && !empty( $_POST['fjn_nonce'] ) && !empty( $_POST['action'] ) && in_array( $_POST['action'], array( 'login', 'register' ) ) ){
 			if( is_user_logged_in() ){
 				wp_redirect( site_url( 'orderlist' ) );
 				exit;
-			}elseif( !empty( $_POST['username'] ) && !empty( $_POST['password'] ) ){
+			}elseif( !empty( $_POST['username'] ) || !empty( $_POST['password'] ) ){
 				if( 'login' == $_POST['action'] && wp_verify_nonce( $_POST['fjn_nonce'], 'fjn_submit-login' ) ){
 					$user = wp_signon( array( 'user_login' => $_POST['username'], 'user_password' => $_POST['password'], 'remember' => true ), true );
 					if( $user && $user->ID ){
@@ -534,15 +534,12 @@ add_action( 'after_setup_theme', 'fjn_frontend_login' );
 
 function fjn_redirect_login_page(){
 	$page_viewed = basename($_SERVER['REQUEST_URI']);
-	if( current_user_can( 'manage_options' ) ){
-	}else{
-		if( ( strpos( $page_viewed , 'wp-login' ) !== false || strpos( $page_viewed , 'wp-admin' ) !== false ) && strpos( $page_viewed , 'action=logout' ) === false ){
-			wp_redirect( site_url( '?err=34' ) );
-			exit;  
-		}
+	if( strpos( $page_viewed , 'wp-login' ) !== false && strpos( $page_viewed , 'action=logout' ) === false ){
+		wp_redirect( site_url( '?err=2' ) );
+		exit;  
 	}
 }
-add_action( 'init', 'fjn_redirect_login_page' );
+//add_action( 'init', 'fjn_redirect_login_page' );
 
 function fjn_checkRole(){
 	if ( !current_user_can( 'manage_options' ) ){
@@ -554,10 +551,14 @@ add_action( 'admin_init', 'fjn_checkRole' );
 
 function fjn_redirect_user(){
 	if( !is_user_logged_in() && is_page_template( 'orderlist.php' ) ){
-		wp_redirect( site_url() . 'login' . '?err=11' );
+		wp_redirect( site_url( 'login' ) . '?err=11' );
+		exit ();
+	}elseif( !is_user_logged_in() && is_page_template( 'single-orders.php' ) ){
+		wp_redirect( site_url( 'login' ) . '?err=11' );
 		exit ();
 	}elseif( is_user_logged_in() && is_page_template( 'page-login.php' ) ){
 		wp_redirect( site_url( 'orderlist' ) );
+		exit ();
 	}
 }
 add_action( 'template_redirect', 'fjn_redirect_user' ); 
